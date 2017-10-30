@@ -1,4 +1,4 @@
-package com.chs.androiddailytext;
+package com.chs.androiddailytext.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,6 +9,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+
+import com.chs.androiddailytext.R;
 
 /**
  * 作者：chs on 2017-10-26 17:56
@@ -36,7 +38,7 @@ public class MyView extends View {
 
     private void init() {
         mPaint = new Paint();
-        mPaint.setColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
+        mPaint.setColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
         mPaint.setStrokeWidth(20);
         mPaint.setStyle(Paint.Style.STROKE); // 填充模式
         mPaint.setStrokeCap(Paint.Cap.SQUARE);
@@ -48,12 +50,13 @@ public class MyView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.i("tagg","canvas");
         canvas.drawPoint(300,300,mPaint);
 
 
         canvas.drawArc(200, 100, 800, 500, -110, 100, true, mPaint); // 绘制扇
 
+        //addArc() 只是一个直接使用了 forceMoveTo = true 的简化版 arcTo() 。
+        // forceMoveTo 参数的意思是，绘制是要「抬一下笔移动过去」，还是「直接拖着笔过去」，区别在于是否留下移动的痕迹。
         mPath.addArc(200, 200, 400, 400, -225, 225);
         mPath.arcTo(400, 200, 600, 400, -180, 225, false);
         mPath.lineTo(400, 542);
