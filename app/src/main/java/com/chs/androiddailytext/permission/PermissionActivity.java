@@ -1,21 +1,26 @@
 package com.chs.androiddailytext.permission;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.chs.androiddailytext.R;
 import com.chs.androiddailytext.utils.AppToast;
 
-public class PermissionActivity extends AppCompatActivity {
+import java.util.List;
 
+public class PermissionActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_PERMISSION_CALL_PHONE = 100;
+    private static final int REQUEST_CODE_PERMISSION_CAMERA = 101;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,24 +29,23 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
     public void callPhone(View view) {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CALL_PHONE},1);
-        }else {
+        if(MyPermission.hasPermissions(this,Manifest.permission.CALL_PHONE)){
             callPhone();
-        }
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case 1:
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                     callPhone();
-                }else {
-                    AppToast.show(this,"没有权限");
-                }
-                break;
+        }else {
+            MyPermission.with(this)
+                    .listener(new PermissionListener() {
+                        @Override
+                        public void onPermissionsGranted(int requestCode, List<String> perms) {
+                            if(requestCode == REQUEST_CODE_PERMISSION_CALL_PHONE){
+                                callPhone();
+                            }
+                        }
+                        @Override
+                        public void onPermissionsDenied(int requestCode, List<String> perms) {
+                         AppToast.show(PermissionActivity.this,"请求被拒绝");
+                        }
+                    })
+                    .requestPermissions(REQUEST_CODE_PERMISSION_CALL_PHONE,Manifest.permission.CALL_PHONE);
         }
 
     }
@@ -51,5 +55,55 @@ public class PermissionActivity extends AppCompatActivity {
         Uri data = Uri.parse("tel:"+"13161083183");
         intent.setData(data);
         startActivity(intent);
+    }
+
+    public void camera(View view) {
+        if(MyPermission.hasPermissions(this,Manifest.permission.CAMERA)){
+            AppToast.show(PermissionActivity.this,"有权限啦");
+        }else {
+            MyPermission.with(this)
+                    .listener(new PermissionListener() {
+                        @Override
+                        public void onPermissionsGranted(int requestCode, List<String> perms) {
+                            if(requestCode == REQUEST_CODE_PERMISSION_CAMERA){
+                                AppToast.show(PermissionActivity.this,"请求权限成功");
+                            }
+                        }
+                        @Override
+                        public void onPermissionsDenied(int requestCode, List<String> perms) {
+                            AppToast.show(PermissionActivity.this,"请求被拒绝");
+                            if(MyPermission.somePermissionPermanentlyDenied(PermissionActivity.this,perms)){
+                                setDialog(requestCode,perms);
+                            }
+                        }
+                    })
+                    .requestPermissions(REQUEST_CODE_PERMISSION_CAMERA,Manifest.permission.CAMERA);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+    private static final int APP_SETTINGS_RC = 7534;
+    private void setDialog(final int requestCode, @NonNull final List<String> perms) {
+        new AlertDialog.Builder(this)
+                .setCancelable(false)
+                .setTitle("权限请求失败")
+                .setMessage("我们需要此请求干什么")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivityForResult(
+                                new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                        .setData(Uri.fromParts("package", getPackageName(), null)),
+                                APP_SETTINGS_RC);
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).create().show();
     }
 }
