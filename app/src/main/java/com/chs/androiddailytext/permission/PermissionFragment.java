@@ -18,7 +18,6 @@ import java.util.List;
 
 public class PermissionFragment extends Fragment {
 
-    private static final int PERMISSIONS_REQUEST_CODE = 0x01;
     private PermissionListener mPermissionListener;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

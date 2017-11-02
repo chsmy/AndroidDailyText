@@ -20,4 +20,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PermissionActivity.class);
         startActivity(intent);
     }
+
+    public void ViewActivity(View view) {
+        Intent intent = new Intent(this, ViewActivity.class);
+        startActivity(intent);
+    }
 }
