@@ -25,4 +25,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ViewActivity.class);
         startActivity(intent);
     }
+
+    public void AnimatorActivity(View view) {
+        Intent intent = new Intent(this, AnimatorActivity.class);
+        startActivity(intent);
+    }
 }
