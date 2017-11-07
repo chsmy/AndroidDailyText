@@ -70,10 +70,10 @@ public class PermissionController {
      */
     @TargetApi(Build.VERSION_CODES.M)
     public void requestPermissions(int requestCode, @NonNull String... perms) {
-        if (MyPermission.hasPermissions(mActivity, perms)) {
-            //所请求的权限都有了 直接返回确定
-            mPermissionListener.onPermissionsGranted(requestCode, Arrays.asList(perms));
-        }else {
+//        if (MyPermission.hasPermissions(mActivity, perms)) {
+//            //所请求的权限都有了 直接返回确定
+//            mPermissionListener.onPermissionsGranted(requestCode, Arrays.asList(perms));
+//        }else {
             if(shouldShowRationale(perms)){
                 //用户有拒绝的权限需要重新请求  这里自定义dialog 让用户重新设置
                 setDialog(requestCode,perms);
@@ -81,7 +81,7 @@ public class PermissionController {
                 //直接请求
                 mPermissionFragment.requestPermissions(perms,requestCode,mPermissionListener);
             }
-        }
+//        }
     }
 
     private void setDialog(final int requestCode, @NonNull final String... perms) {

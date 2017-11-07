@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.AppOpsManagerCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
+
+import com.chs.androiddailytext.utils.AppLog;
 
 import java.util.List;
 
@@ -36,10 +40,16 @@ public class MyPermission {
         }
 
         for (String perm : perms) {
-            if (ContextCompat.checkSelfPermission(context, perm)
-                    != PackageManager.PERMISSION_GRANTED) {
+
+            if (ContextCompat.checkSelfPermission(context, perm) != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
+
+            String op = AppOpsManagerCompat.permissionToOp(perm);
+            if (TextUtils.isEmpty(op)) continue;
+            int result = AppOpsManagerCompat.noteProxyOp(context, op, context.getPackageName());
+            AppLog.i(op,result+"----"+perm);
+            if (result != AppOpsManagerCompat.MODE_ALLOWED) return false;
         }
 
         return true;

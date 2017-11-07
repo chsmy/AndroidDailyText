@@ -4,11 +4,9 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,6 +27,8 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
     public void callPhone(View view) {
+        boolean b = MyPermission.hasPermissions(this, Manifest.permission.CALL_PHONE);
+
         if(MyPermission.hasPermissions(this,Manifest.permission.CALL_PHONE)){
             callPhone();
         }else {
