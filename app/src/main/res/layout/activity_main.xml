@@ -41,6 +41,10 @@
    </LinearLayout>
    <com.chs.androiddailytext.widget.RulerView
        android:layout_width="match_parent"
+       android:layout_height="80dp"
+       />
+   <com.chs.androiddailytext.widget.RulerView1
+       android:layout_width="match_parent"
        android:layout_height="wrap_content"
        />
 </LinearLayout>
