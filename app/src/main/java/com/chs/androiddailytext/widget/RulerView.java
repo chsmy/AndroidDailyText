@@ -43,6 +43,7 @@ public class RulerView extends View {
     }
 
     private void init(Context context) {
+        setWillNotDraw(false);
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         mBoundPaint = new Paint();

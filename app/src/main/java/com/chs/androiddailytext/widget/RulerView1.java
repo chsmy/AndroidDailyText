@@ -78,7 +78,7 @@ public class RulerView1 extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        AppLog.i("onDraw");
+//        AppLog.i("onDraw");
         //绘制上下边界
         canvas.drawLine(10,10,screenWidth-10,10,mBoundPaint);
         canvas.drawLine(10,200,screenWidth-10,200,mBoundPaint);
