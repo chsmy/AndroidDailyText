@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".PullRefreshActivity">
         </activity>
+        <activity android:name=".ChartActivity">
+        </activity>
     </application>
 
 </manifest>
