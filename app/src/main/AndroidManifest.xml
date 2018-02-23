@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".ChartActivity">
         </activity>
+        <activity android:name=".pattern.strategy.StrategyActivity">
+        </activity>
     </application>
 
 </manifest>

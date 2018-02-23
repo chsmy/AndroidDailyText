@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chs.androiddailytext.module.Content;
+import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -72,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toChart(View view) {
         Intent intent = new Intent(this, ChartActivity.class);
+        startActivity(intent);
+    }
+
+    public void toStrategy(View view) {
+        Intent intent = new Intent(this, StrategyActivity.class);
         startActivity(intent);
     }
 }
