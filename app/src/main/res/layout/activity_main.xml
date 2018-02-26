@@ -71,6 +71,12 @@
           android:text="策略模式"
           android:onClick="toStrategy"
           />
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="换肤"
+          android:onClick="toChnageSkin"
+          />
    </LinearLayout>
    <TextView
        android:id="@+id/tv_content"

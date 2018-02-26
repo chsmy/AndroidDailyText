@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
 import com.chs.androiddailytext.module.Content;
 import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
@@ -78,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toStrategy(View view) {
         Intent intent = new Intent(this, StrategyActivity.class);
+        startActivity(intent);
+    }
+
+    public void toChnageSkin(View view) {
+        Intent intent = new Intent(this, ChangeSkinActivity.class);
         startActivity(intent);
     }
 }
