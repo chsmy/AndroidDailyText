@@ -77,6 +77,12 @@
           android:text="换肤"
           android:onClick="toChnageSkin"
           />
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="okhttp"
+          android:onClick="okHttp"
+          />
    </LinearLayout>
    <TextView
        android:id="@+id/tv_content"

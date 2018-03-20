@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
+import com.chs.androiddailytext.http.OkhttpTextActivity;
 import com.chs.androiddailytext.module.Content;
 import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
@@ -84,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toChnageSkin(View view) {
         Intent intent = new Intent(this, ChangeSkinActivity.class);
+        startActivity(intent);
+    }
+
+    public void okHttp(View view) {
+        Intent intent = new Intent(this, OkhttpTextActivity.class);
         startActivity(intent);
     }
 }

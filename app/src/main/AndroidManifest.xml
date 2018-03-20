@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".changeSkin.ChangeSkinActivity">
         </activity>
+        <activity android:name=".http.OkhttpTextActivity">
+        </activity>
     </application>
 
 </manifest>
