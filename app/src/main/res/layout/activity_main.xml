@@ -84,6 +84,19 @@
           android:onClick="okHttp"
           />
    </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       >
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="retrofit"
+          android:onClick="toRetrofit"
+          />
+   </LinearLayout>
    <TextView
        android:id="@+id/tv_content"
        android:layout_width="wrap_content"

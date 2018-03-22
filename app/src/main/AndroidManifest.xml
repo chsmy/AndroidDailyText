@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".APP"
@@ -37,6 +38,8 @@
         <activity android:name=".changeSkin.ChangeSkinActivity">
         </activity>
         <activity android:name=".http.OkhttpTextActivity">
+        </activity>
+        <activity android:name=".http.RetrofitTextActivity">
         </activity>
     </application>
 
