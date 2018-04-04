@@ -96,6 +96,18 @@
           android:text="retrofit"
           android:onClick="toRetrofit"
           />
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="glide"
+          android:onClick="toGlide"
+          />
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="statistic"
+          android:onClick="toStatistic"
+          />
    </LinearLayout>
    <TextView
        android:id="@+id/tv_content"

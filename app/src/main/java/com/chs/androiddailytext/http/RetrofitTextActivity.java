@@ -6,12 +6,14 @@ import android.util.Log;
 
 import com.chs.androiddailytext.R;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitTextActivity extends AppCompatActivity {
@@ -22,11 +24,18 @@ public class RetrofitTextActivity extends AppCompatActivity {
         setContentView(R.layout.activity_retrofit_text);
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl("https://api.github.com/")
                 .build();
 
         GitHubService service = retrofit.create(GitHubService.class);
         Call<List<Repo>> call = service.listRepos("octocat");
+        try {
+            Response<List<Repo>> execute = call.execute();
+            List<Repo> body = execute.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         call.enqueue(new Callback<List<Repo>>() {
             @Override
             public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {

@@ -41,6 +41,10 @@
         </activity>
         <activity android:name=".http.RetrofitTextActivity">
         </activity>
+        <activity android:name=".glide.GlideActivity">
+        </activity>
+        <activity android:name=".custom_views.WorkLoadStatisticActivity">
+        </activity>
     </application>
 
 </manifest>

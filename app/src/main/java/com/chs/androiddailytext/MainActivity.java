@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
+import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
+import com.chs.androiddailytext.glide.GlideActivity;
 import com.chs.androiddailytext.http.OkhttpTextActivity;
 import com.chs.androiddailytext.http.RetrofitTextActivity;
 import com.chs.androiddailytext.module.Content;
@@ -96,6 +98,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void toRetrofit(View view) {
         Intent intent = new Intent(this, RetrofitTextActivity.class);
+        startActivity(intent);
+    }
+
+    public void toGlide(View view) {
+        Intent intent = new Intent(this, GlideActivity.class);
+        startActivity(intent);
+    }
+
+    public void toStatistic(View view) {
+        Intent intent = new Intent(this, WorkLoadStatisticActivity.class);
         startActivity(intent);
     }
 }
