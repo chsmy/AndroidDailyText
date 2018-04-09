@@ -11,4 +11,6 @@
 
     <color name="bg">#9b8888</color>
 
+    <color name="axis">#979797</color>
+
 </resources>

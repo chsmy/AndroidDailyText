@@ -108,6 +108,12 @@
           android:text="statistic"
           android:onClick="toStatistic"
           />
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="barchart"
+          android:onClick="toBarchart"
+          />
    </LinearLayout>
    <TextView
        android:id="@+id/tv_content"

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
+import com.chs.androiddailytext.chart.BarChartActivity;
 import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
 import com.chs.androiddailytext.http.OkhttpTextActivity;
@@ -108,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toStatistic(View view) {
         Intent intent = new Intent(this, WorkLoadStatisticActivity.class);
+        startActivity(intent);
+    }
+
+    public void toBarchart(View view) {
+        Intent intent = new Intent(this, BarChartActivity.class);
         startActivity(intent);
     }
 }

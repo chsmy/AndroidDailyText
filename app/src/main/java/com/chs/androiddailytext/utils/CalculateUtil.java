@@ -19,6 +19,9 @@ public class CalculateUtil {
      * @return
      */
     public  static int getScale(float value) {
+        if(value<0){
+            value = Math.abs(value);
+        }
         if (value >= 1 && value < 10) {
             return 0;
         }
@@ -28,7 +31,7 @@ public class CalculateUtil {
         if (value >= 10) {
             return 1 + getScale(value / 10);
         } else {
-            return getScale(value * 10) - 1;
+            return 0;
         }
     }
 
@@ -60,6 +63,10 @@ public class CalculateUtil {
 
         if (value < 6.0) {
             return 6.0f;
+        }
+
+        if (value < 7.0) {
+            return 7.0f;
         }
 
         if (value < 8.0) {
