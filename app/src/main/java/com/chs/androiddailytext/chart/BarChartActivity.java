@@ -54,7 +54,9 @@ public class BarChartActivity extends AppCompatActivity {
                 Toast.makeText(BarChartActivity.this,"点击了："+position,Toast.LENGTH_SHORT).show();
             }
         });
-        barChart.setData(data1,new int[]{Color.parseColor("#6FC5F4"),Color.parseColor("#78DA9F"),Color.parseColor("#FCAE84")});
+        barChart.setData(data1,
+                new int[]{Color.parseColor("#6FC5F4"),Color.parseColor("#78DA9F"),Color.parseColor("#FCAE84")}
+                ,"分组","数量");
         barChart.startAnimation();
     }
 }

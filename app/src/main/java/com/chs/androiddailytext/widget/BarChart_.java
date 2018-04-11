@@ -22,7 +22,6 @@ import android.widget.Scroller;
 
 import com.chs.androiddailytext.R;
 import com.chs.androiddailytext.module.BarChartEntity;
-import com.chs.androiddailytext.utils.AppLog;
 import com.chs.androiddailytext.utils.CalculateUtil;
 import com.chs.androiddailytext.utils.DensityUtil;
 
@@ -40,7 +39,7 @@ public class BarChart_ extends View {
      * 视图的宽和高  刻度区域的最大值
      */
     private int mTotalWidth, mTotalHeight,maxHeight;
-    private int paddingLeft,paddingRight,paddingBottom,paddingTop;
+    private int paddingRight;
     //柱形图的颜色集合
     private int barColors[];
     //距离底部的多少 用来显示底部的文字
@@ -94,6 +93,9 @@ public class BarChart_ extends View {
      * 右边的最大和最小值
      */
     private int maxRight, minRight;
+    /**
+     * 下面两个相当于图表的原点
+     */
     private float mStartX;
     private int mStartY;
     /**
@@ -122,6 +124,9 @@ public class BarChart_ extends View {
      * fling最大速度
      */
     private int maxVelocity;
+    //x轴 y轴的单位
+    private String unitX;
+    private String unitY;
 
     public void setOnItemBarClickListener(OnItemBarClickListener onRangeBarClickListener) {
         this.mOnItemBarClickListener = onRangeBarClickListener;
@@ -185,9 +190,11 @@ public class BarChart_ extends View {
         mBarRectClick = new Rect(0, 0, 0, 0);
         mDrawArea = new RectF(0, 0, 0, 0);
     }
-    public void setData(List<BarChartEntity> list,int colors[]) {
+    public void setData(List<BarChartEntity> list,int colors[],String unitX,String unitY) {
         this.mData = list;
         this.barColors = colors;
+        this.unitX = unitX;
+        this.unitY = unitY;
         maxYValue = calculateMax(list);
         getRange(maxYValue);
     }
@@ -222,15 +229,15 @@ public class BarChart_ extends View {
         mTotalWidth = w;
         mTotalHeight = h;
         maxHeight = h - getPaddingTop() - getPaddingBottom()-bottomMargin-topMargin;
-        paddingBottom = getPaddingBottom();
-        paddingLeft = getPaddingLeft();
+        int paddingBottom = getPaddingBottom();
+        int paddingTop = getPaddingTop();
+        int paddingLeft = getPaddingLeft();
         paddingRight = getPaddingRight();
-        paddingTop = getPaddingTop();
 
         maxRight = (int) (mStartX + (barSpace + barWidth) * mData.size());
         minRight = w -leftMargin-rightMargin;
-        mStartY = h-bottomMargin-paddingBottom;
-        mDrawArea = new RectF(mStartX,paddingTop,w-paddingRight-rightMargin,h-paddingBottom);
+        mStartY = h-bottomMargin- paddingBottom;
+        mDrawArea = new RectF(mStartX, paddingTop,w-paddingRight-rightMargin,h- paddingBottom);
     }
 
     @Override
@@ -251,8 +258,8 @@ public class BarChart_ extends View {
     }
 
     private void drawUnit(Canvas canvas) {
-        canvas.drawText("数量",mStartX-textPaint.measureText("数量"),topMargin/2,unitPaint);
-        canvas.drawText("分组",mTotalWidth-rightMargin-paddingRight+10,mTotalHeight-bottomMargin/2,unitPaint);
+        canvas.drawText(unitY,mStartX-textPaint.measureText(unitY),topMargin/2,unitPaint);
+        canvas.drawText(unitX,mTotalWidth-rightMargin-paddingRight+10,mTotalHeight-bottomMargin/2,unitPaint);
     }
 
     /**
@@ -290,7 +297,6 @@ public class BarChart_ extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 percent = (float) animation.getAnimatedValue();
-                AppLog.i(""+percent);
                 invalidate();
             }
         });
@@ -312,7 +318,7 @@ public class BarChart_ extends View {
                 mBarRect.right = mBarRect.left + barWidth;
                 for (int j = 0;j< barColors.length;j++) {
                     barPaint.setColor(barColors[j]);
-                    mBarRect.bottom = mStartY-eachHeight;
+                    mBarRect.bottom = (int) (mStartY-eachHeight*percent);
                     eachHeight += (int) ((maxHeight * (mData.get(i).getyValue()[j] / maxYDivisionValue)));
                     mBarRect.top = (int) (mBarRect.bottom - ((maxHeight * (mData.get(i).getyValue()[j] / maxYDivisionValue)))*percent);
                     canvas.drawRect(mBarRect, barPaint);
@@ -435,7 +441,6 @@ public class BarChart_ extends View {
         public boolean onDown(MotionEvent e) {
             return true;
         }
-
         @Override
         public void onShowPress(MotionEvent e) {
         }
@@ -449,7 +454,6 @@ public class BarChart_ extends View {
             }
             return true;
         }
-
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             return false;
@@ -475,7 +479,6 @@ public class BarChart_ extends View {
 
     /**
      * 根据点击的手势位置识别是第几个柱图被点击
-     *
      * @param x
      * @param y
      * @return -1时表示点击的是无效位置
