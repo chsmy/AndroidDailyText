@@ -36,7 +36,6 @@ public class CalculateUtil {
     }
 
     public static float getRangeTop(float value) {
-        //value: [1,10)
         if (value < 1.2) {
             return 1.2f;
         }
@@ -45,32 +44,35 @@ public class CalculateUtil {
             return 1.5f;
         }
 
-        if (value < 2.0) {
+        if (value <= 2.0) {
             return 2.0f;
         }
 
-        if (value < 3.0) {
+        if (value <= 3.0) {
             return 3.0f;
         }
 
-        if (value < 4.0) {
+        if (value <= 4.0) {
             return 4.0f;
         }
 
-        if (value < 5.0) {
+        if (value <= 5.0) {
             return 5.0f;
         }
 
-        if (value < 6.0) {
+        if (value <= 6.0) {
             return 6.0f;
         }
 
-        if (value < 7.0) {
+        if (value <= 7.0) {
             return 7.0f;
         }
 
-        if (value < 8.0) {
+        if (value <= 8.0) {
             return 8.0f;
+        }
+        if (value <= 9.0) {
+            return 9.0f;
         }
 
         return 10.0f;
@@ -119,13 +121,18 @@ public class CalculateUtil {
         Paint textPaint = new Paint();
         textPaint.setTextSize(DensityUtil.dip2px(context, 10));
         BigDecimal bigDecimal = new BigDecimal(maxDivisionValue);
-        float max = textPaint.measureText(String.valueOf(bigDecimal.intValue()));
+        float max = textPaint.measureText(String.valueOf(bigDecimal.floatValue()));
         for (int i = 2; i <= 10; i++) {
             if (maxDivisionValue * 0.1 >= 1) {
                 //当数字非常大的时候会出现精度丢失的情况 所以候使用BigDecimal做运算
                 BigDecimal bd = new BigDecimal(maxDivisionValue);
                 BigDecimal fen = new BigDecimal(0.1 * i);
-                String text = String.valueOf(bd.multiply(fen).longValue());
+                String text = null;
+                if(maxDivisionValue%5!=0){
+                    text = String.valueOf(bd.multiply(fen).floatValue());
+                }else {
+                    text = String.valueOf(bd.multiply(fen).longValue());
+                }
                 float w = textPaint.measureText(text);
                 if (w > max) {
                     max = w;

@@ -469,7 +469,6 @@ public class BarChart extends View {
                 velocityTracker.addMovement(event);
                 break;
             case MotionEvent.ACTION_UP:
-//                new Thread(new SmoothScrollThread(movingThisTime)).start();
                 velocityTracker.addMovement(event);
                 velocityTracker.computeCurrentVelocity(1000, maxVelocity);
                 int initialVelocity = (int) velocityTracker.getXVelocity();
