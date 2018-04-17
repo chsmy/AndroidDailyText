@@ -12,7 +12,6 @@ import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -196,8 +195,10 @@ public class BarChart_ extends View {
         this.barColors = colors;
         this.unitX = unitX;
         this.unitY = unitY;
+        if(list!=null&&list.size()>0){
         maxYValue = calculateMax(list);
         getRange(maxYValue);
+          }
     }
 
     /**
@@ -369,7 +370,7 @@ public class BarChart_ extends View {
                 } else {
                     text = String.valueOf(maxValue.multiply(fen).longValue());
                 }
-                canvas.drawText(text, mStartX-textPaint.measureText(text) -5, startY + textPaint.measureText("0")/2, textPaint);
+                canvas.drawText(text, mStartX - textPaint.measureText(text) -5, startY + textPaint.measureText("0")/2, textPaint);
                 canvas.drawLine(mStartX, startY, mTotalWidth-paddingRight-rightMargin, startY, axisPaint);
             }
         } else if (maxYValue > 0 && maxYValue <= 1) {
@@ -377,14 +378,14 @@ public class BarChart_ extends View {
                 float startY = mStartY-eachHeight * i;
                 textValue = CalculateUtil.numMathMul(maxYDivisionValue, (float) (0.2 * i));
                 String text = String.valueOf(textValue);
-                canvas.drawText(text,  textPaint.measureText(text) - 5, startY + textPaint.measureText("0")/2, textPaint);
+                canvas.drawText(text,  mStartX - textPaint.measureText(text) - 5, startY + textPaint.measureText("0")/2, textPaint);
                 canvas.drawLine(mStartX, startY, mTotalWidth-paddingRight-rightMargin, startY, axisPaint);
             }
         } else {
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 0; i <= 5; i++) {
                 float startY = mStartY-eachHeight * i;
                 String text = String.valueOf(10 * i);
-                canvas.drawText(text,textPaint.measureText(text) - 5, startY + textPaint.measureText("0")/2, textPaint);
+                canvas.drawText(text,mStartX - textPaint.measureText(text) - 5, startY + textPaint.measureText("0")/2, textPaint);
                 canvas.drawLine(mStartX, startY, mTotalWidth-paddingRight-rightMargin, startY, axisPaint);
             }
         }
@@ -408,7 +409,6 @@ public class BarChart_ extends View {
             movingThisTime = (scroller.getCurrX() - lastPointX);
             leftMoving = leftMoving + movingThisTime;
             lastPointX = scroller.getCurrX();
-            Log.i("leftMoving","computeScroll----"+leftMoving);
             postInvalidate();
         }
     }
@@ -426,7 +426,6 @@ public class BarChart_ extends View {
                 movingThisTime = lastPointX - movex;
                 leftMoving = leftMoving + movingThisTime;
                 lastPointX = movex;
-                Log.i("leftMoving","ACTION_MOVE----"+leftMoving);
                 invalidate();
                 velocityTracker.addMovement(event);
                 break;
@@ -437,7 +436,6 @@ public class BarChart_ extends View {
                 velocityTracker.clear();
                 scroller.fling((int) event.getX(), (int) event.getY(), -initialVelocity / 2,
                         0, Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 0);
-                Log.i("leftMoving","ACTION_UP------------"+leftMoving);
                 invalidate();
                 lastPointX = event.getX();
                 break;

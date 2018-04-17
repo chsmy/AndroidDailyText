@@ -36,12 +36,8 @@ public class CalculateUtil {
     }
 
     public static float getRangeTop(float value) {
-        if (value < 1.2) {
-            return 1.2f;
-        }
-
-        if (value < 1.5) {
-            return 1.5f;
+        if (value <=1.0) {
+            return 1.0f;
         }
 
         if (value <= 2.0) {
