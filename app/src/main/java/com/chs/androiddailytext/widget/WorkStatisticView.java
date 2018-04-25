@@ -55,16 +55,18 @@ public class WorkStatisticView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         mWidth = w - getPaddingLeft() - getPaddingRight();
         mHeight = h - getPaddingTop() - getPaddingBottom();
+        Log.i("zhixing","onSizeChanged");
     }
     public void setData(int yes,int no,int hand,int sum){
         this.yes = yes;
         this.no = no;
         this.hand = hand;
         this.sum = sum;
+        Log.i("zhixing","setData");
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.i("mRect",mWidth+"");
+        Log.i("zhixing","onDraw");
 
         mRectF.left = 0; mRectF.top = 0; mRectF.right = ((float)yes/sum)* mWidth; mRectF.bottom = mHeight;
         mPaint.setColor(ContextCompat.getColor(mContext, R.color.statistic_yes));
