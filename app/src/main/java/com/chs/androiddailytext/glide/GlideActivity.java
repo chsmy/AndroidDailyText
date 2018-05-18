@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -22,7 +23,6 @@ import java.util.concurrent.ExecutionException;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class GlideActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,5 +109,41 @@ public class GlideActivity extends AppCompatActivity {
 //        Glide.with(this).asFile()
 //        Glide.with(this).asBitmap()
 //        Glide.with(this).asDrawable()
+//        int count = 1; for (int i = 1; i <= 5; i++) { count += i; }
+//        Log.i("count",count+"");
+//        int a=0; int c=0;
+//        do{ --c; a=a-1; }while(a>0);
+//
+//        int x = (11+3*8)/4%3;
+//        Log.i("countx",x+"");
+//
+//        int[] score = new int[]{1,2,3,4,5};
+//        int temp = score[0];
+//        for (int index = 1;index < 5;index++) {
+//            if (score[index] < temp) {
+//                temp = score[index];
+//            } }
+
+        int a = 0; while ( a < 5 )
+        { switch(a){ case 0 : case 3 : a = a + 2; case 1 : case 2 : a = a + 3; default : a = a + 5; } }
+        Log.i("count","a----"+a);
+
+        int i=0,s=0; do{ if ( i%2 == 0 ){ i++; continue; } i++; s = s + i; } while (i<7);
+        Log.i("count","i----"+s);
+
+        int total = 0; for ( int j = 0; j < 4; j++ ){
+            if ( j == 1) continue;
+            if ( j == 2) break;
+            total += j; }
+
+        Log.i("count","total----"+total);
+
+        int x;
+        x = 6;
+        Log.i("count","aaa----"+x+"x++"+(x++)+"xxx"+x);
+        int y = 1+2/3-4*5;
+
+        Log.i("count","y----"+y);
     }
+
 }

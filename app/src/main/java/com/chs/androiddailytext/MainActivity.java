@@ -10,9 +10,11 @@ import android.widget.TextView;
 import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
 import com.chs.androiddailytext.chart.BarChartActivity;
 import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
+import com.chs.androiddailytext.dagger.DaggerActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
 import com.chs.androiddailytext.http.OkhttpTextActivity;
 import com.chs.androiddailytext.http.RetrofitTextActivity;
+import com.chs.androiddailytext.list.ListActivity;
 import com.chs.androiddailytext.module.Content;
 import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
@@ -114,6 +116,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void toBarchart(View view) {
         Intent intent = new Intent(this, BarChartActivity.class);
+        startActivity(intent);
+    }
+
+    public void toDagger(View view) {
+        Intent intent = new Intent(this, DaggerActivity.class);
+        startActivity(intent);
+    }
+
+    public void toList(View view) {
+        Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
     }
 }

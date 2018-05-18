@@ -47,6 +47,10 @@
         </activity>
         <activity android:name=".chart.BarChartActivity">
         </activity>
+        <activity android:name=".dagger.DaggerActivity">
+        </activity>
+        <activity android:name=".list.ListActivity">
+        </activity>
     </application>
 
 </manifest>
