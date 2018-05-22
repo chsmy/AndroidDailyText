@@ -15,7 +15,6 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
     private List<ListBean.DataEntity> mList = new ArrayList<>();
-    private List<ListBean.DataEntity> mClicked = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,12 +26,8 @@ public class ListActivity extends AppCompatActivity {
         final Gson gson = new Gson();
         ListBean listBean = gson.fromJson(json,ListBean.class);
 
-
-//        for(int i=0;i<20000;i++){
-//            data.add("item---------"+i);
-//        }
         mList.addAll(listBean.getData());
-        //为第一季都设置可见
+        //为第一级都设置可见
         for (ListBean.DataEntity bean : mList){
             bean.setVisible(true);
         }
@@ -42,66 +37,10 @@ public class ListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListBean.DataEntity entityClicked = mList.get(position);
-
-                entityClicked.setClicked(!entityClicked.isClicked());
-
-                List<ListBean.DataEntity> current = new ArrayList<>();
-                //把点击过的都放入到一个list中存放
-                if(entityClicked.isClicked()){
-                  mClicked.add(entityClicked);
-                }
-                maopao(entityClicked);
-
-                for (ListBean.DataEntity entity:mList){
-
-                    if(!entity.isClicked()&&entity.isExpend()){
-                        setNoClicked(entity);
-                        entity.setExpend(false);
-                    }
-                    //只有可见的才放进去
-                    if(entity.isVisible()){
-                        current.add(entity);
-                    }
-                    //ietm 被点击 它有子集 并且不是展开状态 才把子集放进去
-                    if(entity.isClicked()&&entity.getLists()!=null&&entity.getLists().size()>0&& !entity.isExpend()){
-                        entity.setExpend(!entity.isExpend());
-                        for(ListBean.DataEntity bean:entity.getLists()){
-                            bean.setVisible(true);
-                        }
-                        current.addAll(entity.getLists());
-                    }
-                }
-
-                mList.clear();
-                mList.addAll(current);
-                adapter.notifyDataSetChanged();
-                Log.i("Str-----",adapter.getStr());
+                ListBean.DataEntity entity = adapter.clicked(position);
+                Log.i("Str-----",entity.getId()+"------"+adapter.getStr());
             }
         });
     }
 
-    //如果该条isclick为false，那么它一定不是展开状态，它的下级也一定不是展开状态
-    private void setNoClicked(ListBean.DataEntity entity){
-        for(ListBean.DataEntity bean:entity.getLists()){
-            bean.setVisible(false);
-            bean.setClicked(false);
-            bean.setExpend(false);
-            if(bean.getLists()!=null&&bean.getLists().size()>0){
-                  setNoClicked(bean);
-            }
-        }
-    }
-   //冒泡找出需要变蓝的item
-    private void maopao(ListBean.DataEntity entity){
-        for (ListBean.DataEntity e:mClicked){
-            if(entity.getLevel()>e.getLevel()&&entity.getPid().equals(e.getId())){
-                e.setSelected(true);
-                maopao(e);
-            }else {
-                e.setSelected(false);
-            }
-        }
-        entity.setSelected(true);
-    }
 }
