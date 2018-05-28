@@ -18,6 +18,7 @@ import com.chs.androiddailytext.list.ListActivity;
 import com.chs.androiddailytext.module.Content;
 import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
+import com.chs.androiddailytext.piccanvas.PicCanvasActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -126,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toList(View view) {
         Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
+    }
+
+    public void toPicCanvas(View view) {
+        Intent intent = new Intent(this, PicCanvasActivity.class);
         startActivity(intent);
     }
 }

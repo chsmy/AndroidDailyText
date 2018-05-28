@@ -51,6 +51,8 @@
         </activity>
         <activity android:name=".list.ListActivity">
         </activity>
+        <activity android:name=".piccanvas.PicCanvasActivity">
+        </activity>
     </application>
 
 </manifest>
