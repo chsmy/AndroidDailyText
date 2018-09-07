@@ -82,6 +82,7 @@
           android:layout_height="wrap_content"
           android:text="okhttp"
           android:onClick="okHttp"
+          android:textAllCaps="false"
           />
    </LinearLayout>
 
@@ -95,24 +96,28 @@
           android:layout_height="wrap_content"
           android:text="retrofit"
           android:onClick="toRetrofit"
+          android:textAllCaps="false"
           />
       <Button
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="glide"
           android:onClick="toGlide"
+          android:textAllCaps="false"
           />
       <Button
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="statistic"
           android:onClick="toStatistic"
+          android:textAllCaps="false"
           />
       <Button
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="barchart"
           android:onClick="toBarchart"
+          android:textAllCaps="false"
           />
    </LinearLayout>
    <LinearLayout
@@ -125,24 +130,28 @@
           android:layout_height="wrap_content"
           android:text="dagger"
           android:onClick="toDagger"
+          android:textAllCaps="false"
           />
       <Button
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="list"
+          android:text="treelist"
           android:onClick="toList"
+          android:textAllCaps="false"
           />
       <Button
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="toPicCanvas"
           android:onClick="toPicCanvas"
+          android:textAllCaps="false"
           />
       <Button
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="toPop"
           android:onClick="toPop"
+          android:textAllCaps="false"
           />
    </LinearLayout>
    <TextView

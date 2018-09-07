@@ -2,8 +2,10 @@ package com.chs.androiddailytext.popwindow;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chs.androiddailytext.R;
 
@@ -16,6 +18,7 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
     private LinearLayout ll_room;
     private LinearLayout ll_type;
     private LinearLayout ll_state;
+    private TextView tv_room;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,7 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
         ll_room = findViewById(R.id.ll_room);
         ll_type = findViewById(R.id.ll_type);
         ll_state = findViewById(R.id.ll_state);
+        tv_room = findViewById(R.id.tv_room);
 
         ll_room .setOnClickListener(this);
         ll_type .setOnClickListener(this);
@@ -37,6 +41,7 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        Log.i("tv_room:",tv_room.getX()+"");
         switch (v.getId()){
             case R.id.ll_room:
                 mPopWindow = new MyPopWindow(this,mlist);
