@@ -1,4 +1,4 @@
-package com.chs.androiddailytext.http;
+package com.chs.androiddailytext.retorfit;
 
 import com.google.gson.annotations.SerializedName;
 
