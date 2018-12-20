@@ -44,7 +44,6 @@ public class RestClient {
     private void request(HttpMethod method) {
         final ApiService service = RestCreator.getRestService();
         Observable observable = null;
-
         switch (method) {
             case GET:
                 observable = service.get(URL, PARAMS);
@@ -74,9 +73,7 @@ public class RestClient {
             default:
                 break;
         }
-
         toSubscribe(observable);
-
     }
     private <T> void toSubscribe(Observable<T> o){
         o.subscribeOn(Schedulers.io())//指定Observable
