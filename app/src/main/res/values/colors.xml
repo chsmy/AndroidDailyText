@@ -2,8 +2,10 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#5A8DDF</color>
 
+    <!-- 按钮禁用时的颜色 -->
+    <color name="colorButtonDisable">#DDDDDD</color>
     <color name="skin_bg">#FF4081</color>
     <color name="statistic_yes">#40ff70</color>
     <color name="statistic_no">#FF4081</color>
@@ -11,8 +13,16 @@
     <color name="blue">#07afec</color>
     <color name="black">#000000</color>
 
+    <!-- 按钮按压时的颜色 -->
+    <color name="colorButtonPressed">#1976d2</color>
+
     <color name="bg">#9b8888</color>
 
     <color name="axis">#979797</color>
 
+    <color name="black_60">#99000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- 分割线的颜色 -->
+    <color name="colorLine">#ECECEC</color>
 </resources>

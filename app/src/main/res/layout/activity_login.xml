@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+             >
+
+
+    <ImageView
+        android:layout_width="@dimen/dp100"
+        android:layout_height="@dimen/dp100"
+        android:layout_margin="@dimen/dp30"
+        android:src="@mipmap/ic_launcher" />
+
+    <com.chs.androiddailytext.widget.ClearEditText
+        android:id="@+id/et_login_phone"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp40"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp40"
+        android:hint="@string/login_phone_input_hint"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:maxLines="1" />
+
+    <View
+        style="@style/HorizontalLineStyle"
+        android:layout_marginLeft="@dimen/dp40"
+        android:layout_marginRight="@dimen/dp40" />
+
+    <com.chs.androiddailytext.widget.ClearEditText
+        android:id="@+id/et_login_password"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp40"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp40"
+        android:hint="@string/login_password_input_hint"
+        android:inputType="textPassword"
+        android:maxLength="20"
+        android:maxLines="1" />
+
+    <View
+        style="@style/HorizontalLineStyle"
+        android:layout_marginLeft="@dimen/dp40"
+        android:layout_marginRight="@dimen/dp40" />
+
+    <TextView
+        android:id="@+id/tv_login_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginLeft="@dimen/dp40"
+        android:layout_marginTop="@dimen/dp15"
+        android:layout_marginRight="@dimen/dp60"
+        android:text="@string/login_forget"
+        android:textColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/btn_login_commit"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp40"
+        android:layout_marginTop="@dimen/dp30"
+        android:layout_marginRight="@dimen/dp40"
+        android:text="@string/login_text" />
+</LinearLayout>

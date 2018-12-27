@@ -27,6 +27,9 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import login.LoginActivity;
+import login.RegisterActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -138,6 +141,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void toPop(View view) {
         Intent intent = new Intent(this, PopActivity.class);
+        startActivity(intent);
+    }
+
+    public void toLogin(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void toRegister(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }

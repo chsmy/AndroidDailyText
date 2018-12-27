@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">AndroidDailyText</string>
+
+    <!-- 登录 -->
+    <string name="login_register">注册</string>
+    <string name="login_phone_input_hint">请输入手机号</string>
+    <string name="login_password_input_hint">请输入密码</string>
+    <string name="login_forget">忘记密码？</string>
+    <string name="login_text">登录</string>
+
+    <!-- 注册 -->
+    <string name="register_text">注册</string>
+    <string name="register_hint">手机号仅用于登录和保护账号安全</string>
+    <string name="register_login">登录</string>
+    <string name="register_phone_input_hint">输入手机号码</string>
+    <string name="register_code_input_hint">输入验证码</string>
+    <string name="register_send_code">发送验证码</string>
+    <string name="register_password_input_hint1">设置密码</string>
+    <string name="register_password_input_hint2">再次输入密码</string>
 </resources>

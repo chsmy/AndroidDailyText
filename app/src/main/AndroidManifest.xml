@@ -55,6 +55,10 @@
         </activity>
         <activity android:name=".popwindow.PopActivity">
         </activity>
+        <activity android:name="login.LoginActivity">
+        </activity>
+        <activity android:name="login.RegisterActivity">
+        </activity>
     </application>
 
 </manifest>
