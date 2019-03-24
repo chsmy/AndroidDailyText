@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.chs.androiddailytext">
+    package="com.chs.androiddailytext">
 
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".APP"
@@ -16,49 +16,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".netease.XfermodesActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".permission.PermissionActivity">
-        </activity>
-        <activity android:name=".ViewActivity">
-        </activity>
-        <activity android:name=".AnimatorActivity">
-        </activity>
-        <activity android:name=".PullRefreshActivity">
-        </activity>
-        <activity android:name=".ChartActivity">
-        </activity>
-        <activity android:name=".pattern.strategy.StrategyActivity">
-        </activity>
-        <activity android:name=".changeSkin.ChangeSkinActivity">
-        </activity>
-        <activity android:name=".retorfit.OkhttpTextActivity">
-        </activity>
-        <activity android:name=".retorfit.RetrofitTextActivity">
-        </activity>
-        <activity android:name=".glide.GlideActivity">
-        </activity>
-        <activity android:name=".custom_views.WorkLoadStatisticActivity">
-        </activity>
-        <activity android:name=".chart.BarChartActivity">
-        </activity>
-        <activity android:name=".dagger.DaggerActivity">
-        </activity>
-        <activity android:name=".list.ListActivity">
-        </activity>
-        <activity android:name=".piccanvas.PicCanvasActivity">
-        </activity>
-        <activity android:name=".popwindow.PopActivity">
-        </activity>
-        <activity android:name="login.LoginActivity">
-        </activity>
-        <activity android:name="login.RegisterActivity">
-        </activity>
+        <activity android:name=".permission.PermissionActivity"></activity>
+        <activity android:name=".ViewActivity"></activity>
+        <activity android:name=".AnimatorActivity"></activity>
+        <activity android:name=".PullRefreshActivity"></activity>
+        <activity android:name=".ChartActivity"></activity>
+        <activity android:name=".pattern.strategy.StrategyActivity"></activity>
+        <activity android:name=".changeSkin.ChangeSkinActivity"></activity>
+        <activity android:name=".retorfit.OkhttpTextActivity"></activity>
+        <activity android:name=".retorfit.RetrofitTextActivity"></activity>
+        <activity android:name=".glide.GlideActivity"></activity>
+        <activity android:name=".custom_views.WorkLoadStatisticActivity"></activity>
+        <activity android:name=".chart.BarChartActivity"></activity>
+        <activity android:name=".dagger.DaggerActivity"></activity>
+        <activity android:name=".list.ListActivity"></activity>
+        <activity android:name=".piccanvas.PicCanvasActivity"></activity>
+        <activity android:name=".popwindow.PopActivity"></activity>
+        <activity android:name="login.LoginActivity"></activity>
+        <activity android:name="login.RegisterActivity"></activity>
     </application>
 
 </manifest>

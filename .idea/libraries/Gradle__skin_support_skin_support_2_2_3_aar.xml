@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: skin.support:skin-support:2.2.3@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/skin-support-2.2.3.aar/838f1924b416974003527d12594440ee/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/skin-support-2.2.3.aar/838f1924b416974003527d12594440ee/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/skin.support/skin-support/2.2.3/507b3f3a497843016218d67def667154b0a57714/skin-support-2.2.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
