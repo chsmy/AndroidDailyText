@@ -28,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import kot.KotlinActivity;
 import login.LoginActivity;
 import login.RegisterActivity;
 
@@ -157,6 +158,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toNetease(View view) {
         Intent intent = new Intent(this, XfermodesActivity.class);
+        startActivity(intent);
+    }
+
+    public void toKotlin(View view) {
+        Intent intent = new Intent(this, KotlinActivity.class);
         startActivity(intent);
     }
 }
