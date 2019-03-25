@@ -12,6 +12,7 @@ import com.chs.androiddailytext.chart.BarChartActivity;
 import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
 import com.chs.androiddailytext.dagger.DaggerActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
+import com.chs.androiddailytext.netease.SplitActivity;
 import com.chs.androiddailytext.netease.XfermodesActivity;
 import com.chs.androiddailytext.retorfit.OkhttpTextActivity;
 import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
@@ -157,7 +158,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toNetease(View view) {
-        Intent intent = new Intent(this, XfermodesActivity.class);
+//        Intent intent = new Intent(this, XfermodesActivity.class);
+//        startActivity(intent);
+        Intent intent = new Intent(this, SplitActivity.class);
         startActivity(intent);
     }
 

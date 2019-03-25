@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".netease.XfermodesActivity"></activity>
+        <activity android:name=".netease.SplitActivity"></activity>
+        <activity android:name=".netease.XfermodesActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,25 +25,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".permission.PermissionActivity"></activity>
-        <activity android:name=".ViewActivity"></activity>
-        <activity android:name=".AnimatorActivity"></activity>
-        <activity android:name=".PullRefreshActivity"></activity>
-        <activity android:name=".ChartActivity"></activity>
-        <activity android:name=".pattern.strategy.StrategyActivity"></activity>
-        <activity android:name=".changeSkin.ChangeSkinActivity"></activity>
-        <activity android:name=".retorfit.OkhttpTextActivity"></activity>
-        <activity android:name=".retorfit.RetrofitTextActivity"></activity>
-        <activity android:name=".glide.GlideActivity"></activity>
-        <activity android:name=".custom_views.WorkLoadStatisticActivity"></activity>
-        <activity android:name=".chart.BarChartActivity"></activity>
-        <activity android:name=".dagger.DaggerActivity"></activity>
-        <activity android:name=".list.ListActivity"></activity>
-        <activity android:name=".piccanvas.PicCanvasActivity"></activity>
-        <activity android:name=".popwindow.PopActivity"></activity>
-        <activity android:name="login.LoginActivity"></activity>
-        <activity android:name="login.RegisterActivity"></activity>
-        <activity android:name="kot.KotlinActivity"/>
+        <activity android:name=".permission.PermissionActivity" />
+        <activity android:name=".ViewActivity" />
+        <activity android:name=".AnimatorActivity" />
+        <activity android:name=".PullRefreshActivity" />
+        <activity android:name=".ChartActivity" />
+        <activity android:name=".pattern.strategy.StrategyActivity" />
+        <activity android:name=".changeSkin.ChangeSkinActivity" />
+        <activity android:name=".retorfit.OkhttpTextActivity" />
+        <activity android:name=".retorfit.RetrofitTextActivity" />
+        <activity android:name=".glide.GlideActivity" />
+        <activity android:name=".custom_views.WorkLoadStatisticActivity" />
+        <activity android:name=".chart.BarChartActivity" />
+        <activity android:name=".dagger.DaggerActivity" />
+        <activity android:name=".list.ListActivity" />
+        <activity android:name=".piccanvas.PicCanvasActivity" />
+        <activity android:name=".popwindow.PopActivity" />
+        <activity android:name="login.LoginActivity" />
+        <activity android:name="login.RegisterActivity" />
+        <activity android:name="kot.KotlinActivity" />
     </application>
 
 </manifest>
