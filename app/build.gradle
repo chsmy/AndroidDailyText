@@ -48,4 +48,5 @@ dependencies {
     // if you use the support libraries
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
     implementation project(':image')
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }
