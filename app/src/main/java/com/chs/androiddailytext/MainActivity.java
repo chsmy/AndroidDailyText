@@ -12,16 +12,15 @@ import com.chs.androiddailytext.chart.BarChartActivity;
 import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
 import com.chs.androiddailytext.dagger.DaggerActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
-import com.chs.androiddailytext.netease.SplitActivity;
-import com.chs.androiddailytext.netease.XfermodesActivity;
-import com.chs.androiddailytext.retorfit.OkhttpTextActivity;
-import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
 import com.chs.androiddailytext.list.ListActivity;
 import com.chs.androiddailytext.module.Content;
+import com.chs.androiddailytext.netease.NeteaseActivity;
 import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
 import com.chs.androiddailytext.piccanvas.PicCanvasActivity;
 import com.chs.androiddailytext.popwindow.PopActivity;
+import com.chs.androiddailytext.retorfit.OkhttpTextActivity;
+import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -160,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     public void toNetease(View view) {
 //        Intent intent = new Intent(this, XfermodesActivity.class);
 //        startActivity(intent);
-        Intent intent = new Intent(this, SplitActivity.class);
+        Intent intent = new Intent(this, NeteaseActivity.class);
         startActivity(intent);
     }
 
