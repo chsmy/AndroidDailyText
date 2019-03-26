@@ -28,7 +28,10 @@ import java.util.Random;
 public class SplitView  extends View {
     private Paint mPaint;
     private Bitmap mBitmap;
-    private int d= 4;//粒子的直径
+    /**
+     * //粒子的直径
+     */
+    private int d= 4;
     private List<Ball> mBalls = new ArrayList<>();
     //是否绘制原图
     private boolean isShowBitmap = true;

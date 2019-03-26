@@ -24,6 +24,7 @@ class NeteaseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_netease)
         datas.add("刮刮卡")
         datas.add("粒子效果")
+        datas.add("splash")
         recycleview.layoutManager = GridLayoutManager(this, 3)
         recycleview.addItemDecoration(DividerItemDecoration(this, HORIZONTAL))
         val adapter = NeteaseAdapter(datas, this)
@@ -33,6 +34,7 @@ class NeteaseActivity : AppCompatActivity() {
                 when (position) {
                     0 -> startActivity(XfermodesActivity::class.java)
                     1 -> startActivity(SplitActivity::class.java)
+                    2 -> startActivity(SplashActivity::class.java)
                 }
             }
         })

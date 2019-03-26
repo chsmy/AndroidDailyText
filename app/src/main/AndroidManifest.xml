@@ -45,6 +45,7 @@
         <activity android:name="login.RegisterActivity" />
         <activity android:name="kot.KotlinActivity" />
         <activity android:name=".netease.NeteaseActivity"/>
+        <activity android:name=".netease.SplashActivity" />
     </application>
 
 </manifest>
