@@ -31,7 +31,7 @@ public class SplitView  extends View {
     /**
      * //粒子的直径
      */
-    private int d= 4;
+    private int d= 2;
     private List<Ball> mBalls = new ArrayList<>();
     //是否绘制原图
     private boolean isShowBitmap = true;
