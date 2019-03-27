@@ -55,6 +55,34 @@ public class GuaGuaKaView extends View {
         mDstBitmap = Bitmap.createBitmap(mSrcBitmap.getWidth(),mSrcBitmap.getHeight(), Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mDstBitmap);
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        // 宽的测量规格
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        // 宽的测量尺寸
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        // 高度的测量规格
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        // 高度的测量尺寸
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        //根据View的逻辑得到，比如TextView根据设置的文字计算wrap_content时的大小。
+        //这两个数据根据实现需求计算。
+        int wrapWidth = mBitmapRes.getWidth();
+        int wrapHeight = mBitmapRes.getHeight();
+
+        // 如果是是AT_MOST则对哪个进行特殊处理
+        if(widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(wrapWidth, wrapHeight);
+        }else if(widthSpecMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(wrapWidth, heightSpecSize);
+        }else if(heightSpecMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(widthSpecSize, wrapHeight);
+        }
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -94,7 +122,7 @@ public class GuaGuaKaView extends View {
                 mPath.moveTo(mEventX,mEventY);
                 break;
             case MotionEvent.ACTION_MOVE:
-                float endX = (mEventX+event.getX())/2;
+                float endX = (mEventX+event.getX())/2 ;
                 float endY = (mEventY+event.getY())/2;
                 mPath.quadTo(mEventX,mEventY,endX,endY);
 //                mPath.lineTo(event.getX(),event.getY());
@@ -105,6 +133,7 @@ public class GuaGuaKaView extends View {
             case MotionEvent.ACTION_UP:
                 new Thread(mRunnable).start();
                 break;
+                default:
         }
         return true;
     }
