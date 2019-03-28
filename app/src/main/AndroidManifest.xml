@@ -46,6 +46,7 @@
         <activity android:name="kot.KotlinActivity" />
         <activity android:name=".netease.NeteaseActivity"/>
         <activity android:name=".netease.SplashActivity" />
+        <activity android:name=".netease.QQBubbleActivity" />
     </application>
 
 </manifest>
