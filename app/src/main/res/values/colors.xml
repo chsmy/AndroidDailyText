@@ -39,5 +39,5 @@
         <item>@color/aqua</item>
         <item>@color/yellow</item>
     </array>
-
+    <color name="red">#FF0000</color>
 </resources>

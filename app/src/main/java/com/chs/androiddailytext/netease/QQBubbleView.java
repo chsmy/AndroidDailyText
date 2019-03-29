@@ -104,6 +104,8 @@ public class QQBubbleView extends View {
      */
     private RectF mBlastRect;
 
+
+
     public QQBubbleView(Context context) {
         this(context, null);
     }
