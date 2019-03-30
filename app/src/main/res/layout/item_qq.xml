@@ -22,6 +22,7 @@
      android:text="ss"
      android:gravity="center"
      android:background="@drawable/red_bg"
+       android:textColor="@color/white"
      android:layout_marginRight="@dimen/dp20"
      />
 </LinearLayout>

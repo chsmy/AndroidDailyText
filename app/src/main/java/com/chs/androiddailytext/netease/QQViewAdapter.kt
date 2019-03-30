@@ -35,11 +35,13 @@ class QQViewAdapter(var data :MutableList<String>, var context: Context) : Recyc
 
     override fun onBindViewHolder(holder: QQViewHolder, position: Int) {
         holder.textView.text = data.get(holder.adapterPosition)
+        holder.qqTextView.text = holder.adapterPosition.toString()
         holder.textView.setOnClickListener {
 
 //            onItemClickListenter.onItemClick(holder.textView,holder.adapterPosition)
 
         }
+        holder.qqTextView.setOnTouchListener(QQViewListenter(context))
     }
     class QQViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

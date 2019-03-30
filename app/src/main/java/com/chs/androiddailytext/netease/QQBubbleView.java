@@ -15,6 +15,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -45,6 +46,14 @@ public class QQBubbleView extends View {
      * 爆炸消失的状态
      */
     private static final int BUBBLE_STATE_BLAST = 0X04;
+    /**
+     * 气泡移动完后回到原来状态
+     */
+    public static final int EXECUTE_STATE_BACK = 0X05;
+    /**
+     * 气泡移动完后回爆炸消失
+     */
+    public static final int EXECUTE_STATE_BLAST = 0X06;
     /**
      * 小球的画笔 文本的画笔 爆炸效果的画笔
      */
@@ -104,7 +113,12 @@ public class QQBubbleView extends View {
      */
     private RectF mBlastRect;
 
+    private OnExecuteFinishListener mOnExecuteFinishListener;
 
+
+    public void setOnDismissListener(OnExecuteFinishListener onDismissListener) {
+        mOnExecuteFinishListener = onDismissListener;
+    }
 
     public QQBubbleView(Context context) {
         this(context, null);
@@ -148,22 +162,36 @@ public class QQBubbleView extends View {
         mBlastRect = new RectF();
     }
 
+    public void setText(String text) {
+        mText = text;
+    }
+    /**
+     * 设置圆心的坐标
+     */
+    public void setCenter(float x,float y,int radius){
+        mState = BUBBLE_STATE_CLICK;
+        mQuitPoint.set(x, y);
+        mMovePoint.set(x, y);
+        mMoveRadius = radius;
+        mQuitRadius = radius;
+        mMaxDist = mMoveRadius * 8;
+        invalidate();
+    }
+    public void setState(int state){
+        mState = state;
+        invalidate();
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mQuitPoint.set(w / 2, h / 2);
-        mMovePoint.set(w / 2, h / 2);
+//        mQuitPoint.set(w / 2, h / 2);
+//        mMovePoint.set(w / 2, h / 2);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //只要不是爆炸的情况都要绘制圆和字
-        if (mState != BUBBLE_STATE_BLAST) {
-            canvas.drawCircle(mMovePoint.x, mMovePoint.y, mMoveRadius, mBubblePaint);
-            mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
-            canvas.drawText(mText, mMovePoint.x - mTextRect.width() / 2, mMovePoint.y + mTextRect.height() / 2, mTextPaint);
-        }
         //链接状态绘制静止的圆和赛贝尔曲线
         if (mState == BUBBLE_STATE_CLICK) {
             //绘制静止的圆
@@ -174,21 +202,21 @@ public class QQBubbleView extends View {
             float controlY = (mMovePoint.y + mQuitPoint.y) / 2;
             //计算角度 在直角三角形中,非直角的sin值等于对边长比斜边长.使用勾股定理计算即可
             //sinA=对边/斜边  cosB=邻边/斜边   tanA=对边/邻边
-            float sinThet = (mMovePoint.y - mQuitPoint.y) / mDist;
-            float cosThet = (mMovePoint.x - mQuitPoint.x) / mDist;
+            float sinTheta = (mMovePoint.y - mQuitPoint.y) / mDist;
+            float cosTheta = (mMovePoint.x - mQuitPoint.x) / mDist;
 
             //A点
-            float ax = mQuitPoint.x - mQuitRadius * sinThet;
-            float ay = mQuitPoint.y + mQuitRadius * cosThet;
+            float ax = mQuitPoint.x - mQuitRadius * sinTheta;
+            float ay = mQuitPoint.y + mQuitRadius * cosTheta;
             //B点
-            float bx = mMovePoint.x - mMoveRadius * sinThet;
-            float by = mMovePoint.y + mMoveRadius * cosThet;
+            float bx = mMovePoint.x - mMoveRadius * sinTheta;
+            float by = mMovePoint.y + mMoveRadius * cosTheta;
             //C点
-            float cx = mMovePoint.x + mMoveRadius * sinThet;
-            float cy = mMovePoint.y - mMoveRadius * cosThet;
+            float cx = mMovePoint.x + mMoveRadius * sinTheta;
+            float cy = mMovePoint.y - mMoveRadius * cosTheta;
             //D点
-            float dx = mQuitPoint.x + mQuitRadius * sinThet;
-            float dy = mQuitPoint.y - mQuitRadius * cosThet;
+            float dx = mQuitPoint.x + mQuitRadius * sinTheta;
+            float dy = mQuitPoint.y - mQuitRadius * cosTheta;
 
             //设置path的路径
             mBezierPath.reset();
@@ -200,6 +228,14 @@ public class QQBubbleView extends View {
             mBezierPath.close();
             canvas.drawPath(mBezierPath, mBubblePaint);
         }
+
+        //只要不是爆炸的情况都要绘制圆和字
+        if (mState != BUBBLE_STATE_BLAST) {
+            canvas.drawCircle(mMovePoint.x, mMovePoint.y, mMoveRadius, mBubblePaint);
+            mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
+            canvas.drawText(mText, mMovePoint.x - mTextRect.width() / 2, mMovePoint.y + mTextRect.height() / 2, mTextPaint);
+        }
+
         //爆炸状态绘制爆炸图片
         if (mState == BUBBLE_STATE_BLAST && mBlastIndex < mBlastDrawablesArray.length) {
             mBlastRect.left = mMovePoint.x - mMoveRadius;
@@ -212,13 +248,14 @@ public class QQBubbleView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
+        float x = event.getRawX();
+        float y = event.getRawY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 //勾股定理算出点击位置和静止圆的圆心距离
                 mDist = (float) Math.hypot(x - mQuitPoint.x, y - mQuitPoint.y);
                 if (mState == BUBBLE_STATE_DEFAULT) {
+                    //如果手指点击到了圆上或者圆的附近
                     if (mDist < mMoveRadius + MOVE_OFFSET) {
                         mState = BUBBLE_STATE_CLICK;
                     }
@@ -226,10 +263,13 @@ public class QQBubbleView extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (mState != BUBBLE_STATE_DEFAULT) {
+                    //勾股定理算出点击位置和静止圆的圆心距离,也就是手指一动的距离
                     mDist = (float) Math.hypot(x - mQuitPoint.x, y - mQuitPoint.y);
-                    mMovePoint.x = event.getX();
-                    mMovePoint.y = event.getY();
+                    mMovePoint.x = event.getRawX();
+                    mMovePoint.y = event.getRawY();
+                    //如果手指点击到了圆上或者圆的附近
                     if (mState == BUBBLE_STATE_CLICK) {
+                        //手指移动动的距离小于我们定义的一个最大的距离，就绘制贝塞尔曲线，反之就是分离状态
                         if (mDist < mMaxDist - MOVE_OFFSET) {
                             mQuitRadius = (mMoveRadius - mDist / 8);
                         } else {
@@ -263,6 +303,9 @@ public class QQBubbleView extends View {
         return true;
     }
 
+    /**
+     * 爆炸动画
+     */
     private void startBlastAnim() {
         ValueAnimator animator = ValueAnimator.ofInt(0, 5);
         animator.setDuration(500);
@@ -274,9 +317,21 @@ public class QQBubbleView extends View {
                 invalidate();
             }
         });
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if(mOnExecuteFinishListener!=null){
+                    mOnExecuteFinishListener.onFinish(EXECUTE_STATE_BLAST);
+                }
+            }
+        });
         animator.start();
     }
 
+    /**
+     * 回弹动画
+     */
     private void startBackAnim() {
         PointF start = new PointF(mMovePoint.x, mMovePoint.y);
         PointF end = new PointF(mQuitPoint.x, mQuitPoint.y);
@@ -296,8 +351,19 @@ public class QQBubbleView extends View {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 mState = BUBBLE_STATE_DEFAULT;
+                if(mOnExecuteFinishListener!=null){
+                    mOnExecuteFinishListener.onFinish(EXECUTE_STATE_BACK);
+                }
             }
         });
         animator.start();
+    }
+
+    public interface OnExecuteFinishListener{
+        /**
+         * 执行完成
+         * @param type
+         */
+        void onFinish(int type);
     }
 }
