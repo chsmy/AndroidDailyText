@@ -47,6 +47,7 @@
         <activity android:name=".netease.NeteaseActivity"/>
         <activity android:name=".netease.SplashActivity" />
         <activity android:name=".netease.QQBubbleActivity" />
+        <activity android:name=".netease.PathMeasureActivity" />
     </application>
 
 </manifest>

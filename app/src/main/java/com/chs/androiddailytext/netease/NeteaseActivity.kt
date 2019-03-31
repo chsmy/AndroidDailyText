@@ -26,6 +26,7 @@ class NeteaseActivity : AppCompatActivity() {
         datas.add("粒子效果")
         datas.add("splash")
         datas.add("QQ红点拖拽")
+        datas.add("PathMeasure")
         recycleview.layoutManager = GridLayoutManager(this, 3)
         recycleview.addItemDecoration(DividerItemDecoration(this, HORIZONTAL))
         val adapter = NeteaseAdapter(datas, this)
@@ -37,6 +38,7 @@ class NeteaseActivity : AppCompatActivity() {
                     1 -> startActivity(SplitActivity::class.java)
                     2 -> startActivity(SplashActivity::class.java)
                     3 -> startActivity(QQBubbleActivity::class.java)
+                    4 -> startActivity(PathMeasureActivity::class.java)
                 }
             }
         })

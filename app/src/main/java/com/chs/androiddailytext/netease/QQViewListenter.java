@@ -34,7 +34,6 @@ public class QQViewListenter implements View.OnTouchListener , QQBubbleView.OnEx
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         currentClickView = v;
-        Log.e("onTouch","x--"+event.getRawX()+"y--"+event.getRawY()+"--event"+event.getAction());
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if(mViewGroup!=null){
                 mViewGroup.addView(mQQBubbleView);
