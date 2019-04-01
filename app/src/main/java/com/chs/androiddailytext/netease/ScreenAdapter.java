@@ -45,5 +45,9 @@ public class ScreenAdapter {
         activityDm.scaledDensity = systemDm.scaledDensity;
         activityDm.densityDpi = systemDm.densityDpi;
     }
-
+    public static void adaptWidth(Activity activity, int designWidth) {
+        DisplayMetrics dm = Resources.getSystem().getDisplayMetrics();
+        final  DisplayMetrics activityDM = activity.getResources().getDisplayMetrics();
+        activityDM.xdpi= dm.xdpi = (dm.widthPixels * 72f) / designWidth;
+    }
 }

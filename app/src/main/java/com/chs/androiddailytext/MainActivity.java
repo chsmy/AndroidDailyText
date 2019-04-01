@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
@@ -52,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i("content",arrayList.get(2).getTitle());
         TextView textView = findViewById(R.id.tv_content);
         textView.setText(arrayList.get(2).getContent());
-
-finish();
 
         String json1 = "[{\"title\":\"aa\",\"id\":\"1\",\"type\":\"check_radio\",\"is_checked\":\"0\",\"option\":[{\"value\":\"a\",\"is_default\":\"1\",\"key\":\"1\"}]},{\"title\":\"bb\",\"id\":\"2\",\"type\":\"check_checkbox\",\"is_checked\":\"0\",\"option\":[{\"value\":\"\\u9009\\u9879\\u4e00b\",\"is_default\":\"1\",\"key\":\"1\"}]},{\"title\":\"aaaaaaa\",\"id\":\"3\",\"type\":\"check_show\",\"content\":\"1.\\u738d\\u53e4\\\\n2.\\u6c34\\u7535\\u8d39\\u6c34\\u7535\\u8d39\\\\n3.SD\\u53d1\\u751f\\u7684\"}]";
         ArrayList<JsonObject> jsonObjects1 = new Gson().fromJson(json1, type);
