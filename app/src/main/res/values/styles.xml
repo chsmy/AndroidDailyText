@@ -7,6 +7,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="BangTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
     <style name="PopupWindowAnimation">
         <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
         <item name="android:windowExitAnimation">@anim/pophidden_anim</item>

@@ -49,6 +49,8 @@
         <activity android:name=".netease.QQBubbleActivity" />
         <activity android:name=".netease.PathMeasureActivity" />
         <activity android:name=".netease.ScreenActivity"/>
+        <activity android:name=".netease.BangAdapterActivity"
+            android:theme="@style/BangTheme"/>
     </application>
 
 </manifest>

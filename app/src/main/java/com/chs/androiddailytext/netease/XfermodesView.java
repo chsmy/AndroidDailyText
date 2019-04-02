@@ -155,12 +155,7 @@ public class XfermodesView extends View {
             canvas.drawRect(x, y, x + W, y + H, paint);
 
             // 图层保存
-            int sc = canvas.saveLayer(x, y, x + W, y + H, null,
-                    Canvas.MATRIX_SAVE_FLAG |
-                    Canvas.CLIP_SAVE_FLAG |
-                    Canvas.HAS_ALPHA_LAYER_SAVE_FLAG |
-                    Canvas.FULL_COLOR_LAYER_SAVE_FLAG |
-                    Canvas.CLIP_TO_LAYER_SAVE_FLAG);
+            int sc = canvas.saveLayer(x, y, x + W, y + H, null);
             canvas.translate(x, y);
             canvas.drawBitmap(mDstB, 0, 0, paint);
             paint.setXfermode(sModes[i]);

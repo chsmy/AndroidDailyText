@@ -3,8 +3,6 @@ package com.chs.androiddailytext.netease
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.DividerItemDecoration.HORIZONTAL
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.chs.androiddailytext.R
@@ -28,8 +26,9 @@ class NeteaseActivity : AppCompatActivity() {
         datas.add("QQ红点拖拽")
         datas.add("PathMeasure")
         datas.add("屏幕适配")
+        datas.add("刘海适配")
         recycleview.layoutManager = GridLayoutManager(this, 3)
-        recycleview.addItemDecoration(DividerItemDecoration(this, HORIZONTAL))
+//        recycleview.addItemDecoration(DividerItemDecoration(this, HORIZONTAL))
         val adapter = NeteaseAdapter(datas, this)
         recycleview.adapter = adapter
         adapter.setOnItemClickListener(object : NeteaseAdapter.OnItemClickListenter {
@@ -41,6 +40,7 @@ class NeteaseActivity : AppCompatActivity() {
                     3 -> startActivity(QQBubbleActivity::class.java)
                     4 -> startActivity(PathMeasureActivity::class.java)
                     5 -> startActivity(ScreenActivity::class.java)
+                    6 -> startActivity(BangAdapterActivity::class.java)
                 }
             }
         })
