@@ -27,6 +27,7 @@ class NeteaseActivity : AppCompatActivity() {
         datas.add("PathMeasure")
         datas.add("屏幕适配")
         datas.add("刘海适配")
+        datas.add("FlowLayout")
         recycleview.layoutManager = GridLayoutManager(this, 3)
 //        recycleview.addItemDecoration(DividerItemDecoration(this, HORIZONTAL))
         val adapter = NeteaseAdapter(datas, this)
@@ -41,6 +42,7 @@ class NeteaseActivity : AppCompatActivity() {
                     4 -> startActivity(PathMeasureActivity::class.java)
                     5 -> startActivity(ScreenActivity::class.java)
                     6 -> startActivity(BangAdapterActivity::class.java)
+                    7 -> startActivity(FlowLayoutActivity::class.java)
                 }
             }
         })

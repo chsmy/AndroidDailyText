@@ -51,6 +51,7 @@
         <activity android:name=".netease.ScreenActivity"/>
         <activity android:name=".netease.BangAdapterActivity"
             android:theme="@style/BangTheme"/>
+        <activity android:name=".netease.FlowLayoutActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.chs.androiddailytext.netease.FlowLayout
+        android:id="@+id/flow_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/text_flow"
+                    android:text="哈哈" />
+
+                <TextView
+                    style="@style/text_flow"
+                    android:text="嘎嘎嘎嘎" />
+
+                <TextView
+                    style="@style/text_flow"
+                    android:text="呱呱呱呱呱" />
+
+                <TextView
+                    style="@style/text_flow"
+                    android:text="摇摇摇" />
+
+                <TextView
+                    style="@style/text_flow"
+                    android:text="切克闹" />
+
+                <TextView
+                    style="@style/text_flow"
+                    android:text="呵呵呵呵" />
+
+                <TextView
+                    style="@style/text_flow"
+                    android:text="嘿嘿嘿IEhi额嘿嘿" />
+                <TextView
+                    style="@style/text_flow"
+                    android:text="哇哇哇哇" />
+                <TextView
+                    style="@style/text_flow"
+                    android:text="来来来来" />
+                <TextView
+                    style="@style/text_flow"
+                    android:text="小bitch" />
+                <TextView
+                    style="@style/text_flow"
+                    android:text="come on baby" />
+                <TextView
+                    style="@style/text_flow"
+                    android:text="都是弟弟" />
+
+    </com.chs.androiddailytext.netease.FlowLayout>
+
+</LinearLayout>

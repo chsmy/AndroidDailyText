@@ -50,4 +50,11 @@ public class ScreenAdapter {
         final  DisplayMetrics activityDM = activity.getResources().getDisplayMetrics();
         activityDM.xdpi= dm.xdpi = (dm.widthPixels * 72f) / designWidth;
     }
+
+    public static void cancelPtAdapter(final Activity activity) {
+        final DisplayMetrics dm = Resources.getSystem().getDisplayMetrics();
+        final DisplayMetrics activityDm = activity.getResources().getDisplayMetrics();
+        activityDm.xdpi = dm.xdpi = dm.density * 72;
+    }
+
 }
