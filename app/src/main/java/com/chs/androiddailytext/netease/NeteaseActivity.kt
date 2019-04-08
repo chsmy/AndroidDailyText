@@ -2,8 +2,8 @@ package com.chs.androiddailytext.netease
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.View
 import com.chs.androiddailytext.R
 import kotlinx.android.synthetic.main.activity_netease.*

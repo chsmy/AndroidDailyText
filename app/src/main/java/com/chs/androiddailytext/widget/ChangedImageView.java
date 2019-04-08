@@ -1,7 +1,7 @@
 package com.chs.androiddailytext.widget;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.chs.androiddailytext.utils.AppLog;
@@ -11,7 +11,7 @@ import com.chs.androiddailytext.utils.AppLog;
  * 邮箱：657083984@qq.com
  */
 
-public class ChangedImageView extends android.support.v7.widget.AppCompatImageView {
+public class ChangedImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     private int cha;
 

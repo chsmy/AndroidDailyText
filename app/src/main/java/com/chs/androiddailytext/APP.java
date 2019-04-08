@@ -1,10 +1,10 @@
 package com.chs.androiddailytext;
 
 import android.app.Application;
-import android.support.v7.app.AppCompatDelegate;
 
 import com.chs.androiddailytext.changeSkin.CustomSDCardLoader;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import skin.support.SkinCompatManager;
 
 /**

@@ -2,7 +2,6 @@ package com.chs.androiddailytext;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +11,7 @@ import com.chs.androiddailytext.chart.BarChartActivity;
 import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
 import com.chs.androiddailytext.dagger.DaggerActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
+import com.chs.androiddailytext.jetpack.NameActivity;
 import com.chs.androiddailytext.list.ListActivity;
 import com.chs.androiddailytext.module.Content;
 import com.chs.androiddailytext.netease.NeteaseActivity;
@@ -28,7 +28,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import kot.KotlinActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import login.LoginActivity;
 import login.RegisterActivity;
 
@@ -162,7 +162,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toKotlin(View view) {
-        Intent intent = new Intent(this, KotlinActivity.class);
+//        Intent intent = new Intent(this, MyActivity.class);
+        Intent intent = new Intent(this, NameActivity.class);
         startActivity(intent);
     }
 }

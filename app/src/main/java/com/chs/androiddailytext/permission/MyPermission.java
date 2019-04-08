@@ -4,15 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.AppOpsManagerCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.chs.androiddailytext.utils.AppLog;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.AppOpsManagerCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * 作者：chs on 2017-10-31 11:09

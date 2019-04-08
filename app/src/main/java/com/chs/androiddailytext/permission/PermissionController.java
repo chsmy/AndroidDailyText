@@ -5,10 +5,11 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 
 import java.util.Arrays;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * 作者：chs on 2017-10-31 15:28

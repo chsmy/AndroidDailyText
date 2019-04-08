@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.chs.androiddailytext">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.chs.androiddailytext">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,7 +16,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:appComponentFactory=""
+        tools:replace="android:appComponentFactory"
+        >
         <activity android:name=".netease.SplitActivity"></activity>
         <activity android:name=".netease.XfermodesActivity" />
         <activity android:name=".MainActivity">
@@ -43,7 +47,6 @@
         <activity android:name=".popwindow.PopActivity" />
         <activity android:name="login.LoginActivity" />
         <activity android:name="login.RegisterActivity" />
-        <activity android:name="kot.KotlinActivity" />
         <activity android:name=".netease.NeteaseActivity"/>
         <activity android:name=".netease.SplashActivity" />
         <activity android:name=".netease.QQBubbleActivity" />
@@ -52,6 +55,8 @@
         <activity android:name=".netease.BangAdapterActivity"
             android:theme="@style/BangTheme"/>
         <activity android:name=".netease.FlowLayoutActivity" />
+        <activity android:name=".jetpack.MyActivity"/>
+        <activity android:name=".jetpack.NameActivity"/>
     </application>
 
 </manifest>

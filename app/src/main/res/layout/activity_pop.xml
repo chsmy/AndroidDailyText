@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,12 +27,12 @@
                 android:id="@+id/tv_room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@mipmap/parts_screen_select_up"
+
                 android:gravity="center"
                 android:text="全部库房"
                 />
         </LinearLayout>
-
+        <!--android:drawableRight="@mipmap/parts_screen_select_up"-->
         <LinearLayout
             android:id="@+id/ll_type"
             android:layout_width="0dp"
@@ -44,12 +44,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@mipmap/parts_screen_unselect"
+
                 android:gravity="center"
                 android:text="出库类型"
                 />
         </LinearLayout>
-
+        <!--android:drawableRight="@mipmap/parts_screen_unselect"-->
         <LinearLayout
             android:id="@+id/ll_state"
             android:layout_width="0dp"
@@ -61,10 +61,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@mipmap/parts_screen_unselect"
+
                 android:gravity="center"
                 android:text="单据状态"
                 />
         </LinearLayout>
+        <!--android:drawableRight="@mipmap/parts_screen_unselect"-->
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.ConstraintLayout>

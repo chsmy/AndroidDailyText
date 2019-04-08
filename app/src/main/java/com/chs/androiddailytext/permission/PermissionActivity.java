@@ -6,15 +6,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.chs.androiddailytext.R;
 import com.chs.androiddailytext.utils.AppToast;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PermissionActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_PERMISSION_CALL_PHONE = 100;

@@ -1,7 +1,7 @@
 package com.chs.androiddailytext.dagger;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.chs.androiddailytext.R;
 
