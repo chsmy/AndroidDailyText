@@ -17,8 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:appComponentFactory=""
-        tools:replace="android:appComponentFactory"
         >
         <activity android:name=".netease.SplitActivity"></activity>
         <activity android:name=".netease.XfermodesActivity" />
