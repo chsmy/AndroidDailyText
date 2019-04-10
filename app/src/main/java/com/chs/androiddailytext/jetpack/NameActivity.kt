@@ -2,9 +2,7 @@ package com.chs.androiddailytext.jetpack
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProviders
 import com.chs.androiddailytext.R
 import kotlinx.android.synthetic.main.activity_name.*
@@ -23,19 +21,11 @@ class NameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_name)
         // 获取ViewModel.
         model = ViewModelProviders.of(this).get(NameViewModel::class.java)
-
         // 创建observer
         val nameObserver = Observer<String> { newName ->
             tv_name.text = newName
         }
-
-        val userName: LiveData<String> = Transformations.map(model.currentName) {
-            name -> name+"哈哈哈"
-        }
-
         // 观察LiveData,传入当前的LifecycleOwner和观察者
-//        model.currentName.observe(this, nameObserver)
-        userName.observe(this, nameObserver)
-
+        model.currentName.observe(this, nameObserver)
     }
 }

@@ -1,9 +1,10 @@
 package com.chs.androiddailytext.jetpack
 
-import android.os.Handler
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.callback.StringCallback
 
 /**
  *  @author chs
@@ -18,16 +19,20 @@ class NameViewModel : ViewModel() {
             loadData()
         }
     }
-
-    fun getCurrentName() : LiveData<String> {
-        return currentName
-    }
-
+//    fun getCurrentName() : LiveData<String> {
+//        return currentName
+//    }
     private fun loadData() {
-       val handler = Handler()
-        handler.postDelayed({
-            currentName.postValue("Lily")
-        },1000)
+        OkGo.get<String>("http://gank.io/api/xiandu/categories")
+                .execute(object : StringCallback(){
+                    override fun onSuccess(response: com.lzy.okgo.model.Response<String>?) {
+                        val gson = Gson()
+                        var res = gson.fromJson<Catefories>(response!!.body(), Catefories::class.java)
+                        currentName.postValue(res.results.get(0).name)
+                    }
+                    override fun onError(response: com.lzy.okgo.model.Response<String>?) {
+                        super.onError(response)
+                    }
+                })
     }
-
 }
