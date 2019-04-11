@@ -55,6 +55,7 @@
         <activity android:name=".netease.FlowLayoutActivity" />
         <activity android:name=".jetpack.MyActivity"/>
         <activity android:name=".jetpack.NameActivity"/>
+        <activity android:name=".myanimator.AnimActivity"/>
     </application>
 
 </manifest>

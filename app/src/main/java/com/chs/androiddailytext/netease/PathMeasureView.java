@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 public class PathMeasureView extends View {
 
     private Paint mPaint = new Paint();
+    private Paint mDstPaint = new Paint();
     private Bitmap mBitmap;
     private Matrix mMatrix = new Matrix();
 
@@ -49,6 +50,10 @@ public class PathMeasureView extends View {
         mPaint.setColor(Color.BLACK);
         mPaint.setStrokeWidth(4);
 
+        mDstPaint.setStyle(Paint.Style.STROKE);
+        mDstPaint.setColor(Color.BLUE);
+        mDstPaint.setStrokeWidth(8);
+
         //缩小图片
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 4;
@@ -59,29 +64,29 @@ public class PathMeasureView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-//        mPath.reset();
+        mPath.reset();
 
         mFloat += 0.01;
         if (mFloat >= 1){
             mFloat = 0;
         }
         //路径
-//        mPath.lineTo(0, 200);
-//        mPath.lineTo(300, 200);
-//        mPath.quadTo(450,100,600,200);
-//        mPath.lineTo(900, 200);
-//        pathMeasure.setPath(mPath,false);
-//        //将pos信息和tan信息保存在mMatrix中
-//        pathMeasure.getMatrix(pathMeasure.getLength() * mFloat, mMatrix,
-//                PathMeasure.POSITION_MATRIX_FLAG | PathMeasure.TANGENT_MATRIX_FLAG);
-//        //将图片的旋转坐标调整到图片中心位置
-//        mMatrix.preTranslate(-mBitmap.getWidth() / 2, -mBitmap.getHeight() / 2);
-//        canvas.drawPath(mPath, mPaint);
-//        canvas.drawBitmap(mBitmap,mMatrix, mPaint);
+        mPath.lineTo(0, 200);
+        mPath.lineTo(300, 200);
+        mPath.quadTo(450,100,600,200);
+        mPath.lineTo(900, 200);
+        pathMeasure.setPath(mPath,false);
+        //将pos信息和tan信息保存在mMatrix中
+        pathMeasure.getMatrix(pathMeasure.getLength() * mFloat, mMatrix,
+                PathMeasure.POSITION_MATRIX_FLAG | PathMeasure.TANGENT_MATRIX_FLAG);
+        //将图片的旋转坐标调整到图片中心位置
+        mMatrix.preTranslate(-mBitmap.getWidth() / 2, -mBitmap.getHeight() / 2);
+        canvas.drawPath(mPath, mPaint);
+        canvas.drawBitmap(mBitmap,mMatrix, mPaint);
+
 
 //        mPath.addCircle(getWidth()/2,getHeight()/2,200,Path.Direction.CW);
 //        pathMeasure.setPath(mPath,false);
-//
 //        //用来记录位置
 //        float []pos = new float[2];
 //        //用来记录切点的位置
@@ -100,13 +105,29 @@ public class PathMeasureView extends View {
 
 
 
-        mPath.addCircle(getWidth()/2,getHeight()/2,200,Path.Direction.CW);
-        mDst.reset();
-        pathMeasure.setPath(mPath,false);
-        float distance = pathMeasure.getLength() * mFloat;
-        pathMeasure.getSegment(2*distance/3, distance, mDst, true);
-        canvas.drawPath(mDst, mPaint);
+//        mPath.addCircle(getWidth()/2,getHeight()/2,200,Path.Direction.CW);
+//        mDst.reset();
+//        pathMeasure.setPath(mPath,false);
+//        float distance = pathMeasure.getLength() * mFloat;
+//        pathMeasure.getSegment(0, distance , mDst, true);
+//        canvas.drawPath(mDst, mPaint);
 
+
+//        mPath.addCircle(getWidth()/2,getHeight()/2,200,Path.Direction.CW);
+//        mDst.reset();
+//        pathMeasure.setPath(mPath,false);
+//        float distance = pathMeasure.getLength() * mFloat;
+//        pathMeasure.getSegment(2*distance/3, distance, mDst, true);
+//        canvas.drawPath(mDst, mPaint);
+
+
+//        mPath.addCircle(getWidth()/2,getHeight()/2,200,Path.Direction.CW);
+//        mDst.reset();
+//        pathMeasure.setPath(mPath,false);
+//        float distance = pathMeasure.getLength() * mFloat;
+//        pathMeasure.getSegment(2*distance/3, distance, mDst, true);
+//        canvas.drawPath(mPath, mPaint);
+//        canvas.drawPath(mDst, mDstPaint);
 
         invalidate();
 

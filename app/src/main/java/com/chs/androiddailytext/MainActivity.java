@@ -14,6 +14,7 @@ import com.chs.androiddailytext.glide.GlideActivity;
 import com.chs.androiddailytext.jetpack.NameActivity;
 import com.chs.androiddailytext.list.ListActivity;
 import com.chs.androiddailytext.module.Content;
+import com.chs.androiddailytext.myanimator.AnimActivity;
 import com.chs.androiddailytext.netease.NeteaseActivity;
 import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
@@ -164,6 +165,11 @@ public class MainActivity extends AppCompatActivity {
     public void toKotlin(View view) {
 //        Intent intent = new Intent(this, MyActivity.class);
         Intent intent = new Intent(this, NameActivity.class);
+        startActivity(intent);
+    }
+
+    public void toImitation(View view) {
+        Intent intent = new Intent(this, AnimActivity.class);
         startActivity(intent);
     }
 }

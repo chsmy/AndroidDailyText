@@ -27,7 +27,7 @@ class NameViewModel : ViewModel() {
                 .execute(object : StringCallback(){
                     override fun onSuccess(response: com.lzy.okgo.model.Response<String>?) {
                         val gson = Gson()
-                        var res = gson.fromJson<Catefories>(response!!.body(), Catefories::class.java)
+                        val res = gson.fromJson<Catefories>(response?.body(), Catefories::class.java)
                         currentName.postValue(res.results.get(0).name)
                     }
                     override fun onError(response: com.lzy.okgo.model.Response<String>?) {

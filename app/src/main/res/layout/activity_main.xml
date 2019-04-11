@@ -154,27 +154,31 @@
           android:textAllCaps="false"
           />
    </LinearLayout>
-   <TextView
-       android:id="@+id/tv_content"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="xx"
-       />
-   <TextView
-       android:id="@+id/tv_content1"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="10dp"
-       android:text="xx"
-       />
-   <com.chs.androiddailytext.widget.PathDivision
-       android:layout_width="match_parent"
-       android:layout_height="20dp"/>
-   <EditText
+   <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="点击"
-       />
+       android:orientation="horizontal"
+       >
+      <TextView
+          android:id="@+id/tv_content"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="xx"
+          />
+      <TextView
+          android:id="@+id/tv_content1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/dp10"
+          android:text="xx"
+          />
+      <com.chs.androiddailytext.widget.PathDivision
+          android:layout_width="match_parent"
+          android:layout_height="20dp"
+          android:layout_marginLeft="@dimen/dp20"
+          />
+   </LinearLayout>
+
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
@@ -206,6 +210,19 @@
           android:layout_height="wrap_content"
           android:text="jetpack"
           android:onClick="toKotlin"
+          android:textAllCaps="false"
+          />
+   </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       >
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="仿写"
+          android:onClick="toImitation"
           android:textAllCaps="false"
           />
    </LinearLayout>
