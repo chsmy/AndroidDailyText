@@ -20,6 +20,7 @@ import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
 import com.chs.androiddailytext.piccanvas.PicCanvasActivity;
 import com.chs.androiddailytext.popwindow.PopActivity;
+import com.chs.androiddailytext.recyclerview.RecyclerActivity;
 import com.chs.androiddailytext.retorfit.OkhttpTextActivity;
 import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
 import com.google.gson.Gson;
@@ -170,6 +171,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toImitation(View view) {
         Intent intent = new Intent(this, AnimActivity.class);
+        startActivity(intent);
+    }
+
+    public void toRecyclerView(View view) {
+        Intent intent = new Intent(this, RecyclerActivity.class);
         startActivity(intent);
     }
 }
