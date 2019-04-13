@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: skin.support:skin-support:2.2.3@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/skin-support-2.2.3.aar/838f1924b416974003527d12594440ee/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/skin-support-2.2.3.aar/838f1924b416974003527d12594440ee/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-skin-support-2.2.3.aar/cbafbe994d9c6750238f220f1c70ecc0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-skin-support-2.2.3.aar/cbafbe994d9c6750238f220f1c70ecc0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

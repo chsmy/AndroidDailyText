@@ -34,8 +34,8 @@ public class RecyclerActivity extends AppCompatActivity {
             @Override
             public View onBinderViewHodler(int position, View convertView, ViewGroup parent) {
                 TextView textView= (TextView) convertView.findViewById(R.id.tvname);
-                textView.setText("网易课堂 "+position);
-                return null;
+                textView.setText("name "+position);
+                return convertView;
             }
 
             @Override
@@ -50,7 +50,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
             @Override
             public int getCount() {
-                return 30;
+                return 40;
             }
 
             @Override
