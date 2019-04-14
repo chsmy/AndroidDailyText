@@ -112,7 +112,6 @@ public class MyRecyclerView extends ViewGroup {
     private int height;
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
         if(needRelayout&&changed){
             needRelayout = false;
             mCurrentViewList.clear();
@@ -185,11 +184,11 @@ public class MyRecyclerView extends ViewGroup {
         return super.onTouchEvent(event);
     }
     private int scrollBounds(int scrollY) {
-//        上滑
+        //上滑极限值
         if (scrollY > 0) {
             scrollY = Math.min(scrollY,sumArray(heights, firstRow, heights.length-firstRow)-height);
         }else {
-//            极限值  会取零  非极限值的情况下   socrlly
+            //下滑极限值
             scrollY = Math.max(scrollY, -sumArray(heights, 0, firstRow));
         }
         return scrollY;
@@ -205,7 +204,7 @@ public class MyRecyclerView extends ViewGroup {
     public void scrollBy(int x, int y) {
         scrollY+=y;
         scrollY = scrollBounds(scrollY);
-        //上滑
+        //<1>上滑
         if(scrollY>0){
          //上滑移除最上面的一条
          while (scrollY>heights[firstRow]){
@@ -214,16 +213,16 @@ public class MyRecyclerView extends ViewGroup {
            scrollY -= heights[firstRow];
            firstRow++;
          }
-         //上滑加载最下面的一条
+         //<2>上滑加载最下面的一条
         // 当剩下的数据的总高度小于屏幕的高度的时候
          while (getFillHeight() < height){
-            int addLast = firstRow + mCurrentViewList.size()-1;
+            int addLast = firstRow + mCurrentViewList.size();
              View view = createView(addLast,width,heights[addLast]);
              //上滑是往mCurrentViewList中添加数据
              mCurrentViewList.add(mCurrentViewList.size(),view);
          }
         }else if(scrollY<0){
-            //下滑最上面加载
+            //<3>下滑最上面加载
             //这里判断scrollY<0即可，滑到顶置零
             while (scrollY<0){
                 //第一行应该变成firstRow - 1
@@ -234,13 +233,13 @@ public class MyRecyclerView extends ViewGroup {
                 firstRow --;
                 scrollY += heights[firstRow+1];
             }
-            //下滑最下面移除
-//            while (sumArray(heights, firstRow, mCurrentViewList.size())-scrollY>height){
-//                removeView(mCurrentViewList.remove(mCurrentViewList.size() - 1));
-//            }
-            while (sumArray(heights, firstRow, mCurrentViewList.size()) - scrollY - heights[firstRow + mCurrentViewList.size() - 1] >= height) {
+            //<4>下滑最下面移除
+            while (sumArray(heights, firstRow, mCurrentViewList.size())-scrollY>height){
                 removeView(mCurrentViewList.remove(mCurrentViewList.size() - 1));
             }
+//            while (sumArray(heights, firstRow, mCurrentViewList.size()) - scrollY - heights[firstRow + mCurrentViewList.size() - 1] >= height) {
+//                removeView(mCurrentViewList.remove(mCurrentViewList.size() - 1));
+//            }
         }
         //重新布局
         repositionViews();
@@ -249,11 +248,10 @@ public class MyRecyclerView extends ViewGroup {
     private void repositionViews() {
         int left, top, right, bottom, i;
         top =  - scrollY;
-//        Log.i("top",top+"---firstrow"+firstRow);
         i = firstRow;
         Log.i("mCurrentViewList",(i)+"--i----"+mCurrentViewList.size());
         for (View view : mCurrentViewList) {
-            if(i<heights.length-1){
+            if(i<heights.length){
                 bottom = top + heights[i++];
                 view.layout(0, top, width, bottom);
                 top = bottom;
@@ -262,7 +260,7 @@ public class MyRecyclerView extends ViewGroup {
     }
 
     private int getFillHeight() {
-        return sumArray(heights, firstRow, mCurrentViewList.size()-1) - scrollY;
+        return sumArray(heights, firstRow, mCurrentViewList.size()) - scrollY;
     }
 
     interface Adapter{
@@ -271,7 +269,7 @@ public class MyRecyclerView extends ViewGroup {
         int getItemViewType(int row);
         int getViewTypeCount();
         int getCount();
-        public int getHeight(int index);
+        int getHeight(int index);
     }
 
 }

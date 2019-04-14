@@ -1,7 +1,10 @@
 package com.chs.androiddailytext.netease
 
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.chs.androiddailytext.R
 import kotlinx.android.synthetic.main.activity_flowlayout.*
 
@@ -27,21 +30,21 @@ class FlowLayoutActivity : AppCompatActivity(){
         datas.add("FlowLayout")
         datas.add("FlowLayout")
 
-//        for (str in datas){
-//            val textview = TextView(this)
-//            val lp = ViewGroup.MarginLayoutParams(
-//                    ViewGroup.LayoutParams.WRAP_CONTENT,
-//                    ViewGroup.LayoutParams.WRAP_CONTENT)
-//            lp.setMargins(15,15,15,15)
-//            textview.layoutParams = lp
-//            textview.text = str
-//            textview.textSize = 20f
-//            textview.background = ContextCompat.getDrawable(this,R.drawable.text_bg)
-//
-//            flow_layout.addView(textview)
-//        }
+        for (str in datas){
+            val textview = TextView(this)
+            val lp = ViewGroup.MarginLayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT)
+            lp.setMargins(15,15,15,15)
+            textview.layoutParams = lp
+            textview.text = str
+            textview.textSize = 20f
+            textview.background = ContextCompat.getDrawable(this,R.drawable.text_bg)
 
-        flow_layout.addTag(datas)
+            flow_layout.addView(textview)
+        }
+
+//        flow_layout.addTag(datas)
 
     }
 }

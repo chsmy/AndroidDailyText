@@ -37,7 +37,6 @@ public class RecyclerActivity extends AppCompatActivity {
                 textView.setText("name "+position);
                 return convertView;
             }
-
             @Override
             public int getItemViewType(int row) {
                 return 0;

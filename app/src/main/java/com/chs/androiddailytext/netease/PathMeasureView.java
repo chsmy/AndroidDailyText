@@ -70,19 +70,19 @@ public class PathMeasureView extends View {
         if (mFloat >= 1){
             mFloat = 0;
         }
-        //路径
-        mPath.lineTo(0, 200);
-        mPath.lineTo(300, 200);
-        mPath.quadTo(450,100,600,200);
-        mPath.lineTo(900, 200);
-        pathMeasure.setPath(mPath,false);
-        //将pos信息和tan信息保存在mMatrix中
-        pathMeasure.getMatrix(pathMeasure.getLength() * mFloat, mMatrix,
-                PathMeasure.POSITION_MATRIX_FLAG | PathMeasure.TANGENT_MATRIX_FLAG);
-        //将图片的旋转坐标调整到图片中心位置
-        mMatrix.preTranslate(-mBitmap.getWidth() / 2, -mBitmap.getHeight() / 2);
-        canvas.drawPath(mPath, mPaint);
-        canvas.drawBitmap(mBitmap,mMatrix, mPaint);
+//        //路径
+//        mPath.lineTo(0, 200);
+//        mPath.lineTo(300, 200);
+//        mPath.quadTo(450,100,600,200);
+//        mPath.lineTo(900, 200);
+//        pathMeasure.setPath(mPath,false);
+//        //将pos信息和tan信息保存在mMatrix中
+//        pathMeasure.getMatrix(pathMeasure.getLength() * mFloat, mMatrix,
+//                PathMeasure.POSITION_MATRIX_FLAG | PathMeasure.TANGENT_MATRIX_FLAG);
+//        //将图片的旋转坐标调整到图片中心位置
+//        mMatrix.preTranslate(-mBitmap.getWidth() / 2, -mBitmap.getHeight() / 2);
+//        canvas.drawPath(mPath, mPaint);
+//        canvas.drawBitmap(mBitmap,mMatrix, mPaint);
 
 
 //        mPath.addCircle(getWidth()/2,getHeight()/2,200,Path.Direction.CW);
@@ -121,13 +121,13 @@ public class PathMeasureView extends View {
 //        canvas.drawPath(mDst, mPaint);
 
 
-//        mPath.addCircle(getWidth()/2,getHeight()/2,200,Path.Direction.CW);
-//        mDst.reset();
-//        pathMeasure.setPath(mPath,false);
-//        float distance = pathMeasure.getLength() * mFloat;
-//        pathMeasure.getSegment(2*distance/3, distance, mDst, true);
-//        canvas.drawPath(mPath, mPaint);
-//        canvas.drawPath(mDst, mDstPaint);
+        mPath.addCircle(getWidth()/2,getHeight()/2,200,Path.Direction.CW);
+        mDst.reset();
+        pathMeasure.setPath(mPath,false);
+        float distance = pathMeasure.getLength() * mFloat;
+        pathMeasure.getSegment(2*distance/3, distance, mDst, true);
+        canvas.drawPath(mPath, mPaint);
+        canvas.drawPath(mDst, mDstPaint);
 
         invalidate();
 

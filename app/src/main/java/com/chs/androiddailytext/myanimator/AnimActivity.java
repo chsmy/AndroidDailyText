@@ -1,5 +1,6 @@
 package com.chs.androiddailytext.myanimator;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -22,6 +23,11 @@ public class AnimActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anima);
         final Button button = findViewById(R.id.button);
+
+//        ObjectAnimator animator = ObjectAnimator.ofFloat(button,"translationX",0,200);
+//        animator.setDuration(2000);
+//        animator.start();
+//        animator.setInterpolator(new LinearInterpolator());
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

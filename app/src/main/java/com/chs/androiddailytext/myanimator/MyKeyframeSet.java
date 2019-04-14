@@ -13,9 +13,17 @@ import java.util.List;
  * des：
  */
 public class MyKeyframeSet {
-
+    /**
+     * 类型估值器
+     */
     TypeEvaluator mEvaluator;
+    /**
+     * 第一帧
+     */
     MyFloatKeyframe mFirstKeyframe;
+    /**
+     * 帧的集合
+     */
     List<MyFloatKeyframe> mKeyframes;
 
     private MyKeyframeSet(MyFloatKeyframe ... keyframes){
@@ -53,5 +61,4 @@ public class MyKeyframeSet {
         }
         return null;
     }
-
 }

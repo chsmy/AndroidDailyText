@@ -40,4 +40,8 @@
         <item>@color/yellow</item>
     </array>
     <color name="red">#FF0000</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="base_shallow_black">#818181</color>
+
 </resources>

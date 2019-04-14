@@ -17,4 +17,7 @@
     <string name="register_send_code">发送验证码</string>
     <string name="register_password_input_hint1">设置密码</string>
     <string name="register_password_input_hint2">再次输入密码</string>
+
+    <string name="phone_login">手机登录</string>
+    <string name="phone_reg">注册帐号</string>
 </resources>
