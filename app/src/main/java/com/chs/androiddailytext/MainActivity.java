@@ -23,6 +23,7 @@ import com.chs.androiddailytext.popwindow.PopActivity;
 import com.chs.androiddailytext.recyclerview.RecyclerActivity;
 import com.chs.androiddailytext.retorfit.OkhttpTextActivity;
 import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
+import com.chs.androiddailytext.slideview.SlideActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -176,6 +177,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toRecyclerView(View view) {
         Intent intent = new Intent(this, RecyclerActivity.class);
+        startActivity(intent);
+    }
+
+    public void toSlide(View view) {
+        Intent intent = new Intent(this, SlideActivity.class);
         startActivity(intent);
     }
 }

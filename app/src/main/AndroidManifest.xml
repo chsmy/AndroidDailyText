@@ -59,6 +59,7 @@
         <activity android:name=".jetpack.NameActivity"/>
         <activity android:name=".myanimator.AnimActivity"/>
         <activity android:name=".jetpack.LifeActivity"/>
+        <activity android:name=".slideview.SlideActivity" />
     </application>
 
 </manifest>
