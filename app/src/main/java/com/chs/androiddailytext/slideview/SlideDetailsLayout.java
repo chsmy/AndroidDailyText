@@ -15,14 +15,12 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.chs.androiddailytext.R;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import androidx.core.view.MotionEventCompat;
 import androidx.core.view.ViewCompat;
-import skin.support.widget.SkinCompatLinearLayout;
 
 
 /**
@@ -88,6 +86,8 @@ public class SlideDetailsLayout extends ViewGroup {
 
     private OnSlideDetailsListener mOnSlideDetailsListener;
 
+    private int mScreenHeight;
+
     public SlideDetailsLayout(Context context) {
         this(context, null);
     }
@@ -106,6 +106,7 @@ public class SlideDetailsLayout extends ViewGroup {
         a.recycle();
 
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
+        mScreenHeight = getResources().getDisplayMetrics().heightPixels;
     }
 
     /**
@@ -126,7 +127,7 @@ public class SlideDetailsLayout extends ViewGroup {
         if (mStatus != Status.OPEN) {
             mStatus = Status.OPEN;
             final float height = -getMeasuredHeight();
-            animatorSwitch(0, height, true, smooth ? mDuration : 0);
+            animatorSwitch(-(float) mScreenHeight*2/3, height, true, smooth ? mDuration : 0);
         }
     }
 
@@ -170,7 +171,7 @@ public class SlideDetailsLayout extends ViewGroup {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        processTouchEvent(-800);
+        processTouchEvent(-(float) mScreenHeight*2/3);
         final int childCount = getChildCount();
         if (1 >= childCount) {
             throw new RuntimeException("SlideDetailsLayout only accept childs more than 1!!");
@@ -537,9 +538,9 @@ public class SlideDetailsLayout extends ViewGroup {
     private boolean innerCanChildScrollVertically(View view, int direction) {
         if (view instanceof ViewGroup) {
 
-            if(mStatus == Status.OPEN&&mInitMotionY<150){
+            if(mStatus == Status.OPEN&&mInitMotionY< SizeUtils.dp2px(50)){
                 return false;
-            }else if(mStatus == Status.OPEN&&mInitMotionY>150){
+            }else if(mStatus == Status.OPEN&&mInitMotionY> SizeUtils.dp2px(50)){
                 return true;
             }
 

@@ -1,8 +1,6 @@
 package com.chs.androiddailytext.slideview;
 
-import android.app.AppComponentFactory;
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.chs.androiddailytext.R;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -28,8 +26,8 @@ public class SlideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide);
         mSlideDetailsLayout = findViewById(R.id.slidedetails);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+
+        getWindow().getDecorView().postDelayed(new Runnable() {
             @Override
             public void run() {
                 mSlideDetailsLayout.smoothOpen(true);
