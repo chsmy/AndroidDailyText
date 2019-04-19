@@ -3,8 +3,11 @@ package com.chs.androiddailytext;
 import android.app.Application;
 
 import com.chs.androiddailytext.changeSkin.CustomSDCardLoader;
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import okhttp3.OkHttpClient;
 import skin.support.SkinCompatManager;
 
 /**
@@ -20,5 +23,10 @@ public class APP extends Application {
                 .addStrategy(new CustomSDCardLoader()).
         loadSkin();
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+
+        Stetho.initializeWithDefaults(this);
+        new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
     }
 }
