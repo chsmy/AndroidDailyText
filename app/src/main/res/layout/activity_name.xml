@@ -11,4 +11,10 @@
         android:text="ggg"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="start"
+        android:text="开始"
+        />
 </LinearLayout>

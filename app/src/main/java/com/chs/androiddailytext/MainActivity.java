@@ -11,6 +11,7 @@ import com.chs.androiddailytext.chart.BarChartActivity;
 import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
 import com.chs.androiddailytext.dagger.DaggerActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
+import com.chs.androiddailytext.jetpack.LifeActivity;
 import com.chs.androiddailytext.jetpack.RoomActivity;
 import com.chs.androiddailytext.list.ListActivity;
 import com.chs.androiddailytext.module.Content;
@@ -166,8 +167,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void toKotlin(View view) {
 //        Intent intent = new Intent(this, MyActivity.class);
-//        Intent intent = new Intent(this, LifeActivity.class);
-        Intent intent = new Intent(this, RoomActivity.class);
+        Intent intent = new Intent(this, LifeActivity.class);
+//        Intent intent = new Intent(this, RoomActivity.class);
         startActivity(intent);
     }
 
