@@ -86,8 +86,12 @@ public class SlideDetailsLayout extends ViewGroup {
 
     private OnSlideDetailsListener mOnSlideDetailsListener;
 
-    private int mScreenHeight;
-
+    /**
+     * 第一次进入首页的时候，显示第一屏的1/3
+     */
+    private int mFirstHeight;
+    private boolean isFirstIn = false;
+    private OnFinishListener mOnFinishListener;
     public SlideDetailsLayout(Context context) {
         this(context, null);
     }
@@ -106,7 +110,12 @@ public class SlideDetailsLayout extends ViewGroup {
         a.recycle();
 
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-        mScreenHeight = getResources().getDisplayMetrics().heightPixels;
+        int screenHeight = getResources().getDisplayMetrics().heightPixels;
+        mFirstHeight = screenHeight*2/3;
+    }
+
+    public void setFirstIn(boolean firstIn) {
+        isFirstIn = firstIn;
     }
 
     /**
@@ -127,7 +136,11 @@ public class SlideDetailsLayout extends ViewGroup {
         if (mStatus != Status.OPEN) {
             mStatus = Status.OPEN;
             final float height = -getMeasuredHeight();
-            animatorSwitch(-(float) mScreenHeight*2/3, height, true, smooth ? mDuration : 0);
+            if(isFirstIn){
+                animatorSwitch(-(float) mFirstHeight, height, true, smooth ? mDuration : 0);
+            }else {
+                animatorSwitch(0, height, true, smooth ? mDuration : 0);
+            }
         }
     }
 
@@ -171,7 +184,6 @@ public class SlideDetailsLayout extends ViewGroup {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        processTouchEvent(-(float) mScreenHeight*2/3);
         final int childCount = getChildCount();
         if (1 >= childCount) {
             throw new RuntimeException("SlideDetailsLayout only accept childs more than 1!!");
@@ -270,7 +282,11 @@ public class SlideDetailsLayout extends ViewGroup {
                 mVelocityTracker.addMovement(ev);
 
                 mInitMotionX = ev.getX();
-                mInitMotionY = ev.getY();
+                if(isFirstIn){
+                    mInitMotionY = ev.getY()+mFirstHeight;
+                }else {
+                    mInitMotionY = ev.getY();
+                }
                 shouldIntercept = false;
                 break;
             }
@@ -378,7 +394,7 @@ public class SlideDetailsLayout extends ViewGroup {
     /**
      * @param offset Displacement in vertically.
      */
-    private void processTouchEvent(final float offset) {
+    public void processTouchEvent(final float offset) {
         if (Math.abs(offset) < mTouchSlop) {
             return;
         }
@@ -456,6 +472,10 @@ public class SlideDetailsLayout extends ViewGroup {
         }
 
         animatorSwitch(offset, mSlideOffset, changed);
+        isFirstIn = false;
+        if(mOnFinishListener!=null){
+            mOnFinishListener.finish();
+        }
     }
 
     private void animatorSwitch(final float start, final float end) {
@@ -647,4 +667,16 @@ public class SlideDetailsLayout extends ViewGroup {
                     }
                 };
     }
+
+    public void setOnFinishListener(OnFinishListener onFinishListener) {
+        mOnFinishListener = onFinishListener;
+    }
+
+    interface  OnFinishListener{
+        /**
+         * 滑动完成
+         */
+        void finish();
+    }
+
 }
