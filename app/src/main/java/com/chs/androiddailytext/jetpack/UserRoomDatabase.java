@@ -26,6 +26,7 @@ public abstract class UserRoomDatabase extends RoomDatabase {
                    instance = Room.databaseBuilder(context.getApplicationContext(),UserRoomDatabase.class
                    ,"user_database")
                            .addMigrations(MIGRATION_1_2)
+                           .fallbackToDestructiveMigration()
                            .build();
                }
            }
