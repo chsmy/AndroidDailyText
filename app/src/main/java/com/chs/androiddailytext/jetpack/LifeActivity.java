@@ -1,17 +1,9 @@
 package com.chs.androiddailytext.jetpack;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.chs.androiddailytext.R;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +11,6 @@ import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 /**
@@ -52,26 +43,5 @@ public class LifeActivity extends AppCompatActivity {
             }
         });
 
-        LiveDataBus.get().getChannel("key_test", String.class)
-                .observe(this, new Observer<String>() {
-                    @Override
-                    public void onChanged(@Nullable String str) {
-                        textView.setText(str);
-                    }
-                });
-
-    }
-
-    int i = 0;
-    public void start(View view) {
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                LiveDataBus.get().getChannel("key_test").postValue("哈哈"+i);
-                i++;
-                System.out.println("run "+ System.currentTimeMillis());
-            }
-        }, 0, 1000, TimeUnit.MILLISECONDS);
     }
 }

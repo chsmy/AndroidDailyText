@@ -61,6 +61,8 @@
         <activity android:name=".jetpack.LifeActivity"/>
         <activity android:name=".slideview.SlideActivity" />
         <activity android:name=".jetpack.RoomActivity"/>
+        <activity android:name=".jetpack.LiveDataFirstActivity"/>
+        <activity android:name=".jetpack.LiveDataSecondActivity"/>
     </application>
 
 </manifest>
