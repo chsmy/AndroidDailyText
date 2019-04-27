@@ -37,7 +37,7 @@ class MyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
-        myLocationListener = MyLocationListener(this){location ->
+        myLocationListener = MyLocationListener(this){ _ ->
              //更新UI
         }
         lifecycle.addObserver(myLocationListener)
