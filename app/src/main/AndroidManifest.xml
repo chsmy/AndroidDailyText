@@ -63,6 +63,7 @@
         <activity android:name=".jetpack.RoomActivity"/>
         <activity android:name=".jetpack.LiveDataFirstActivity"/>
         <activity android:name=".jetpack.LiveDataSecondActivity"/>
+        <activity android:name=".jetpack.LiveDataBusThirdActivity" />
     </application>
 
 </manifest>

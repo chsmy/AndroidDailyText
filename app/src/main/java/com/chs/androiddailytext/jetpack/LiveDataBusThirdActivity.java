@@ -1,22 +1,20 @@
 package com.chs.androiddailytext.jetpack;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
-import com.blankj.utilcode.util.ToastUtils;
-import com.chs.androiddailytext.R;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import com.blankj.utilcode.util.ToastUtils;
+import com.chs.androiddailytext.R;
+
 /**
- * @author chs
- * date：2019-04-26 14:53
+ * @author：chs date：2019/4/29
  * des：
  */
-public class LiveDataSecondActivity extends AppCompatActivity {
+public class LiveDataBusThirdActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +31,5 @@ public class LiveDataSecondActivity extends AppCompatActivity {
     }
 
     public void Jump(View view) {
-        Intent intent = new Intent(this,LiveDataBusThirdActivity.class);
-        startActivity(intent);
     }
 }
