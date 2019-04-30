@@ -1,11 +1,11 @@
 package com.chs.androiddailytext;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.chs.androiddailytext.base.BaseActivity;
 import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
 import com.chs.androiddailytext.chart.BarChartActivity;
 import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
@@ -13,7 +13,6 @@ import com.chs.androiddailytext.dagger.DaggerActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
 import com.chs.androiddailytext.jetpack.LiveDataFirstActivity;
 import com.chs.androiddailytext.list.ListActivity;
-import com.chs.androiddailytext.module.Content;
 import com.chs.androiddailytext.myanimator.AnimActivity;
 import com.chs.androiddailytext.netease.NeteaseActivity;
 import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
@@ -24,166 +23,142 @@ import com.chs.androiddailytext.recyclerview.RecyclerActivity;
 import com.chs.androiddailytext.retorfit.OkhttpTextActivity;
 import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
 import com.chs.androiddailytext.slideview.SlideActivity;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import login.LoginActivity;
 import login.RegisterActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
+    List<String> datas = new ArrayList<>();
+    RecyclerView recyclerView;
+    BaseQuickAdapter adapter;
+    @Override
+    public int getContentView(Bundle savedInstanceState) {
+        return R.layout.activity_main;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        String json = "[{\"title\":\"aa\",\"id\":\"1\",\"type\":\"check_radio\",\"is_checked\":\"0\",\"option\":[{\"value\":\"a\",\"is_default\":\"1\",\"key\":\"1\"}]},{\"title\":\"bb\",\"id\":\"2\",\"type\":\"check_checkbox\",\"is_checked\":\"0\",\"option\":[{\"value\":\"\\u9009\\u9879\\u4e00b\",\"is_default\":\"1\",\"key\":\"1\"}]},{\"title\":\"aaaaaaa\",\"id\":\"3\",\"type\":\"check_show\",\"content\":\"1.\\u738d\\u53e4\\n2.\\u6c34\\u7535\\u8d39\\u6c34\\u7535\\u8d39\\n3.SD\\u53d1\\u751f\\u7684\"}]\n";
-        Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<JsonObject>>()
-        {}.getType();
-        ArrayList<JsonObject> jsonObjects = new Gson().fromJson(json, type);
-
-        ArrayList<Content> arrayList = new ArrayList<>();
-        for (JsonObject jsonObject : jsonObjects)
-        {
-            arrayList.add(new Gson().fromJson(jsonObject, Content.class));
-        }
-        Log.i("content",arrayList.get(2).getTitle());
-        TextView textView = findViewById(R.id.tv_content);
-        textView.setText(arrayList.get(2).getContent());
-
-        String json1 = "[{\"title\":\"aa\",\"id\":\"1\",\"type\":\"check_radio\",\"is_checked\":\"0\",\"option\":[{\"value\":\"a\",\"is_default\":\"1\",\"key\":\"1\"}]},{\"title\":\"bb\",\"id\":\"2\",\"type\":\"check_checkbox\",\"is_checked\":\"0\",\"option\":[{\"value\":\"\\u9009\\u9879\\u4e00b\",\"is_default\":\"1\",\"key\":\"1\"}]},{\"title\":\"aaaaaaa\",\"id\":\"3\",\"type\":\"check_show\",\"content\":\"1.\\u738d\\u53e4\\\\n2.\\u6c34\\u7535\\u8d39\\u6c34\\u7535\\u8d39\\\\n3.SD\\u53d1\\u751f\\u7684\"}]";
-        ArrayList<JsonObject> jsonObjects1 = new Gson().fromJson(json1, type);
-
-        ArrayList<Content> arrayList1 = new ArrayList<>();
-        for (JsonObject jsonObject : jsonObjects1)
-        {
-            arrayList1.add(new Gson().fromJson(jsonObject, Content.class));
-        }
-        TextView textView1 = findViewById(R.id.tv_content1);
-        textView1.setText(arrayList1.get(2).getContent());
+    public void initView() {
+        recyclerView = findViewById(R.id.recycleview);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        adapter = new BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_main,datas) {
+            @Override
+            protected void convert(BaseViewHolder helper, String item) {
+                helper.setText(R.id.tv_name,item);
+            }
+        };
+        recyclerView.setAdapter(adapter);
     }
 
-    public void permission(View view) {
-        Intent intent = new Intent(this, PermissionActivity.class);
-        startActivity(intent);
+    @Override
+    public void initListener() {
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (position){
+                    case 0:
+                        startActivity(PermissionActivity.class);
+                        break;
+                    case 1:
+                        startActivity(ViewActivity.class);
+                        break;
+                    case 2:
+                        startActivity(AnimatorActivity.class);
+                        break;
+                    case 3:
+                        startActivity(PullRefreshActivity.class);
+                        break;
+                    case 4:
+                        startActivity(ChartActivity.class);
+                        break;
+                    case 5:
+                        startActivity(StrategyActivity.class);
+                        break;
+                    case 6:
+                        startActivity(ChangeSkinActivity.class);
+                        break;
+                    case 7:
+                        startActivity(OkhttpTextActivity.class);
+                        break;
+                    case 8:
+                        startActivity(RetrofitTextActivity.class);
+                        break;
+                    case 9:
+                        startActivity(GlideActivity.class);
+                        break;
+                    case 10:
+                        startActivity(WorkLoadStatisticActivity.class);
+                        break;
+                    case 11:
+                        startActivity(BarChartActivity.class);
+                        break;
+                    case 12:
+                        startActivity(DaggerActivity.class);
+                        break;
+                    case 13:
+                        startActivity(ListActivity.class);
+                        break;
+                    case 14:
+                        startActivity(PicCanvasActivity.class);
+                        break;
+                    case 15:
+                        startActivity(PopActivity.class);
+                        break;
+                    case 16:
+                        startActivity(LoginActivity.class);
+                        break;
+                    case 17:
+                        startActivity(RegisterActivity.class);
+                        break;
+                    case 18:
+                        startActivity(NeteaseActivity.class);
+                        break;
+                    case 19:
+                        startActivity(LiveDataFirstActivity.class);
+                        break;
+                    case 20:
+                        startActivity(AnimActivity.class);
+                        break;
+                    case 21:
+                        startActivity(RecyclerActivity.class);
+                        break;
+                    case 22:
+                        startActivity(SlideActivity.class);
+                        break;
+                    default:
+                }
+            }
+        });
+    }
+    @Override
+    public void initData() {
+        datas.add("权限");
+        datas.add("View");
+        datas.add("动画");
+        datas.add("刷新");
+        datas.add("图表");
+        datas.add("策略模式");
+        datas.add("换肤");
+        datas.add("okhttp");
+        datas.add("retrofit");
+        datas.add("glide");
+        datas.add("统计");
+        datas.add("柱状图");
+        datas.add("Dagger");
+        datas.add("treelist");
+        datas.add("PicCanvas");
+        datas.add("toPop");
+        datas.add("登录");
+        datas.add("注册");
+        datas.add("Netease");
+        datas.add("Jetpack");
+        datas.add("手写动画");
+        datas.add("手写recycleview");
+        datas.add("Slide");
     }
 
-    public void ViewActivity(View view) {
-        Intent intent = new Intent(this, ViewActivity.class);
-        startActivity(intent);
-    }
-
-    public void AnimatorActivity(View view) {
-        Intent intent = new Intent(this, AnimatorActivity.class);
-        startActivity(intent);
-    }
-    public void pullRefreshActivity(View view) {
-        Intent intent = new Intent(this, PullRefreshActivity.class);
-        startActivity(intent);
-    }
-
-    public void toChart(View view) {
-        Intent intent = new Intent(this, ChartActivity.class);
-        startActivity(intent);
-    }
-
-    public void toStrategy(View view) {
-        Intent intent = new Intent(this, StrategyActivity.class);
-        startActivity(intent);
-    }
-
-    public void toChnageSkin(View view) {
-        Intent intent = new Intent(this, ChangeSkinActivity.class);
-        startActivity(intent);
-    }
-
-    public void okHttp(View view) {
-        Intent intent = new Intent(this, OkhttpTextActivity.class);
-        startActivity(intent);
-    }
-
-    public void toRetrofit(View view) {
-        Intent intent = new Intent(this, RetrofitTextActivity.class);
-        startActivity(intent);
-    }
-
-    public void toGlide(View view) {
-        Intent intent = new Intent(this, GlideActivity.class);
-        startActivity(intent);
-    }
-
-    public void toStatistic(View view) {
-        Intent intent = new Intent(this, WorkLoadStatisticActivity.class);
-        startActivity(intent);
-    }
-
-    public void toBarchart(View view) {
-        Intent intent = new Intent(this, BarChartActivity.class);
-        startActivity(intent);
-    }
-
-    public void toDagger(View view) {
-        Intent intent = new Intent(this, DaggerActivity.class);
-        startActivity(intent);
-    }
-
-    public void toList(View view) {
-        Intent intent = new Intent(this, ListActivity.class);
-        startActivity(intent);
-    }
-
-    public void toPicCanvas(View view) {
-        Intent intent = new Intent(this, PicCanvasActivity.class);
-        startActivity(intent);
-    }
-
-    public void toPop(View view) {
-        Intent intent = new Intent(this, PopActivity.class);
-        startActivity(intent);
-    }
-
-    public void toLogin(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    public void toRegister(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-    }
-
-    public void toNetease(View view) {
-//        Intent intent = new Intent(this, XfermodesActivity.class);
-//        startActivity(intent);
-        Intent intent = new Intent(this, NeteaseActivity.class);
-        startActivity(intent);
-    }
-
-    public void toKotlin(View view) {
-//        Intent intent = new Intent(this, MyActivity.class);
-//        Intent intent = new Intent(this, LifeActivity.class);
-//        Intent intent = new Intent(this, RoomActivity.class);
-        Intent intent = new Intent(this, LiveDataFirstActivity.class);
-        startActivity(intent);
-    }
-
-    public void toImitation(View view) {
-        Intent intent = new Intent(this, AnimActivity.class);
-        startActivity(intent);
-    }
-
-    public void toRecyclerView(View view) {
-        Intent intent = new Intent(this, RecyclerActivity.class);
-        startActivity(intent);
-    }
-
-    public void toSlide(View view) {
-        Intent intent = new Intent(this, SlideActivity.class);
-        startActivity(intent);
-    }
 }

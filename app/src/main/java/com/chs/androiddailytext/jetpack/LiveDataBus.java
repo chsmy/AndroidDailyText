@@ -1,13 +1,10 @@
 package com.chs.androiddailytext.jetpack;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
@@ -30,17 +27,16 @@ public class LiveDataBus {
         return SingletonHolder.DATA_BUS;
     }
 
-    public synchronized <T> MutableLiveData<T> with(String target, Class<T> type,boolean isFirstChange) {
+    public synchronized <T> MutableLiveData<T> with(String target, Class<T> type) {
         if (!mBus.containsKey(target)) {
             mBus.put(target, new BusMutableLiveData<>());
         }
         BusMutableLiveData liveData = mBus.get(target);
-        liveData.isChangeData = isFirstChange;
         return (MutableLiveData<T>)liveData;
     }
-    public synchronized <T> MutableLiveData<T> with(String target, Class<T> type) {
-        return (MutableLiveData<T>) with(target,Object.class,false);
-    }
+//    public synchronized <T> MutableLiveData<T> with(String target, Class<T> type) {
+//        return (MutableLiveData<T>) with(target,Object.class);
+//    }
 
     public MutableLiveData<Object> with(String target) {
         return with(target, Object.class);
@@ -49,42 +45,42 @@ public class LiveDataBus {
 
     private class BusMutableLiveData<T> extends MutableLiveData<T>{
 
+        int mCurrentVersion;
         /**
          * 是否需要更新数据,当主动调用setValue或者postValue的时候才触发
          */
-        private boolean isChangeData = false;
-
         @Override
         public void setValue(T value) {
-            isChangeData = true;
+            mCurrentVersion++;
             super.setValue(value);
         }
 
         @Override
         public void postValue(T value) {
-            isChangeData = true;
+            mCurrentVersion++;
             super.postValue(value);
         }
 
         @Override
         public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> observer) {
-            super.observe(owner, new ObserverWrapper<T>(observer,this));
+            super.observe(owner, new ObserverWrapper<T>(observer,mCurrentVersion,this));
         }
     }
 
     private class ObserverWrapper<T> implements Observer<T>{
 
         private Observer<? super T> mObserver;
+        private int mVersion;
         private BusMutableLiveData<T> mLiveData;
-
-        public ObserverWrapper(Observer<? super T> observer,BusMutableLiveData<T> liveData) {
+        public ObserverWrapper(Observer<? super T> observer,int version,BusMutableLiveData<T> liveData) {
             mObserver = observer;
+            mVersion = version;
             mLiveData = liveData;
         }
 
         @Override
         public void onChanged(T t) {
-            if(mLiveData.isChangeData&&mObserver!=null){
+            if(mLiveData.mCurrentVersion>mVersion&&mObserver!=null){
                 mObserver.onChanged(t);
             }
         }

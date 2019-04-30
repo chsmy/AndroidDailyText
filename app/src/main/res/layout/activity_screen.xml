@@ -20,5 +20,23 @@
         android:layout_toRightOf="@id/tv_1"
         android:background="@color/yellow"
         />
+    <TextView
+        android:id="@+id/tv_3"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
+        android:text="160dp"
+        android:layout_below="@id/tv_1"
+        android:background="@color/blue"
+        />
+
+    <TextView
+        android:id="@+id/tv_4"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
+        android:text="160dp"
+        android:layout_toRightOf="@id/tv_3"
+        android:layout_below="@id/tv_2"
+        android:background="@color/yellow"
+        />
 
 </RelativeLayout>

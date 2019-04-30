@@ -30,4 +30,15 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_height="wrap_content"/>
+    <com.chs.androiddailytext.widget.RulerView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_above="@+id/ruler"
+        />
+    <com.chs.androiddailytext.widget.RulerView1
+        android:id="@+id/ruler"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>

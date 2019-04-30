@@ -9,8 +9,8 @@
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:text="ss"
-     android:textSize="@dimen/sp23"
-     android:padding="@dimen/dp20"
+     android:textSize="18sp"
+     android:padding="@dimen/dp10"
      android:layout_centerInParent="true"
      />
 </RelativeLayout>
