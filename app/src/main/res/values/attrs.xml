@@ -13,4 +13,10 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="PathMeasurePay">
+        <!--1是对号  2是叉号-->
+        <attr name="type" format="integer"/>
+        <attr name="color" format="color"/>
+    </declare-styleable>
+
 </resources>

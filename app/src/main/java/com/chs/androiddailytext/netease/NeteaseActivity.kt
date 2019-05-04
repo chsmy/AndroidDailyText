@@ -28,6 +28,12 @@ class NeteaseActivity : AppCompatActivity() {
         datas.add("屏幕适配")
         datas.add("刘海适配")
         datas.add("FlowLayout")
+        datas.add("密码框")
+        datas.add("沉浸式")
+        datas.add("滤镜")
+        datas.add("move")
+        datas.add("动画")
+
         recycleview.layoutManager = GridLayoutManager(this, 3)
 //        recycleview.addItemDecoration(DividerItemDecoration(this, HORIZONTAL))
         val adapter = NeteaseAdapter(datas, this)
@@ -43,6 +49,11 @@ class NeteaseActivity : AppCompatActivity() {
                     5 -> startActivity(ScreenActivity::class.java)
                     6 -> startActivity(BangAdapterActivity::class.java)
                     7 -> startActivity(FlowLayoutActivity::class.java)
+                    8 -> startActivity(PasswordActivity::class.java)
+                    9 -> startActivity(ChenJinActivity::class.java)
+                    10 -> startActivity(ColorFilterActivity::class.java)
+                    11 -> startActivity(MoveViewActivity::class.java)
+                    12 -> startActivity(AnimateActivity::class.java)
                 }
             }
         })

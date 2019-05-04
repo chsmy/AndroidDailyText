@@ -3,6 +3,7 @@ package com.chs.androiddailytext.netease;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,6 +40,48 @@ public class ViewCalculateUtil {
         } else {
         }
 
+    }
+    /**
+     * 设置FrameLayoutParam
+     */
+    public static void setViewFrameLayoutParam(View view, int width, int height, int topMargin, int bottomMargin, int lefMargin,
+                                               int rightMargin)
+    {
+
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view.getLayoutParams();
+        if (width != RelativeLayout.LayoutParams.MATCH_PARENT && width != RelativeLayout.LayoutParams.WRAP_CONTENT && width != RelativeLayout.LayoutParams.FILL_PARENT)
+        {
+            layoutParams.width = UIUtils.getInstance( ).getWidth(width);
+        }
+        else
+        {
+            layoutParams.width = width;
+        }
+        if (height != RelativeLayout.LayoutParams.MATCH_PARENT && height != RelativeLayout.LayoutParams.WRAP_CONTENT && height != RelativeLayout.LayoutParams.FILL_PARENT)
+        {
+            layoutParams.height = UIUtils.getInstance( ).getHeight(height);
+        }
+        else
+        {
+            layoutParams.height = height;
+        }
+
+        layoutParams.topMargin = UIUtils.getInstance( ).getHeight(topMargin);
+        layoutParams.bottomMargin = UIUtils.getInstance( ).getHeight(bottomMargin);
+        layoutParams.leftMargin = UIUtils.getInstance( ).getWidth(lefMargin);
+        layoutParams.rightMargin = UIUtils.getInstance( ).getWidth(rightMargin);
+        view.setLayoutParams(layoutParams);
+    }
+
+    /**
+     * 设置view的内边距
+     */
+    public static void setViewPadding(View view, int topPadding, int bottomPadding, int leftpadding, int rightPadding)
+    {
+        view.setPadding(UIUtils.getInstance( ).getWidth(leftpadding),
+                UIUtils.getInstance( ).getHeight(topPadding),
+                UIUtils.getInstance( ).getWidth(rightPadding),
+                UIUtils.getInstance( ).getHeight(bottomPadding));
     }
 
     /**
@@ -111,6 +154,4 @@ public class ViewCalculateUtil {
         layoutParams.rightMargin = UIUtils.getInstance().getWidth(rightMargin);
         view.setLayoutParams(layoutParams);
     }
-
-
 }

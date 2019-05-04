@@ -20,8 +20,6 @@ class ScreenActivity : AppCompatActivity(){
 
         UIUtils.getInstance(this)
 
-        Log.i("160dp",""+DensityUtil.dip2px(this,160f))
-
         ViewCalculateUtil.setViewLayoutParam(tv_3,540,540,0,0,0,0)
         ViewCalculateUtil.setViewLayoutParam(tv_4,540,540,0,0,0,0)
 

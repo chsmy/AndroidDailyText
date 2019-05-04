@@ -64,6 +64,11 @@
         <activity android:name=".jetpack.LiveDataFirstActivity"/>
         <activity android:name=".jetpack.LiveDataSecondActivity"/>
         <activity android:name=".jetpack.LiveDataBusThirdActivity" />
+        <activity android:name=".netease.PasswordActivity" />
+        <activity android:name=".netease.ChenJinActivity" />
+        <activity android:name=".netease.ColorFilterActivity" />
+        <activity android:name=".netease.MoveViewActivity" />
+        <activity android:name=".netease.AnimateActivity" />
     </application>
 
 </manifest>

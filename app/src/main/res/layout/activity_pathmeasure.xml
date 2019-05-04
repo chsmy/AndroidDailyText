@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.chs.androiddailytext.netease.PathMeasureView
+        android:layout_width="wrap_content"
+        android:layout_height="200dp" />
+
+    <com.chs.androiddailytext.netease.PathMeasurePay
+        android:id="@+id/measure_dui"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        app:color="@color/aqua"
+        app:type="1"
+        />
+
+   <com.chs.androiddailytext.netease.PathMeasurePay
+       android:id="@+id/measure_cha"
+       android:layout_width="100dp"
+       android:layout_height="100dp"
+       android:layout_marginTop="@dimen/dp10"
+       android:layout_gravity="center_horizontal"
+       app:color="@color/red"
+       app:type="2"
+       />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp10"
+        android:text="重置"
+        />
+
+</LinearLayout>

@@ -59,7 +59,7 @@ public class UIUtils {
             windowManager.getDefaultDisplay().getMetrics(metrics);
             //状态栏
             systemBarHeight = getStatusBarHeight();
-            //宽大于高，横屏
+            //横屏的时候宽大于高
             if(metrics.widthPixels>metrics.heightPixels){
                 displayMetricsWidth = metrics.heightPixels;
                 displayMetricsHeight = metrics.widthPixels - systemBarHeight;

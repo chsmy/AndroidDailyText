@@ -2,6 +2,8 @@ package com.chs.androiddailytext.netease
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.chs.androiddailytext.R
+import kotlinx.android.synthetic.main.activity_pathmeasure.*
 
 /**
  * author：chs
@@ -11,6 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 class PathMeasureActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(PathMeasureView(this))
+        setContentView(R.layout.activity_pathmeasure)
+
+        button.setOnClickListener {
+            measure_dui.reset()
+            measure_cha.reset()
+        }
+
     }
 }
