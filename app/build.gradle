@@ -10,7 +10,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -25,7 +25,11 @@ android {
     buildToolsVersion '28.0.3'
 
 }
-
+tinkerPatch {
+    buildConfig {
+        tinkerId = "1.0"
+    }
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 //    implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -79,9 +83,10 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
 
     //可选，用于生成application类
-    compileOnly('com.tencent.tinker:tinker-android-anno:1.9.1')
+    annotationProcessor 'com.tencent.tinker:tinker-android-anno:1.9.1'
+    compileOnly 'com.tencent.tinker:tinker-android-anno:1.9.1'
     //tinker的核心库
-    implementation('com.tencent.tinker:tinker-android-lib:1.9.1')
+    implementation 'com.tencent.tinker:tinker-android-lib:1.9.1'
     implementation "com.android.support:multidex:1.0.1"
 }
 repositories {

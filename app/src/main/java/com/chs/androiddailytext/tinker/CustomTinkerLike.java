@@ -15,7 +15,7 @@ import androidx.multidex.MultiDex;
  * date：2019-05-05 15:14
  * des：
  */
-@DefaultLifeCycle(application = ".MyTinkerApplication",
+@DefaultLifeCycle(application = ".SimpleTinkerApplication",
         flags = ShareConstants.TINKER_ENABLE_ALL,
         loadVerifyFlag = false)
 public class CustomTinkerLike extends DefaultApplicationLike {

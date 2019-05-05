@@ -1,8 +1,7 @@
 package com.chs.androiddailytext;
 
-import android.app.Application;
-
 import com.chs.androiddailytext.changeSkin.CustomSDCardLoader;
+import com.chs.androiddailytext.tinker.SimpleTinkerApplication;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
@@ -15,7 +14,7 @@ import skin.support.SkinCompatManager;
  * 邮箱：657083984@qq.com
  */
 
-public class APP extends Application {
+public class APP extends SimpleTinkerApplication {
     @Override
     public void onCreate() {
         super.onCreate();
