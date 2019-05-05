@@ -1,7 +1,5 @@
 package com.chs.androiddailytext.jetpack;
 
-import android.os.Handler;
-
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -21,8 +19,8 @@ public class NameViewModel1 extends ViewModel {
     public MutableLiveData<String> getCurrentName() {
         if (currentName == null) {
             currentName = new MutableLiveData<String>();
-            loadData();
         }
+        loadData();
         return currentName;
     }
 
