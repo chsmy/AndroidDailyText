@@ -23,7 +23,6 @@ import com.chs.androiddailytext.recyclerview.RecyclerActivity;
 import com.chs.androiddailytext.retorfit.OkhttpTextActivity;
 import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
 import com.chs.androiddailytext.slideview.SlideActivity;
-import com.chs.androiddailytext.tinker.TinkerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,9 +129,6 @@ public class MainActivity extends BaseActivity {
                     case 22:
                         startActivity(SlideActivity.class);
                         break;
-                    case 23:
-                        startActivity(TinkerActivity.class);
-                        break;
                     default:
                 }
             }
@@ -163,7 +159,6 @@ public class MainActivity extends BaseActivity {
         datas.add("手写动画");
         datas.add("手写recycleview");
         datas.add("Slide");
-        datas.add("tinker");
     }
 
 }

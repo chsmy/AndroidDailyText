@@ -69,7 +69,6 @@
         <activity android:name=".netease.ColorFilterActivity" />
         <activity android:name=".netease.MoveViewActivity" />
         <activity android:name=".netease.AnimateActivity" />
-        <activity android:name=".tinker.TinkerActivity"/>
 
         <meta-data
             android:name="TINKER_ID"

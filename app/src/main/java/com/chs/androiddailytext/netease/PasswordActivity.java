@@ -7,13 +7,13 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-
 import com.chs.androiddailytext.R;
 import com.chs.androiddailytext.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.core.content.ContextCompat;
 
 /**
  * @author：chs date：2019/5/1
@@ -78,7 +78,7 @@ public class PasswordActivity extends BaseActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             final ViewHolder holder;
             if (convertView == null) {
                 convertView = View.inflate(getApplicationContext(), R.layout.item_password_key, null);
