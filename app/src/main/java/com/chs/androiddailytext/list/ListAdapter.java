@@ -1,7 +1,6 @@
 package com.chs.androiddailytext.list;
 
 import android.content.Context;
-import androidx.core.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,12 @@ import com.chs.androiddailytext.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.core.content.ContextCompat;
+
 /**
  * 作者：chs
  * 时间：2018-05-16 16:32
- * 描述：
+ * 描述：树形结构<一>listview</>
  */
 public class ListAdapter extends BaseAdapter {
     private List<ListBean.DataEntity> mList;
