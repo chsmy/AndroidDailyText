@@ -12,12 +12,13 @@ import android.graphics.Path;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.chs.androiddailytext.R;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 /**
  * 作者：chs on 2017-10-26 17:56
@@ -31,9 +32,12 @@ public class MyView extends View {
     private Paint mPaint3;
     private Paint mPaint4;
     private Paint mPaint5;
+    private Paint mPaint6;
     private Paint mTextPaint;
     private Path mPath;
     private Path mPath1;
+    private Path mPath2;
+    private Path mPath3;
 
     public MyView(Context context) {
         super(context);
@@ -57,6 +61,9 @@ public class MyView extends View {
         mPaint3 = new Paint();
         mPaint4 = new Paint();
         mPaint5 = new Paint();
+        //使用贝塞尔绘制半圆
+        mPaint6 = new Paint();
+
         mTextPaint = new Paint();
         mPaint.setColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
         mPaint.setStrokeWidth(20);
@@ -72,8 +79,15 @@ public class MyView extends View {
         mTextPaint.setTextSize(60);
         mTextPaint.setStrokeCap(Paint.Cap.SQUARE);
 
+
+        mPaint6.setColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+        mPaint6.setStyle(Paint.Style.STROKE); // 填充模式
+        mPaint6.setColor(Color.RED);
+
         mPath = new Path();
         mPath1 = new Path();
+        mPath2 = new Path();
+        mPath3 = new Path();
 
         //线性渐变
         Shader shader = new LinearGradient(600,300,1000,700, Color.RED,
@@ -121,6 +135,13 @@ public class MyView extends View {
         canvas.drawCircle(800, 1100, 200, mPaint4);
         canvas.drawCircle(100, 100, 100, mPaint5);
         canvas.drawCircle(400, 1100, 100, mPaint5);
+
+        mPath2.moveTo(200,600);
+        mPath2.quadTo(300,500,400,600);
+        canvas.drawPath(mPath2,mPaint6);
+        mPath3.moveTo(200,600);
+        mPath3.cubicTo(270,700,340,700,410,600);
+        canvas.drawPath(mPath3,mPaint6);
 
         // text 是文字内容，x 和 y 是文字的坐标。但需要注意：这个坐标并不是文字的左上角，而是一个与左下角比较接近的位置
         //drawText() 参数中的 y ，指的是文字的基线（ baseline ） 的位置
