@@ -6,10 +6,11 @@ package com.chs.androiddailytext.list;
  * des：
  */
 public class TreeListBean {
-    private String id;
-    private String pid;
+    private int id;
+    private int pid;
     private int level;
     private String name;
+    private TreeListBean parent;
     /**
      * 是否展开
      */
@@ -22,27 +23,48 @@ public class TreeListBean {
      * 是否有下级
      */
     private boolean hasLower = true;
+    /**
+     * 代表目前显示的状态，它有多少个下级数据
+     */
+    private int moreSize;
 
-    public TreeListBean(String id, String pid, int level, String name) {
+    public TreeListBean(int id, int pid, int level, String name,TreeListBean parent) {
         this.id = id;
         this.pid = pid;
         this.level = level;
         this.name = name;
+        this.parent = parent;
     }
 
-    public String getId() {
+    public int getMoreSize() {
+        return moreSize;
+    }
+
+    public void setMoreSize(int moreSize) {
+        this.moreSize = moreSize;
+    }
+
+    public TreeListBean getParent() {
+        return parent;
+    }
+
+    public void setParent(TreeListBean parent) {
+        this.parent = parent;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getPid() {
+    public int getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void setPid(int pid) {
         this.pid = pid;
     }
 

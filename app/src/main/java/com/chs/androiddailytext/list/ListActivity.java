@@ -25,15 +25,15 @@ public class ListActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<TreeListBean> listBeans = new ArrayList<>();
-        listBeans.add(new TreeListBean("1","2",1,"item1"));
-        listBeans.add(new TreeListBean("3","2",2,"item1"));
-        listBeans.add(new TreeListBean("3","2",2,"item1"));
-        listBeans.add(new TreeListBean("3","2",3,"item1"));
-        listBeans.add(new TreeListBean("3","2",3,"item1"));
-        listBeans.add(new TreeListBean("3","2",1,"item1"));
-        listBeans.add(new TreeListBean("3","2",1,"item1"));
-        listBeans.add(new TreeListBean("3","2",1,"item1"));
-        listBeans.add(new TreeListBean("3","2",1,"item1"));
+        listBeans.add(new TreeListBean(1,0,1,"item1",null));
+        listBeans.add(new TreeListBean(2,0,1,"item2",null));
+        listBeans.add(new TreeListBean(3,0,1,"item3",null));
+        listBeans.add(new TreeListBean(4,0,1,"item4",null));
+        listBeans.add(new TreeListBean(5,0,1,"item5",null));
+        listBeans.add(new TreeListBean(6,0,1,"item6",null));
+        listBeans.add(new TreeListBean(7,0,1,"item7",null));
+        listBeans.add(new TreeListBean(8,0,1,"item8",null));
+        listBeans.add(new TreeListBean(9,0,1,"item9",null));
         TreeListAdapter adapter = new TreeListAdapter(listBeans);
         recyclerView.setAdapter(adapter);
     }

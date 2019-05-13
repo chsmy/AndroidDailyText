@@ -57,31 +57,42 @@ public class TreeListAdapter extends RecyclerView.Adapter<TreeListAdapter.TreeLi
         });
     }
 
+    /**
+     * 添加或者删除完之后需要跳过多少个
+     */
     int moreSize;
     /**
      * 重新组装数据
+     * 点击位置如果有下级数据，并且是点击状态，添加下级数据
+     * 点击位置如果有下级数据，并且不是点击状态，删除下级数据
      * @param currentPosition 当前点击的位置
      */
     private void reassemblyData(int currentPosition) {
         List<TreeListBean> datas = new ArrayList<>();
         for (int i = 0; i < mListBeans.size(); i++) {
-           if(i == currentPosition){
+            TreeListBean current = mListBeans.get(i);
+            if(i == currentPosition){
                datas.add(mListBeans.get(i+moreSize));
+                List<TreeListBean> listBeans;
                //点击状态，添加下级数据
                if(mListBeans.get(i).isSelected()){
-                   List<TreeListBean> listBeans = new ArrayList<>();
+                   listBeans = new ArrayList<>();
                    int level = mListBeans.get(i).getLevel()+1;
-                   listBeans.add(new TreeListBean("1","2",level,"item2"));
-                   listBeans.add(new TreeListBean("3","2",level,"item2"));
-                   listBeans.add(new TreeListBean("3","2",level,"item2"));
+                   int pid = mListBeans.get(i).getId();
+                   listBeans.add(new TreeListBean(i,pid,level,"item+",current));
+                   listBeans.add(new TreeListBean(i,pid,level,"item+",current));
+                   listBeans.add(new TreeListBean(i,pid,level,"item+",current));
                    datas.addAll(listBeans);
+                   setMoreSize(current,listBeans.size());
                }else {
-                   moreSize = 3;
+                   moreSize += current.getMoreSize();
+                   current.setSelected(false);
+                   clearMoreSize(current,current.getMoreSize());
                }
            }else {
-               //如果不是点击状态,跳过它下级的数据
-               if(i+moreSize<mListBeans.size()){
-                   datas.add(mListBeans.get(i+moreSize));
+                //如果不是当前点击,跳过它下级的数据
+               if(i<currentPosition||i>currentPosition+moreSize){
+                   datas.add(current);
                }
            }
         }
@@ -89,7 +100,32 @@ public class TreeListAdapter extends RecyclerView.Adapter<TreeListAdapter.TreeLi
         mListBeans.addAll(datas);
         moreSize = 0;
     }
-    
+
+    /**
+     * 减去折叠起来的下级个数
+     * @param current
+     * @param moreSize
+     */
+    private void clearMoreSize(TreeListBean current, int moreSize) {
+        current.setMoreSize(current.getMoreSize()-moreSize);
+        if(current.getParent()!=null){
+            clearMoreSize(current.getParent(),moreSize);
+        }
+    }
+
+    /**
+     * 加上新添加的下级个数
+     * @param current
+     * @param moreSize
+     */
+    private void setMoreSize(TreeListBean current, int moreSize) {
+        current.setSelected(true);
+        current.setMoreSize(current.getMoreSize()+moreSize);
+        if(current.getParent()!=null){
+           setMoreSize(current.getParent(),moreSize);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return mListBeans.size();
