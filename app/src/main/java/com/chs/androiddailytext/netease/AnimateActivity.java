@@ -2,13 +2,13 @@ package com.chs.androiddailytext.netease;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.chs.androiddailytext.R;
 import com.chs.androiddailytext.base.BaseActivity;
+import com.chs.androiddailytext.widget.ArrowDrawable;
 
 /**
  * @author：chs date：2019/5/3
@@ -16,6 +16,7 @@ import com.chs.androiddailytext.base.BaseActivity;
  */
 public class AnimateActivity extends BaseActivity {
     private ImageView mImageView;
+    private ImageView iv_gong;
     @Override
     public int getContentView(Bundle savedInstanceState) {
         return R.layout.activity_animate;
@@ -24,6 +25,8 @@ public class AnimateActivity extends BaseActivity {
     @Override
     public void initView() {
         mImageView = findViewById(R.id.imageview);
+        iv_gong = findViewById(R.id.iv_gong);
+        iv_gong.setImageDrawable(new ArrowDrawable(300,300));
     }
 
     public void translation(View view) {

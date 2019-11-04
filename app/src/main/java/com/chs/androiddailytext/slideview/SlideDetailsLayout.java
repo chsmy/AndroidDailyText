@@ -16,11 +16,11 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
-import com.blankj.utilcode.util.SizeUtils;
-import com.chs.androiddailytext.R;
-
 import androidx.core.view.MotionEventCompat;
 import androidx.core.view.ViewCompat;
+
+import com.blankj.utilcode.util.SizeUtils;
+import com.chs.androiddailytext.R;
 
 
 /**
@@ -77,7 +77,7 @@ public class SlideDetailsLayout extends ViewGroup {
 
     private View mTarget;
     private float mSlideOffset;
-    private Status mStatus = Status.CLOSE;
+    private Status mStatus = Status.OPEN;
     private boolean isFirstShowBehindView = true;
     private float mPercent = DEFAULT_PERCENT;
     private long mDuration = DEFAULT_DURATION;

@@ -38,7 +38,7 @@ public class MyView extends View {
     private Path mPath1;
     private Path mPath2;
     private Path mPath3;
-
+    private Path mPath4;
     public MyView(Context context) {
         super(context);
         init();
@@ -88,6 +88,7 @@ public class MyView extends View {
         mPath1 = new Path();
         mPath2 = new Path();
         mPath3 = new Path();
+        mPath4 = new Path();
 
         //线性渐变
         Shader shader = new LinearGradient(600,300,1000,700, Color.RED,
@@ -146,6 +147,13 @@ public class MyView extends View {
         // text 是文字内容，x 和 y 是文字的坐标。但需要注意：这个坐标并不是文字的左上角，而是一个与左下角比较接近的位置
         //drawText() 参数中的 y ，指的是文字的基线（ baseline ） 的位置
         canvas.drawText("hello world",200,1200,mTextPaint);
+
+        mPath4.moveTo(0,600);
+        mPath4.lineTo(100,800);
+        mPath4.moveTo(200,700);
+        mPath4.lineTo(400,800);
+        mPath4.lineTo(600,800);
+        canvas.drawPath(mPath4,mPaint6);
     }
 
 }

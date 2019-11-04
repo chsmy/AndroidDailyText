@@ -5,9 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 /**
  * 作者：chs on 2017-11-03 14:41
@@ -49,12 +51,14 @@ public class ProgressView extends View {
 
     public void setProgress(float progress) {
         this.progress = progress;
+        Log.i("setProgress","setProgress");
         invalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        Log.i("progress",""+progress);
         canvas.drawArc(mRectF,0,progress*2f,false,mPaint);
     }
 }

@@ -2,11 +2,12 @@ package com.chs.androiddailytext;
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.chs.androiddailytext.widget.ProgressView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AnimatorActivity extends AppCompatActivity {
     ImageView imageView;
@@ -26,6 +27,7 @@ public class AnimatorActivity extends AppCompatActivity {
 //                .setInterpolator(new AccelerateDecelerateInterpolator());
 
         ObjectAnimator animator = ObjectAnimator.ofFloat(mProgressView,"progress",0,180);
+        animator.setDuration(10000);
         animator.start();
     }
 }

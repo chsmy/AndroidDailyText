@@ -4,6 +4,11 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/iv_gong"
+        android:layout_width="@dimen/dp100"
+        android:layout_height="@dimen/dp100"/>
+
+    <ImageView
         android:id="@+id/imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

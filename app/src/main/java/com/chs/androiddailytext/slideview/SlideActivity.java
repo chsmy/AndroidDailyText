@@ -28,7 +28,7 @@ public class SlideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slide);
         mSlideDetailsLayout = findViewById(R.id.slidedetails);
         int currentHeight = getResources().getDisplayMetrics().heightPixels*2/3;
-        boolean isFirstIn = true;
+        boolean isFirstIn = false;
         mSlideDetailsLayout.setFirstIn(isFirstIn);
         if(isFirstIn){
             isFinish = false;
