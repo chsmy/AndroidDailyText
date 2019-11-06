@@ -17,8 +17,9 @@
     <color name="colorButtonPressed">#1976d2</color>
 
     <color name="bg">#9b8888</color>
-
+    <color name="gray">#999999</color>
     <color name="axis">#979797</color>
+    <color name="tab_color_blue">#0065ff</color>
 
     <color name="black_60">#99000000</color>
     <color name="black_20">#33000000</color>

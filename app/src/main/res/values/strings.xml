@@ -18,6 +18,50 @@
     <string name="register_password_input_hint1">设置密码</string>
     <string name="register_password_input_hint2">再次输入密码</string>
 
+    <string name="reset">重置</string>
+    <string name="confirm">确定</string>
+
     <string name="phone_login">手机登录</string>
     <string name="phone_reg">注册帐号</string>
+
+
+    <string-array name="repair_order_state_arr">
+        <item>全部</item>
+        <item>已接单</item>
+        <item>开始处理</item>
+        <item>待审核</item>
+        <item>待评价</item>
+        <item>已评价</item>
+        <item>挂单</item>
+        <item>超时</item>
+        <item>取消</item>
+    </string-array>
+    <string-array name="repair_order_wait_my_response">
+        <item>指派</item>
+        <item>转单</item>
+        <item>增援</item>
+    </string-array>
+    <string-array name="repair_order_state_entry">
+        <item>全部挂单</item>
+        <item>挂单申请中</item>
+        <item>已挂单</item>
+    </string-array>
+    <string-array name="repair_order_state_time">
+    <item>超时</item>
+    <item>未超时</item>
+    </string-array>
+    <string-array name="repair_order_state_cancel">
+    <item>未取消</item>
+    <item>已取消</item>
+</string-array>
+    <string-array name="repair_account">
+        <item>全部</item>
+        <item>未关联</item>
+        <item>关联</item>
+    </string-array>
+    <string-array name="repair_sort_left">
+        <item>默认排序</item>
+        <item>报单时间正序</item>
+        <item>报单时间倒序</item>
+    </string-array>
 </resources>

@@ -1,71 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".popwindow.PopActivity">
 
-    <LinearLayout
+    <com.chs.androiddailytext.widget.pop.SelectPop
+        android:id="@+id/pop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:background="#fff"
-        >
+        android:layout_height="@dimen/dp44"/>
 
-        <LinearLayout
-            android:id="@+id/ll_room"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <TextView
-                android:id="@+id/tv_room"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:gravity="center"
-                android:text="全部库房"
-                />
-        </LinearLayout>
-        <!--android:drawableRight="@mipmap/parts_screen_select_up"-->
-        <LinearLayout
-            android:id="@+id/ll_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:gravity="center"
-                android:text="出库类型"
-                />
-        </LinearLayout>
-        <!--android:drawableRight="@mipmap/parts_screen_unselect"-->
-        <LinearLayout
-            android:id="@+id/ll_state"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:gravity="center"
-                android:text="单据状态"
-                />
-        </LinearLayout>
-        <!--android:drawableRight="@mipmap/parts_screen_unselect"-->
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

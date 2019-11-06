@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: skin.support:skin-support:2.2.3@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-skin-support-2.2.3.aar/cbafbe994d9c6750238f220f1c70ecc0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-skin-support-2.2.3.aar/cbafbe994d9c6750238f220f1c70ecc0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/230f823c64c2b67c25d6c5c461b777b0/jetified-skin-support-2.2.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/230f823c64c2b67c25d6c5c461b777b0/jetified-skin-support-2.2.3/res" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/skin.support/skin-support/2.2.3/7ec0f57f24a7da184d42f1875f3918e0aa5b2211/skin-support-2.2.3-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/skin.support/skin-support/2.2.3/507b3f3a497843016218d67def667154b0a57714/skin-support-2.2.3-sources.jar!/" />
     </SOURCES>
