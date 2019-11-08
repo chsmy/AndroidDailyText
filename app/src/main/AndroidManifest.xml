@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.chs.androiddailytext">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.chs.androiddailytext">
 
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".APP"
@@ -17,52 +17,52 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".recyclerview.RecyclerActivity">
-        </activity>
-        <activity android:name=".netease.SplitActivity"/>
-        <activity android:name=".netease.XfermodesActivity"/>
+        <activity android:name=".piccanvas.BigViewActivity"></activity>
+        <activity android:name=".recyclerview.RecyclerActivity"></activity>
+        <activity android:name=".netease.SplitActivity" />
+        <activity android:name=".netease.XfermodesActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".permission.PermissionActivity"/>
-        <activity android:name=".ViewActivity"/>
-        <activity android:name=".AnimatorActivity"/>
-        <activity android:name=".PullRefreshActivity"/>
-        <activity android:name=".ChartActivity"/>
-        <activity android:name=".pattern.strategy.StrategyActivity"/>
-        <activity android:name=".changeSkin.ChangeSkinActivity"/>
-        <activity android:name=".retorfit.OkhttpTextActivity"/>
-        <activity android:name=".retorfit.RetrofitTextActivity"/>
-        <activity android:name=".glide.GlideActivity"/>
-        <activity android:name=".custom_views.WorkLoadStatisticActivity"/>
-        <activity android:name=".chart.BarChartActivity"/>
-        <activity android:name=".dagger.DaggerActivity"/>
-        <activity android:name=".list.ListActivity"/>
-        <activity android:name=".piccanvas.PicCanvasActivity"/>
-        <activity android:name=".popwindow.PopActivity"/>
-        <activity android:name="login.LoginActivity"/>
-        <activity android:name="login.RegisterActivity"/>
-        <activity android:name=".netease.NeteaseActivity"/>
-        <activity android:name=".netease.SplashActivity"/>
-        <activity android:name=".netease.QQBubbleActivity"/>
-        <activity android:name=".netease.PathMeasureActivity"/>
-        <activity android:name=".netease.ScreenActivity"/>
+        <activity android:name=".permission.PermissionActivity" />
+        <activity android:name=".ViewActivity" />
+        <activity android:name=".AnimatorActivity" />
+        <activity android:name=".PullRefreshActivity" />
+        <activity android:name=".ChartActivity" />
+        <activity android:name=".pattern.strategy.StrategyActivity" />
+        <activity android:name=".changeSkin.ChangeSkinActivity" />
+        <activity android:name=".retorfit.OkhttpTextActivity" />
+        <activity android:name=".retorfit.RetrofitTextActivity" />
+        <activity android:name=".glide.GlideActivity" />
+        <activity android:name=".custom_views.WorkLoadStatisticActivity" />
+        <activity android:name=".chart.BarChartActivity" />
+        <activity android:name=".dagger.DaggerActivity" />
+        <activity android:name=".list.ListActivity" />
+        <activity android:name=".piccanvas.PicCanvasActivity" />
+        <activity android:name=".popwindow.PopActivity" />
+        <activity android:name="login.LoginActivity" />
+        <activity android:name="login.RegisterActivity" />
+        <activity android:name=".netease.NeteaseActivity" />
+        <activity android:name=".netease.SplashActivity" />
+        <activity android:name=".netease.QQBubbleActivity" />
+        <activity android:name=".netease.PathMeasureActivity" />
+        <activity android:name=".netease.ScreenActivity" />
         <activity
             android:name=".netease.BangAdapterActivity"
-            android:theme="@style/BangTheme"/>
-        <activity android:name=".netease.FlowLayoutActivity"/>
-        <activity android:name=".jetpack.MyActivity"/>
-        <activity android:name=".jetpack.NameActivity"/>
-        <activity android:name=".myanimator.AnimActivity"/>
-        <activity android:name=".jetpack.LifeActivity"/>
+            android:theme="@style/BangTheme" />
+        <activity android:name=".netease.FlowLayoutActivity" />
+        <activity android:name=".jetpack.MyActivity" />
+        <activity android:name=".jetpack.NameActivity" />
+        <activity android:name=".myanimator.AnimActivity" />
+        <activity android:name=".jetpack.LifeActivity" />
         <activity android:name=".slideview.SlideActivity" />
-        <activity android:name=".jetpack.RoomActivity"/>
-        <activity android:name=".jetpack.LiveDataFirstActivity"/>
-        <activity android:name=".jetpack.LiveDataSecondActivity"/>
+        <activity android:name=".jetpack.RoomActivity" />
+        <activity android:name=".jetpack.LiveDataFirstActivity" />
+        <activity android:name=".jetpack.LiveDataSecondActivity" />
         <activity android:name=".jetpack.LiveDataBusThirdActivity" />
         <activity android:name=".netease.PasswordActivity" />
         <activity android:name=".netease.ChenJinActivity" />
@@ -72,8 +72,7 @@
 
         <meta-data
             android:name="TINKER_ID"
-            android:value="1.0"/>
-
+            android:value="1.0" />
     </application>
 
 </manifest>

@@ -47,13 +47,13 @@
         <item>已挂单</item>
     </string-array>
     <string-array name="repair_order_state_time">
-    <item>超时</item>
-    <item>未超时</item>
+        <item>超时</item>
+        <item>未超时</item>
     </string-array>
     <string-array name="repair_order_state_cancel">
-    <item>未取消</item>
-    <item>已取消</item>
-</string-array>
+        <item>未取消</item>
+        <item>已取消</item>
+    </string-array>
     <string-array name="repair_account">
         <item>全部</item>
         <item>未关联</item>

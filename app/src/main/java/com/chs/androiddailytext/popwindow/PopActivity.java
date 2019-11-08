@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.chs.androiddailytext.R;
 import com.chs.androiddailytext.widget.pop.ItemFilter;
 import com.chs.androiddailytext.widget.pop.SelectPop;
@@ -57,6 +58,12 @@ public class PopActivity extends AppCompatActivity{
         data.add(new TitleBean("排序",false,sortData));
         SelectPop selectPop = findViewById(R.id.pop);
         selectPop.setData(data);
+        selectPop.setOnSelectedListener(new SelectPop.OnSelectedListener() {
+            @Override
+            public void selected(int pos, int position, String id) {
+                LogUtils.i(pos+">>>"+id);
+            }
+        });
     }
 
     public void setOutOrderList(String[] arr, List<ItemFilter> data) {

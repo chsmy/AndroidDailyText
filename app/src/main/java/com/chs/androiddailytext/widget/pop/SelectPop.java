@@ -25,6 +25,21 @@ import java.util.List;
  */
 public class SelectPop extends LinearLayout {
 
+    public interface OnSelectedListener{
+        /**
+         *
+         * @param pos 整个大类中的位置
+         * @param position 每个item下面的子item的位置
+         * @param id 选择的条目的id
+         */
+        void selected(int pos,int position, String id);
+    }
+    private OnSelectedListener mOnSelectedListener;
+
+    public void setOnSelectedListener(OnSelectedListener onSelectedListener) {
+        mOnSelectedListener = onSelectedListener;
+    }
+
     private List<OrderFilterPop> mPops = new ArrayList<>();
 
     public SelectPop(Context context) {
@@ -88,16 +103,17 @@ public class SelectPop extends LinearLayout {
     }
     private void setItemView(List<TitleBean> data) {
         mPops.clear();
-        for (TitleBean item : data) {
+        for (int i = 0; i < data.size(); i++) {
+            TitleBean item = data.get(i);
             LinearLayout wrapView = getWrapView();
             TextView titleView = getTitleView(item);
             wrapView.addView(titleView);
             addView(wrapView);
-            setPops(wrapView,titleView,item);
+            setPops(wrapView,titleView,item,i);
         }
     }
 
-    private void setPops(LinearLayout wrapView, TextView titleView,TitleBean item) {
+    private void setPops(LinearLayout wrapView, TextView titleView,TitleBean item,int pos) {
         OrderFilterPop popWindow = (OrderFilterPop) new XPopup.Builder(getContext())
                 .atView(wrapView)
                 .autoOpenSoftInput(false)
@@ -107,6 +123,14 @@ public class SelectPop extends LinearLayout {
                     @Override
                     public void id(int position, String id) {
                         super.id(position, id);
+                        if(mOnSelectedListener!=null){
+                            mOnSelectedListener.selected(pos,position,id);
+                        }
+                        if(position == 0){
+                            titleView.setText(item.getName());
+                        }else {
+                            titleView.setText(item.getSelectData().get(position).getName());
+                        }
                     }
                     @Override
                     public void onDismiss() {

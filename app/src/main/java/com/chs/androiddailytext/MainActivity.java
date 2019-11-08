@@ -3,6 +3,9 @@ package com.chs.androiddailytext;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chs.androiddailytext.base.BaseActivity;
@@ -17,6 +20,7 @@ import com.chs.androiddailytext.myanimator.AnimActivity;
 import com.chs.androiddailytext.netease.NeteaseActivity;
 import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
+import com.chs.androiddailytext.piccanvas.BigViewActivity;
 import com.chs.androiddailytext.piccanvas.PicCanvasActivity;
 import com.chs.androiddailytext.popwindow.PopActivity;
 import com.chs.androiddailytext.recyclerview.RecyclerActivity;
@@ -27,8 +31,6 @@ import com.chs.androiddailytext.slideview.SlideActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import login.LoginActivity;
 import login.RegisterActivity;
 
@@ -129,6 +131,9 @@ public class MainActivity extends BaseActivity {
                     case 22:
                         startActivity(SlideActivity.class);
                         break;
+                    case 23:
+                        startActivity(BigViewActivity.class);
+                        break;
                     default:
                 }
             }
@@ -159,6 +164,7 @@ public class MainActivity extends BaseActivity {
         datas.add("手写动画");
         datas.add("手写recycleview");
         datas.add("Slide");
+        datas.add("BigView");
     }
 
 }
