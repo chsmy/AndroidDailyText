@@ -75,20 +75,25 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
     }
 
     private void init(){
+        //内存复用
         mOptions = new BitmapFactory.Options();
+        //滑动器
         mScroller = new Scroller(getContext());
+        //所放器
         mMatrix = new Matrix();
+        //手势识别
         mGestureDetector = new GestureDetector(getContext(),this);
     }
 
     public void setImage(InputStream is){
-        mOptions.inJustDecodeBounds = false;
+        mOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeStream(is,null,mOptions);
         mImageWidth = mOptions.outWidth;
         mImageHeight = mOptions.outHeight;
         mOptions.inPreferredConfig = Bitmap.Config.RGB_565;
-        mOptions.inJustDecodeBounds = true;
+        mOptions.inJustDecodeBounds = false;
         try {
+            //区域解码器
             mRegionDecoder = BitmapRegionDecoder.newInstance(is,false);
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,11 +106,11 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
         super.onSizeChanged(w, h, oldw, oldh);
         mViewWidth = w;
         mViewHeight = h;
-        mScale = mImageWidth/mViewWidth;
+        mScale = mViewWidth/mImageWidth;
         mRect.top = 0;
         mRect.left = 0;
-        mRect.right = Math.min(mImageWidth,mViewWidth);
-        mRect.bottom = Math.min(mImageHeight,mViewHeight);
+        mRect.right = mViewWidth;
+        mRect.bottom = mImageHeight;
     }
 
     @Override
@@ -117,7 +122,7 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
         //复用内存
         mOptions.inBitmap = mBitmap;
         mBitmap = mRegionDecoder.decodeRegion(mRect,mOptions);
-        mMatrix.setScale(mViewWidth/(float)mRect.width(),mViewWidth/(float)mRect.width());
+//        mMatrix.setScale(mViewWidth/(float)mRect.width(),mViewWidth/(float)mRect.width());
         canvas.drawBitmap(mBitmap,mMatrix,null);
     }
 
@@ -155,15 +160,18 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
             mRect.left = 0;
             mRect.right = mViewWidth;
         }
-        if(mRect.right>mImageWidth){
-            mRect.right = mImageWidth;
-            mRect.left = mImageWidth-(int)(mViewWidth/mScale);
+        int maxWidth = (int) Math.max(mImageWidth,mViewWidth*mScale);
+        if(mRect.right>maxWidth){
+            mRect.right = maxWidth;
+            mRect.left = maxWidth-mViewWidth;
         }
         if(mRect.top<0){
             mRect.top = 0;
+            mRect.bottom = (int)(mViewHeight/mScale);
         }
         if(mRect.bottom>mImageHeight){
             mRect.bottom = mImageHeight;
+            mRect.top = mImageHeight-(int)(mViewHeight/mScale);
         }
         invalidate();
         return false;
@@ -175,7 +183,21 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
     }
 
     @Override
+    public void computeScroll() {
+        super.computeScroll();
+        if(!mScroller.isFinished()&&mScroller.computeScrollOffset()){
+            mRect.top = mScroller.getCurrY();
+            mRect.bottom = mRect.top + (int)(mViewHeight/mScale);
+            invalidate();
+        }
+    }
+
+    @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+        mScroller.fling(mRect.left,mRect.top,-(int)velocityX,-(int)velocityY,0,mImageWidth-(int)(mViewWidth/mScale)
+                ,0,mImageHeight-(int)(mViewHeight/mScale));
+
         return false;
     }
 }
