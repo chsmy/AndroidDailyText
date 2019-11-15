@@ -34,9 +34,13 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
      */
     private int mViewWidth,mViewHeight;
     /**
-     * 当前View的宽高和图片宽高的缩放比
+     * 显示区域的宽和高
      */
-    private float mScale;
+    private int mShowWidth,mShowHeight;
+    /**
+     * 图片的缩放比
+     */
+    private float mScale = 1;
     /**
      * 绘制区域
      */
@@ -106,11 +110,12 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
         super.onSizeChanged(w, h, oldw, oldh);
         mViewWidth = w;
         mViewHeight = h;
-        mScale = mViewWidth/mImageWidth;
         mRect.top = 0;
         mRect.left = 0;
-        mRect.right = mViewWidth;
-        mRect.bottom = mImageHeight;
+        mShowWidth = Math.min(mImageWidth,mViewWidth);
+        mShowHeight = Math.min(mImageHeight,mViewHeight);
+        mRect.right = mShowWidth;
+        mRect.bottom = mShowHeight;
     }
 
     @Override
@@ -122,7 +127,7 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
         //复用内存
         mOptions.inBitmap = mBitmap;
         mBitmap = mRegionDecoder.decodeRegion(mRect,mOptions);
-//        mMatrix.setScale(mViewWidth/(float)mRect.width(),mViewWidth/(float)mRect.width());
+        mMatrix.setScale(mScale,mScale);
         canvas.drawBitmap(mBitmap,mMatrix,null);
     }
 
@@ -158,20 +163,19 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
         //处理上下左右的边界
         if(mRect.left<0){
             mRect.left = 0;
-            mRect.right = mViewWidth;
+            mRect.right = mRect.left+mShowWidth;
         }
-        int maxWidth = (int) Math.max(mImageWidth,mViewWidth*mScale);
-        if(mRect.right>maxWidth){
-            mRect.right = maxWidth;
-            mRect.left = maxWidth-mViewWidth;
+        if(mRect.right>mImageWidth){
+            mRect.right = mImageWidth;
+            mRect.left = mImageWidth-mShowWidth;
         }
         if(mRect.top<0){
             mRect.top = 0;
-            mRect.bottom = (int)(mViewHeight/mScale);
+            mRect.bottom =  mRect.top + mShowHeight;
         }
         if(mRect.bottom>mImageHeight){
             mRect.bottom = mImageHeight;
-            mRect.top = mImageHeight-(int)(mViewHeight/mScale);
+            mRect.top = mImageHeight-mShowHeight;
         }
         invalidate();
         return false;
@@ -186,8 +190,13 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
     public void computeScroll() {
         super.computeScroll();
         if(!mScroller.isFinished()&&mScroller.computeScrollOffset()){
-            mRect.top = mScroller.getCurrY();
-            mRect.bottom = mRect.top + (int)(mViewHeight/mScale);
+            if(mRect.top+mShowHeight<mImageHeight){
+                mRect.top = mScroller.getCurrY();
+                mRect.bottom = mRect.top + mShowHeight;
+            }else {
+                mRect.top = mImageHeight - mShowHeight;
+                mRect.bottom = mImageHeight;
+            }
             invalidate();
         }
     }
@@ -195,8 +204,8 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
-        mScroller.fling(mRect.left,mRect.top,-(int)velocityX,-(int)velocityY,0,mImageWidth-(int)(mViewWidth/mScale)
-                ,0,mImageHeight-(int)(mViewHeight/mScale));
+        mScroller.fling(mRect.left,mRect.top,-(int)velocityX,-(int)velocityY,0,mImageWidth
+                ,0,mImageHeight);
 
         return false;
     }
