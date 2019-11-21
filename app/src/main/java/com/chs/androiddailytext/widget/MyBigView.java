@@ -212,10 +212,8 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-
         mScroller.fling(mRect.left,mRect.top,-(int)velocityX,-(int)velocityY,0,(int)mImageWidth
                 ,0,(int)mImageHeight);
-
         return false;
     }
 
