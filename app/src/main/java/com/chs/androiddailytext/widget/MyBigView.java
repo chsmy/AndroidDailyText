@@ -169,6 +169,12 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
         //滑动的时候，改变mRect显示区域的位置
         mRect.offset((int)distanceX,(int)distanceY);
         //处理上下左右的边界
+        handleBorder();
+        invalidate();
+        return false;
+    }
+
+    private void handleBorder(){
         if(mRect.left<0){
             mRect.left = 0;
             mRect.right = (int) (mViewWidth/mCurrentScale);
@@ -185,8 +191,6 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
             mRect.bottom = (int) mImageHeight;
             mRect.top = (int) (mImageHeight-mViewHeight/mCurrentScale);
         }
-        invalidate();
-        return false;
     }
 
     @Override
@@ -232,6 +236,8 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
         }
         mRect.right = mRect.left+(int)(mViewWidth/mCurrentScale);
         mRect.bottom = mRect.top+(int)(mViewHeight/mCurrentScale);
+        //处理上下左右的边界
+        handleBorder();
         invalidate();
         return true;
     }
