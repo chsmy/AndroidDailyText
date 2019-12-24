@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chs.androiddailytext.base.BaseActivity;
 import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
 import com.chs.androiddailytext.chart.BarChartActivity;
+import com.chs.androiddailytext.chart.PercentActivity;
 import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
 import com.chs.androiddailytext.dagger.DaggerActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
@@ -134,6 +135,9 @@ public class MainActivity extends BaseActivity {
                     case 23:
                         startActivity(BigViewActivity.class);
                         break;
+                    case 24:
+                        startActivity(PercentActivity.class);
+                        break;
                     default:
                 }
             }
@@ -165,6 +169,7 @@ public class MainActivity extends BaseActivity {
         datas.add("手写recycleview");
         datas.add("Slide");
         datas.add("BigView");
+        datas.add("percent");
     }
 
 }

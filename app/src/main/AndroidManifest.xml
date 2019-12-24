@@ -17,8 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".piccanvas.BigViewActivity"></activity>
-        <activity android:name=".recyclerview.RecyclerActivity"></activity>
+        <activity android:name=".chart.PercentActivity"></activity>
+        <activity android:name=".piccanvas.BigViewActivity" />
+        <activity android:name=".recyclerview.RecyclerActivity" />
         <activity android:name=".netease.SplitActivity" />
         <activity android:name=".netease.XfermodesActivity" />
         <activity android:name=".MainActivity">

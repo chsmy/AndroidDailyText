@@ -41,10 +41,4 @@
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         />
-
-    <com.chs.androiddailytext.widget.PercentView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="500dp"
-        />
 </RelativeLayout>
