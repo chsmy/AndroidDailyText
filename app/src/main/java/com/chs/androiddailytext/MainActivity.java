@@ -12,6 +12,7 @@ import com.chs.androiddailytext.base.BaseActivity;
 import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
 import com.chs.androiddailytext.chart.BarChartActivity;
 import com.chs.androiddailytext.chart.PercentActivity;
+import com.chs.androiddailytext.coordinatorlayout.CoordinatorlayoutActivity;
 import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
 import com.chs.androiddailytext.dagger.DaggerActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
@@ -28,6 +29,8 @@ import com.chs.androiddailytext.recyclerview.RecyclerActivity;
 import com.chs.androiddailytext.retorfit.OkhttpTextActivity;
 import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
 import com.chs.androiddailytext.slideview.SlideActivity;
+import com.chs.androiddailytext.tabscroll.TabRecyclerActivity;
+import com.chs.androiddailytext.tabscroll.TabStickyActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +141,15 @@ public class MainActivity extends BaseActivity {
                     case 24:
                         startActivity(PercentActivity.class);
                         break;
+                    case 25:
+                        startActivity(TabRecyclerActivity.class);
+                        break;
+                    case 26:
+                        startActivity(TabStickyActivity.class);
+                        break;
+                    case 27:
+                        startActivity(CoordinatorlayoutActivity.class);
+                        break;
                     default:
                 }
             }
@@ -170,6 +182,9 @@ public class MainActivity extends BaseActivity {
         datas.add("Slide");
         datas.add("BigView");
         datas.add("percent");
+        datas.add("tabRecycler");
+        datas.add("tabSticky");
+        datas.add("Coordinator");
     }
 
 }
