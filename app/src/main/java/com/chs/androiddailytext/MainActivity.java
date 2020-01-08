@@ -17,6 +17,7 @@ import com.chs.androiddailytext.custom_views.WorkLoadStatisticActivity;
 import com.chs.androiddailytext.dagger.DaggerActivity;
 import com.chs.androiddailytext.glide.GlideActivity;
 import com.chs.androiddailytext.jetpack.LiveDataFirstActivity;
+import com.chs.androiddailytext.kotlin.CoroutinesActivity;
 import com.chs.androiddailytext.list.ListActivity;
 import com.chs.androiddailytext.myanimator.AnimActivity;
 import com.chs.androiddailytext.netease.NeteaseActivity;
@@ -150,6 +151,9 @@ public class MainActivity extends BaseActivity {
                     case 27:
                         startActivity(CoordinatorlayoutActivity.class);
                         break;
+                    case 28:
+                        startActivity(CoroutinesActivity.class);
+                        break;
                     default:
                 }
             }
@@ -185,6 +189,7 @@ public class MainActivity extends BaseActivity {
         datas.add("tabRecycler");
         datas.add("tabSticky");
         datas.add("Coordinator");
+        datas.add("协程");
     }
 
 }

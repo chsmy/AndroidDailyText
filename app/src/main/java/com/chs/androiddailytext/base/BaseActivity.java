@@ -9,7 +9,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * Created by ysq on 2019-04-17.
+ * @author chs
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
