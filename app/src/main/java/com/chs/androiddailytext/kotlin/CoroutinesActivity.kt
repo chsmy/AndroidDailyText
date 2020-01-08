@@ -3,11 +3,16 @@ package com.chs.androiddailytext.kotlin
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.chs.androiddailytext.R
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * 协程
@@ -40,10 +45,17 @@ class CoroutinesActivity : AppCompatActivity() {
                .baseUrl("https://www.wanandroid.com/")
                .build()
         val service =  retrofit.create(AipInterface::class.java)
-        GlobalScope.launch {
-            val result = service.getHomeList()
+        GlobalScope.launch{
+            val result = withContext(Dispatchers.IO){service.getHomeList()}
             Log.i("launch","onResponse:${result.data.datas[0].link}")
         }
+
+        val myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        myViewModel.launchOnUI{
+            val result = service.getHomeList()
+            Log.i("myViewModel","onResponse:${result.data.datas[0].link}")
+        }
+
     }
 
 }

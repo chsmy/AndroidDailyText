@@ -61,7 +61,6 @@ dependencies {
 //    implementation project(':image')
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-4'
     implementation 'com.blankj:utilcodex:1.23.7'
 
