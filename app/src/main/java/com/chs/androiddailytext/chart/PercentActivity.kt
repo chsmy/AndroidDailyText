@@ -12,5 +12,13 @@ class PercentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_percent)
 
         percent.setScales(0.6f)
+
+        percent1.setScales(0.6f)
+        percent1.setGradient(true)
+
+        circle_percent.setPercentage(50f)
+
+        circle_percent1.setPercentage(50f)
+        circle_percent1.setGradient(false)
     }
 }

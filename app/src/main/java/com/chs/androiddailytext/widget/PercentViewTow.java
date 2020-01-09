@@ -2,15 +2,16 @@ package com.chs.androiddailytext.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
 import com.chs.androiddailytext.R;
-import com.chs.androiddailytext.utils.DensityUtil;
 
 /**
  * @author chs
@@ -24,6 +25,9 @@ public class PercentViewTow extends View {
     private RectF mRectAll;
     private RectF mRectPercent;
     private float mPercent;
+    private boolean isGradient;
+    private LinearGradient mGradient;
+    private int mRadius;
     public PercentViewTow(Context context) {
         this(context, null);
     }
@@ -49,16 +53,25 @@ public class PercentViewTow extends View {
         this.mWidth = w;
         mRectAll.bottom = h;
         mRectPercent.bottom = h;
+        mRadius = h/2;
+        mGradient = new LinearGradient(0, getHeight(), getWidth()*mPercent, getHeight(), ContextCompat.getColor(getContext(), R.color.tab_color_blue),
+                ContextCompat.getColor(getContext(), R.color.green), Shader.TileMode.MIRROR);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         mRectAll.right = mWidth;
         mRectPercent.right = mWidth * mPercent;
+        mPaint.setShader(null);
         mPaint.setColor(ContextCompat.getColor(getContext(), R.color.axis));
-        canvas.drawRoundRect(mRectAll, DensityUtil.dip2px(getContext(),2.5f),DensityUtil.dip2px(getContext(),2.5f),mPaint);
+        canvas.drawRoundRect(mRectAll, mRadius,mRadius,mPaint);
+        if(isGradient){
+            mPaint.setShader(mGradient);
+        }else {
+            mPaint.setColor(ContextCompat.getColor(getContext(), R.color.tab_color_blue));
+        }
         mPaint.setColor(ContextCompat.getColor(getContext(), R.color.tab_color_blue));
-        canvas.drawRoundRect(mRectPercent, DensityUtil.dip2px(getContext(),2.5f),DensityUtil.dip2px(getContext(),2.5f),mPaint);
+        canvas.drawRoundRect(mRectPercent, mRadius,mRadius,mPaint);
     }
 
     /**
@@ -69,4 +82,7 @@ public class PercentViewTow extends View {
         invalidate();
     }
 
+    public void setGradient(boolean gradient) {
+        isGradient = gradient;
+    }
 }

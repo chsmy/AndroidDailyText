@@ -41,4 +41,12 @@
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         />
+    <com.chs.androiddailytext.widget.CirclePercentView
+        android:id="@+id/circle_percent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        app:circleBgColor="@color/gray"
+        app:circleIsGradient="true"
+        app:circleProgressColor="@color/blue"/>
 </RelativeLayout>

@@ -1,12 +1,14 @@
 package com.chs.androiddailytext;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSeekBar;
 import android.util.Log;
 import android.widget.SeekBar;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSeekBar;
+
 import com.chs.androiddailytext.widget.ChangedImageView;
+import com.chs.androiddailytext.widget.CirclePercentView;
 
 public class ViewActivity extends AppCompatActivity {
     private AppCompatSeekBar mSeekBar;
@@ -35,5 +37,7 @@ public class ViewActivity extends AppCompatActivity {
 
             }
         });
+        CirclePercentView percentView = findViewById(R.id.circle_percent);
+        percentView.setPercentage(50);
     }
 }
