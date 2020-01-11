@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".kotlin.CoroutinesActivity"></activity>
+        <activity android:name=".coordinatorlayout.FiveActivity"></activity>
+        <activity android:name=".kotlin.CoroutinesActivity" />
         <activity android:name=".tabscroll.TabStickyActivity" />
         <activity android:name=".chart.PercentActivity" />
         <activity android:name=".piccanvas.BigViewActivity" />

@@ -39,4 +39,12 @@
         android:onClick="four"
         android:layout_marginTop="10dp"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="five"
+        android:textAllCaps="false"
+        android:onClick="five"
+        android:layout_marginTop="10dp"
+        />
 </LinearLayout>

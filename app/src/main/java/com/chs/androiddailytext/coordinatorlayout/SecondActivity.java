@@ -69,7 +69,7 @@ public class SecondActivity extends AppCompatActivity implements ViewPager.OnPag
     }
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
-        public MyPagerAdapter(FragmentManager fm) {
+        MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -85,8 +85,7 @@ public class SecondActivity extends AppCompatActivity implements ViewPager.OnPag
 
         @Override
         public CharSequence getPageTitle(int position) {
-            String title = chinnals[position];
-            return title;
+            return chinnals[position];
         }
     }
 }

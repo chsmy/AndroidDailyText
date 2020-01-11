@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SecondFragment extends Fragment {
-    private RecyclerView mRecyclerView;
+public class FiveFragment1 extends Fragment {
+//    private RecyclerView mRecyclerView;
     private List<String> mList = new ArrayList<>();
     private BaseRecycleAdapter mAdapter;
-    public static SecondFragment newInstance(String title) {
-        SecondFragment fragment = new SecondFragment();
+    public static FiveFragment1 newInstance(String title) {
+        FiveFragment1 fragment = new FiveFragment1();
         Bundle args = new Bundle();
         args.putString("title",title);
         fragment.setArguments(args);
@@ -34,16 +34,16 @@ public class SecondFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
         initData();
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycleview);
-        LinearLayoutManager layoutManager =  new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new BaseRecycleAdapter<String>(getContext(),R.layout.item,mList,mRecyclerView) {
-            @Override
-            public void convert(ViewHolder holder, String str) {
-                holder.setText(R.id.tv_item,str);
-            }
-        };
-        mRecyclerView.setAdapter(mAdapter);
+//        mRecyclerView =  view.findViewById(R.id.recycleview);
+//        LinearLayoutManager layoutManager =  new LinearLayoutManager(getContext());
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mAdapter = new BaseRecycleAdapter<String>(getContext(),R.layout.item,mList,mRecyclerView) {
+//            @Override
+//            public void convert(ViewHolder holder, String str) {
+//                holder.setText(R.id.tv_item,str);
+//            }
+//        };
+//        mRecyclerView.setAdapter(mAdapter);
         return view;
     }
 

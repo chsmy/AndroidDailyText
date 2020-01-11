@@ -38,4 +38,9 @@ public class CoordinatorlayoutActivity extends AppCompatActivity {
         Intent intent = new Intent(this,FourActivity.class);
         startActivity(intent);
     }
+
+    public void five(View view) {
+        Intent intent = new Intent(this,FiveActivity.class);
+        startActivity(intent);
+    }
 }
