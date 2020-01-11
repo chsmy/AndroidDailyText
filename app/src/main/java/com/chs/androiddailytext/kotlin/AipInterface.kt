@@ -1,5 +1,6 @@
 package com.chs.androiddailytext.kotlin
 
+import retrofit2.Call
 import retrofit2.http.GET
 
 
@@ -10,11 +11,11 @@ import retrofit2.http.GET
  */
 interface AipInterface {
 
-//    @GET("article/list/1/json")
-//    fun getHomeList() : Call<WanBaseResponse<Data>>
-
     @GET("article/list/1/json")
-    suspend  fun getHomeList() : WanBaseResponse<Data>
+    fun getHomeList() : Call<WanBaseResponse<Data>>
+
+//    @GET("article/list/1/json")
+//    suspend  fun getHomeList() : WanBaseResponse<Data>
 
 
 //    // ================com/chs/androiddailytext/kotlin/AipInterface.class =================

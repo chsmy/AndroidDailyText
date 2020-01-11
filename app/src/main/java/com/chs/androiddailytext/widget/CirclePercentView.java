@@ -24,11 +24,7 @@ import com.chs.androiddailytext.utils.DensityUtil;
  * des:
  */
 public class CirclePercentView extends View {
-    /**
-     *  弧线半径 : 弧线线宽 (比例)
-     */
     public static final int WIDTH_RADIUS_RATIO = 8;
-    public static final int MAX = 100;
     private Paint mPaint,mTextPaint;
     private float progressPercent;
     private int mRadius;
@@ -37,7 +33,7 @@ public class CirclePercentView extends View {
     private int mStartColor, mEndColor;
     private LinearGradient mGradient;
     private boolean isGradient;
-    private int xOffset,yOffset;
+    private int yOffset;
     public CirclePercentView(Context context) {
         super(context);
         init(context);
@@ -71,7 +67,9 @@ public class CirclePercentView extends View {
         mTextPaint = new Paint();
         mTextPaint.setColor(mProgressColor);
         mTextPaint.setAntiAlias(true);
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
         mTextPaint.setTextSize(DensityUtil.dip2px(context,16));
+        measureText();
     }
 
     @Override
@@ -114,21 +112,21 @@ public class CirclePercentView extends View {
         canvas.drawArc(mRectF, -90, 3.6f * progressPercent, false, mPaint);
         //绘制中间的字
         String text = progressPercent + "%";
-        canvas.drawText(text,centerX - xOffset/2,centerY + yOffset/2,mTextPaint);
+        canvas.drawText(text,centerX,centerY + yOffset/2,mTextPaint);
     }
 
     @Keep
     public void setPercentage(float percentage) {
         this.progressPercent = percentage;
+        measureText();
+        invalidate();
+    }
+    private void measureText(){
         Rect bound = new Rect();
         String text = progressPercent + "%";
         mTextPaint.getTextBounds(text,0,text.length(),bound);
-        float textWidth = mTextPaint.measureText(text);
-        xOffset = bound.right-bound.left;
         yOffset = bound.bottom - bound.top;
-        invalidate();
     }
-
     public void setRadius(int mRadius) {
         this.mRadius = mRadius;
     }
