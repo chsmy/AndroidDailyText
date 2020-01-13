@@ -70,7 +70,6 @@ public class PercentViewTow extends View {
         }else {
             mPaint.setColor(ContextCompat.getColor(getContext(), R.color.tab_color_blue));
         }
-        mPaint.setColor(ContextCompat.getColor(getContext(), R.color.tab_color_blue));
         canvas.drawRoundRect(mRectPercent, mRadius,mRadius,mPaint);
     }
 
