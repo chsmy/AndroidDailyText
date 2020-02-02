@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ListAdapter;
 
 /**
  * @author chs
@@ -25,7 +26,6 @@ public class LifeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name);
 //        getLifecycle().addObserver(new MyListener());
-
         final TextView textView = findViewById(R.id.tv_name);
         mViewModel = ViewModelProviders.of(this).get(NameViewModel1.class);
 

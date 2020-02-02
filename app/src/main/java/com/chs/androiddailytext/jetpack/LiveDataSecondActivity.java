@@ -6,9 +6,11 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.chs.androiddailytext.R;
+import com.chs.androiddailytext.jetpack.paging.PagingActivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.arch.core.executor.ArchTaskExecutor;
 import androidx.lifecycle.Observer;
 
 /**
@@ -34,6 +36,11 @@ public class LiveDataSecondActivity extends AppCompatActivity {
 
     public void Jump(View view) {
         Intent intent = new Intent(this,LiveDataBusThirdActivity.class);
+        startActivity(intent);
+    }
+
+    public void Paging(View view) {
+        Intent intent = new Intent(this, PagingActivity.class);
         startActivity(intent);
     }
 }

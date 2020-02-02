@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.chs.androiddailytext.R;
+import com.chs.androiddailytext.jetpack.paging.PagingActivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,10 @@ public class LiveDataFirstActivity extends AppCompatActivity {
 
     public void Jump(View view) {
         Intent intent = new Intent(this,LiveDataSecondActivity.class);
+        startActivity(intent);
+    }
+    public void Paging(View view) {
+        Intent intent = new Intent(this, PagingActivity.class);
         startActivity(intent);
     }
 }
