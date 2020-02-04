@@ -54,15 +54,7 @@ public class PagingActivity extends AppCompatActivity implements OnLoadMoreListe
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        viewModel.loadData(viewModel.currentPage, null, new PageKeyedDataSource.LoadCallback<Integer, ArticleResponse.DataBean.DatasBean>() {
-            @Override
-            public void onResult(@NonNull List<ArticleResponse.DataBean.DatasBean> data, @Nullable Integer adjacentPageKey) {
-                viewModel.getDataSource().data.addAll(data);
-                PagedList.Config config = mAdapter.getCurrentList().getConfig();
-                PagedList<ArticleResponse.DataBean.DatasBean> datasBeans = viewModel.getDataSource().buildNewPagedList(config);
-                mAdapter.submitList(datasBeans);
-            }
-        });
+
     }
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
