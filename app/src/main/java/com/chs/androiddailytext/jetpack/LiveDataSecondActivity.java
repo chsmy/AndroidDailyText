@@ -43,4 +43,11 @@ public class LiveDataSecondActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PagingActivity.class);
         startActivity(intent);
     }
+
+    public void Navigation(View view) {
+    }
+
+    public void BottomNavigation(View view) {
+    }
+
 }

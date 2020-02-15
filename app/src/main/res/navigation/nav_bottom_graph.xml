@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bottom_graph"
+    app:startDestination="@id/oneFragment">
+
+    <fragment
+        android:id="@+id/oneFragment"
+        android:name="com.chs.androiddailytext.jetpack.botton_navigation.OneFragment"
+        android:label="fragment_one"
+        tools:layout="@layout/fragment_one" />
+    <fragment
+        android:id="@+id/towFragment"
+        android:name="com.chs.androiddailytext.jetpack.botton_navigation.TowFragment"
+        android:label="fragment_tow"
+        tools:layout="@layout/fragment_tow" />
+    <fragment
+        android:id="@+id/threeFragment"
+        android:name="com.chs.androiddailytext.jetpack.botton_navigation.ThreeFragment"
+        android:label="fragment_three"
+        tools:layout="@layout/fragment_three" />
+</navigation>

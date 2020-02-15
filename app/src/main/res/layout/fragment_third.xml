@@ -3,38 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".jetpack.navigation.SecondFragment">
+    tools:context=".jetpack.navigation.ThirdFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="@dimen/sp23"
-        android:text="SecondFragment" />
+        android:text="ThirdFragment" />
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp100"
         android:textSize="@dimen/sp16"
+        android:layout_marginTop="@dimen/dp50"
         tools:text="title"
         />
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp200"
         android:textAllCaps="false"
         android:textSize="@dimen/sp23"
-        android:text="goToThird"
+        android:layout_marginTop="@dimen/dp150"
+        android:text="goToSecond"
         />
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp300"
+        android:layout_marginTop="@dimen/dp250"
         android:textAllCaps="false"
         android:textSize="@dimen/sp23"
-        android:text="changeText"
+        android:text="goToFirst"
         />
 </FrameLayout>

@@ -6,12 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.chs.androiddailytext.R;
 import com.chs.androiddailytext.coordinatorlayout.recycleview.BaseRecycleAdapter;
-import com.chs.androiddailytext.coordinatorlayout.recycleview.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +29,7 @@ public class FiveFragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_second, container, false);
+        View view = inflater.inflate(R.layout.fragment_second_five, container, false);
         initData();
 //        mRecyclerView =  view.findViewById(R.id.recycleview);
 //        LinearLayoutManager layoutManager =  new LinearLayoutManager(getContext());

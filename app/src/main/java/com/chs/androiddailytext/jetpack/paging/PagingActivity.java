@@ -50,6 +50,15 @@ public class PagingActivity extends AppCompatActivity implements OnLoadMoreListe
                    mAdapter.submitList(datasBeans);
             }
         });
+        viewModel.getBoundaryPageData().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean haData) {
+                if(!haData){
+                    refreshLayout.finishLoadMore();
+                    refreshLayout.finishRefresh();
+                }
+            }
+        });
     }
 
     @Override

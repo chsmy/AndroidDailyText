@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chs.androiddailytext.R;
 
 /**
- * @author：chs date：2020/2/2
+ * @author：chs
+ * date：2020/2/2
  * des：
  */
 public class PagingAdapter extends PagedListAdapter<ArticleResponse.DataBean.DatasBean, PagingAdapter.ViewHolder> {
-
 
     protected PagingAdapter() {
         super(new DiffUtil.ItemCallback<ArticleResponse.DataBean.DatasBean>() {
@@ -42,7 +42,7 @@ public class PagingAdapter extends PagedListAdapter<ArticleResponse.DataBean.Dat
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ArticleResponse.DataBean.DatasBean bean = getItem(position);
+          ArticleResponse.DataBean.DatasBean bean = getItem(position);
           holder.tvname.setText(bean.getTitle());
     }
 

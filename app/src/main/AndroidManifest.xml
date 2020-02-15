@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".jetpack.paging.PagingActivity"></activity>
         <activity android:name=".coordinatorlayout.FiveActivity" />
         <activity android:name=".kotlin.CoroutinesActivity" />
@@ -80,6 +81,10 @@
         <activity android:name=".coordinatorlayout.FourActivity" />
         <activity android:name=".coordinatorlayout.SecondActivity" />
         <activity android:name=".coordinatorlayout.ThirdActivity" />
+        <activity android:name=".jetpack.navigation.NavigationActivity">
+            <nav-graph android:value="@navigation/nav_graph"/>
+        </activity>
+        <activity android:name=".jetpack.botton_navigation.BottomNavActivity" />
 
         <meta-data
             android:name="TINKER_ID"

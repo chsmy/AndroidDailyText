@@ -20,6 +20,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="Paging"
+        android:textAllCaps="false"
         android:text="Paging"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="Navigation"
+        android:textAllCaps="false"
+        android:text="Navigation"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="BottomNavigation"
+        android:textAllCaps="false"
+        android:text="BottomNavigation"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="NavToActivity"
+        android:textAllCaps="false"
+        android:text="NavToActivity"
         />
 </LinearLayout>

@@ -64,4 +64,6 @@
         <item>报单时间正序</item>
         <item>报单时间倒序</item>
     </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

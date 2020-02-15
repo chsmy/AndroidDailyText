@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_activity_graph"
+    app:startDestination="@id/liveDataFirstActivity">
+
+
+    <activity
+        android:id="@+id/liveDataFirstActivity"
+        android:name="com.chs.androiddailytext.jetpack.LiveDataFirstActivity"
+        android:label="LiveDataFirstActivity"
+        >
+    </activity>
+    <activity android:id="@+id/bottomNavActivity"
+        android:name="com.chs.androiddailytext.jetpack.botton_navigation.BottomNavActivity"
+        android:label="BottomNavActivity"/>
+</navigation>

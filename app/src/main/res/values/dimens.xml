@@ -13,6 +13,10 @@
     <dimen name="dp50">50dp</dimen>
     <dimen name="dp60">60dp</dimen>
     <dimen name="dp100">100dp</dimen>
+    <dimen name="dp150">150dp</dimen>
+    <dimen name="dp200">200dp</dimen>
+    <dimen name="dp250">250dp</dimen>
+    <dimen name="dp300">300dp</dimen>
 
     <dimen name="sp14">14sp</dimen>
     <dimen name="sp15">15sp</dimen>

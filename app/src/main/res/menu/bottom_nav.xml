@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/oneFragment"
+        android:icon="@drawable/ic_home"
+        android:contentDescription="首页"
+        android:title="首页" />
+    <item
+        android:id="@+id/towFragment"
+        android:icon="@drawable/ic_list"
+        android:contentDescription="二页"
+        android:title="二页" />
+    <item
+        android:id="@+id/threeFragment"
+        android:icon="@drawable/ic_feedback"
+        android:contentDescription="三页"
+        android:title="三页" />
+</menu>
