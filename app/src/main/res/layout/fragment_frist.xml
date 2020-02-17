@@ -19,6 +19,8 @@
         android:layout_marginTop="@dimen/dp30"
         android:layout_marginStart="@dimen/dp20"
         android:textSize="@dimen/sp16"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
         tools:text="Lily"
         />
 

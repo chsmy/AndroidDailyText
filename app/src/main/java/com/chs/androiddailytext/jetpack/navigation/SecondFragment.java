@@ -24,6 +24,7 @@ public class SecondFragment extends Fragment {
 
     private TextView tvTitle;
     private NavViewModel viewModel;
+    private TextView tvName;
 
     public SecondFragment() {
         // Required empty public constructor
@@ -41,7 +42,12 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvTitle = view.findViewById(R.id.tv_title);
-        tvTitle.setText(getArguments()==null?"":getArguments().getString("title"));
+        tvName = view.findViewById(R.id.tv_name);
+        Bundle arguments = getArguments();
+        if(arguments!=null){
+            String title = FirstFragmentArgs.fromBundle(getArguments()).getTitle();
+            tvTitle.setText(title);
+        }
         view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,12 +55,12 @@ public class SecondFragment extends Fragment {
             }
         });
         viewModel = new ViewModelProvider(requireActivity()).get(NavViewModel.class);
-        tvTitle.setText(viewModel.getParams().getValue());
+        tvName.setText(viewModel.getParams().getValue());
         view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewModel.getParams().setValue("Tom");
-                tvTitle.setText(viewModel.getParams().getValue());
+                tvName.setText(viewModel.getParams().getValue());
             }
         });
     }
@@ -62,7 +68,7 @@ public class SecondFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        tvTitle.setText(viewModel.getParams().getValue());
+//        tvTitle.setText(viewModel.getParams().getValue());
     }
 
 }

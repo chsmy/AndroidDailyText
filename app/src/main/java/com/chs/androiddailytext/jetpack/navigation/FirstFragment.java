@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ActivityNavigator;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDeepLinkBuilder;
+import androidx.navigation.NavDirections;
 import androidx.navigation.NavGraph;
 import androidx.navigation.NavGraphNavigator;
 import androidx.navigation.NavOptions;
@@ -56,52 +57,47 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvTitle = view.findViewById(R.id.tv_title);
-        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("title","我是前面传过来的");
-                Navigation.findNavController(v).navigate(R.id.action_firstFragment_to_secondFragment,bundle);
-            }
+        view.findViewById(R.id.button).setOnClickListener(v -> {
+//            Bundle bundle = new Bundle();
+//            bundle.putString("title","我是前面传过来的");
+            Bundle bundle = new FirstFragmentArgs.Builder().setTitle("我是前面传过来的").build().toBundle();
+            Navigation.findNavController(v).navigate(R.id.action_firstFragment_to_secondFragment,bundle);
         });
-        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        view.findViewById(R.id.button1).setOnClickListener(v -> {
 //                Intent intent = new Intent();
 //                intent.setData(Uri.parse("http://www.chs.com/Divad"));
 //                Navigation.findNavController(v).handleDeepLink(intent);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("userName","大海");
-                PendingIntent pendingIntent = new NavDeepLinkBuilder(requireContext())
-                        .setGraph(R.navigation.nav_graph)
-                        .setDestination(R.id.thirdFragment)
-                        .setArguments(bundle)
-                        .createPendingIntent();
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                    notificationManager.createNotificationChannel(new NotificationChannel(
-                            "deepLink","deepLinkName", NotificationManager.IMPORTANCE_HIGH
-                    ));
-                }
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), "deepLink")
-                        .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setContentTitle("测试deepLink")
-                        .setContentText("哈哈哈")
-                        .setContentIntent(pendingIntent)
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-                notificationManager.notify(10,builder.build());
+            Bundle bundle = new Bundle();
+            bundle.putString("userName","大海");
+//            PendingIntent pendingIntent = Navigation.findNavController(v).createDeepLink().setArguments(bundle)
+//                    .setDestination(R.id.thirdFragment)
+//                    .createPendingIntent();
+            PendingIntent pendingIntent = new NavDeepLinkBuilder(requireContext())
+                    .setGraph(R.navigation.nav_graph)
+                    .setDestination(R.id.thirdFragment)
+                    .setArguments(bundle)
+                    .createPendingIntent();
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                notificationManager.createNotificationChannel(new NotificationChannel(
+                        "deepLink","deepLinkName", NotificationManager.IMPORTANCE_HIGH
+                ));
             }
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), "deepLink")
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle("测试deepLink")
+                    .setContentText("哈哈哈")
+                    .setContentIntent(pendingIntent)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+            notificationManager.notify(10,builder.build());
         });
         viewModel = new ViewModelProvider(requireActivity()).get(NavViewModel.class);
         tvTitle.setText(viewModel.getParams().getValue());
-        view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewModel.getParams().setValue("Rouse");
-                tvTitle.setText(viewModel.getParams().getValue());
-            }
+        view.findViewById(R.id.button2).setOnClickListener(v -> {
+            viewModel.getParams().setValue("Rouse");
+            tvTitle.setText(viewModel.getParams().getValue());
         });
     }
 

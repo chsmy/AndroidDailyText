@@ -29,9 +29,13 @@ public class BottomNavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom_navigation);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        //导航控制器
         NavController controller = Navigation.findNavController(this,R.id.bottom_fragment);
+        //底部导航的配置
         AppBarConfiguration configuration = new AppBarConfiguration.Builder(bottomNavigationView.getMenu()).build();
+        //关联控制器和底部导航的配置
         NavigationUI.setupActionBarWithNavController(this,controller,configuration);
+        //关联底部bottomNavigationView和控制器
         NavigationUI.setupWithNavController(bottomNavigationView,controller);
     }
 }

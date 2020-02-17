@@ -1,8 +1,15 @@
 package com.chs.androiddailytext;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.navigation.NavDeepLinkBuilder;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -154,6 +161,29 @@ public class MainActivity extends BaseActivity {
                     case 28:
                         startActivity(CoroutinesActivity.class);
                         break;
+                    case 29:
+                        Bundle bundle = new Bundle();
+                        bundle.putString("userName","大海");
+                        PendingIntent pendingIntent = new NavDeepLinkBuilder(MainActivity.this)
+                                .setGraph(R.navigation.nav_graph)
+                                .setDestination(R.id.thirdFragment)
+                                .setArguments(bundle)
+                                .createPendingIntent();
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
+                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                            notificationManager.createNotificationChannel(new NotificationChannel(
+                                    "deepLink","deepLinkName", NotificationManager.IMPORTANCE_HIGH
+                            ));
+                        }
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "deepLink")
+                                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                                .setContentTitle("测试deepLink")
+                                .setContentText("哈哈哈")
+                                .setContentIntent(pendingIntent)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                        notificationManager.notify(10,builder.build());
+                        break;
                     default:
                 }
             }
@@ -190,6 +220,7 @@ public class MainActivity extends BaseActivity {
         datas.add("tabSticky");
         datas.add("Coordinator");
         datas.add("协程");
+        datas.add("deepLink");
     }
 
 }

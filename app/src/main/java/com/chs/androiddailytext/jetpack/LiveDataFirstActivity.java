@@ -82,16 +82,16 @@ public class LiveDataFirstActivity extends AppCompatActivity {
 //        navController.setGraph(navGraph);
 //        navController.handleDeepLink(intent);
 
-//        NavController navController = new NavController(this);
-//        NavigatorProvider navigatorProvider = navController.getNavigatorProvider();
-//        NavGraph navGraph = new NavGraph(new NavGraphNavigator(navigatorProvider));
-//        ActivityNavigator navigator = navigatorProvider.getNavigator(ActivityNavigator.class);
-//        ActivityNavigator.Destination destination = navigator.createDestination();
-//        destination.setId(R.id.bottom_nav_activity);
-//        destination.setComponentName(new ComponentName(getApplication().getPackageName(),
-//                "com.chs.androiddailytext.jetpack.botton_navigation.BottomNavActivity"));
-//        navGraph.addDestination(destination);
-//        navGraph.setStartDestination(destination.getId());
-//        navController.setGraph(navGraph);
+        NavController navController = new NavController(this);
+        NavigatorProvider navigatorProvider = navController.getNavigatorProvider();
+        NavGraph navGraph = new NavGraph(new NavGraphNavigator(navigatorProvider));
+        ActivityNavigator navigator = navigatorProvider.getNavigator(ActivityNavigator.class);
+        ActivityNavigator.Destination destination = navigator.createDestination();
+        destination.setId(R.id.bottom_nav_activity);
+        destination.setComponentName(new ComponentName(getApplication().getPackageName(),
+                "com.chs.androiddailytext.jetpack.botton_navigation.BottomNavActivity"));
+        navGraph.addDestination(destination);
+        navGraph.setStartDestination(destination.getId());
+        navController.setGraph(navGraph);
     }
 }

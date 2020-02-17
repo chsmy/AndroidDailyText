@@ -5,6 +5,28 @@
     android:id="@+id/nav_demo_1"
     app:startDestination="@id/firstFragment">
 
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.chs.androiddailytext.MainActivity"
+        android:label="MainActivity"
+        app:targetPackage="com.chs.androiddailytext"
+        >
+    </activity>
+    <activity
+        android:id="@+id/liveDataFirstActivity"
+        android:name="com.chs.androiddailytext.jetpack.LiveDataFirstActivity"
+        android:label="LiveDataFirstActivity"
+        app:targetPackage="com.chs.androiddailytext"
+        >
+    </activity>
+    <activity
+        android:id="@+id/navigationActivity"
+        android:name="com.chs.androiddailytext.jetpack.navigation.NavigationActivity"
+        android:label="NavigationActivity"
+        app:targetPackage="com.chs.androiddailytext"
+        >
+    </activity>
+
     <fragment
         android:id="@+id/firstFragment"
         android:name="com.chs.androiddailytext.jetpack.navigation.FirstFragment"
@@ -17,6 +39,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument android:name="title"
+            android:defaultValue="i am title"
+            app:argType="string"/>
     </fragment>
 
     <fragment
