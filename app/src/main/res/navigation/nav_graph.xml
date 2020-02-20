@@ -9,23 +9,17 @@
         android:id="@+id/mainActivity"
         android:name="com.chs.androiddailytext.MainActivity"
         android:label="MainActivity"
-        app:targetPackage="com.chs.androiddailytext"
-        >
-    </activity>
+        app:targetPackage="com.chs.androiddailytext"></activity>
     <activity
         android:id="@+id/liveDataFirstActivity"
         android:name="com.chs.androiddailytext.jetpack.LiveDataFirstActivity"
         android:label="LiveDataFirstActivity"
-        app:targetPackage="com.chs.androiddailytext"
-        >
-    </activity>
+        app:targetPackage="com.chs.androiddailytext"></activity>
     <activity
         android:id="@+id/navigationActivity"
         android:name="com.chs.androiddailytext.jetpack.navigation.NavigationActivity"
         android:label="NavigationActivity"
-        app:targetPackage="com.chs.androiddailytext"
-        >
-    </activity>
+        app:targetPackage="com.chs.androiddailytext"></activity>
 
     <fragment
         android:id="@+id/firstFragment"
@@ -39,44 +33,48 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <argument android:name="title"
+        <argument
+            android:name="title"
             android:defaultValue="i am title"
-            app:argType="string"/>
+            app:argType="string" />
     </fragment>
+    <navigation
+        android:id="@+id/nav_sub"
+        app:startDestination="@id/secondFragment">
+        <fragment
+            android:id="@+id/secondFragment"
+            android:name="com.chs.androiddailytext.jetpack.navigation.SecondFragment"
+            android:label="fragment_second"
+            tools:layout="@layout/fragment_second">
+            <action
+                android:id="@+id/action_secondFragment_to_thirdFragment"
+                app:destination="@id/thirdFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+        </fragment>
 
-    <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.chs.androiddailytext.jetpack.navigation.SecondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second">
-        <action
-            android:id="@+id/action_secondFragment_to_thirdFragment"
-            app:destination="@id/thirdFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/thirdFragment"
-        android:name="com.chs.androiddailytext.jetpack.navigation.ThirdFragment"
-        android:label="fragment_third"
-        tools:layout="@layout/fragment_third">
-        <action
-            android:id="@+id/action_thirdFragment_to_firstFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/firstFragment" />
-        <action
-            android:id="@+id/action_thirdFragment_to_secondFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/secondFragment" />
-        <deepLink app:uri="www.chs.com/{userName}" />
-    </fragment>
+        <fragment
+            android:id="@+id/thirdFragment"
+            android:name="com.chs.androiddailytext.jetpack.navigation.ThirdFragment"
+            android:label="fragment_third"
+            tools:layout="@layout/fragment_third">
+            <action
+                android:id="@+id/action_thirdFragment_to_firstFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@id/firstFragment" />
+            <action
+                android:id="@+id/action_thirdFragment_to_secondFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@+id/secondFragment" />
+            <deepLink app:uri="www.chs.com/{userName}" />
+        </fragment>
+    </navigation>
 </navigation>
