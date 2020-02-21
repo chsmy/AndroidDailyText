@@ -10,7 +10,6 @@ import com.chs.androiddailytext.jetpack.paging.PagingActivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.executor.ArchTaskExecutor;
 import androidx.lifecycle.Observer;
 
 /**
@@ -23,7 +22,13 @@ public class LiveDataSecondActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_data_bus);
-        LiveDataBus.get().with("text",String.class).observe(this, new Observer<String>() {
+        LiveDataBus1.get().with("text",String.class).observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                ToastUtils.showShort(s);
+            }
+        });
+        LiveDataBus.<String>get("sticky").observeSticky(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 ToastUtils.showShort(s);
@@ -31,7 +36,8 @@ public class LiveDataSecondActivity extends AppCompatActivity {
         });
     }
     public void sendMessage(View view) {
-        LiveDataBus.get().with("text").setValue("我是第二个");
+//        LiveDataBus1.get().with("text").setValue("我是第二个");
+        LiveDataBus.<String>get("test").postValue("从SecondActivity发送过来的");
     }
 
     public void Jump(View view) {

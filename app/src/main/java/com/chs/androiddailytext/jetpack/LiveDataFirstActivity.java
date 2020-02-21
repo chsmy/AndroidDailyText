@@ -2,7 +2,6 @@ package com.chs.androiddailytext.jetpack;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -14,17 +13,12 @@ import com.chs.androiddailytext.jetpack.paging.PagingActivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.navigation.ActionOnlyNavDirections;
 import androidx.navigation.ActivityNavigator;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.NavGraphNavigator;
-import androidx.navigation.Navigation;
 import androidx.navigation.NavigatorProvider;
-import androidx.navigation.fragment.FragmentNavigator;
-import androidx.navigation.ui.NavigationUI;
 
 /**
  * @author chs
@@ -36,16 +30,20 @@ public class LiveDataFirstActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_data_bus);
-        LiveDataBus.get().with("text", String.class).observe(this, new Observer<String>() {
+        LiveDataBus1.get().with("text", String.class).observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 ToastUtils.showShort(s);
             }
         });
+        LiveDataBus.<String>get("test").observe(this,res->{
+            ToastUtils.showShort(res);
+        });
     }
 
     public void sendMessage(View view) {
-        LiveDataBus.get().with("text").setValue("哈哈哈");
+//        LiveDataBus1.get().with("text").setValue("哈哈哈");
+        LiveDataBus.<String>get("sticky").postStickyData("firstActivity过来的");
     }
 
     public void Jump(View view) {

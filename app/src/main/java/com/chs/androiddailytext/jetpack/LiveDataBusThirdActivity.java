@@ -19,15 +19,16 @@ public class LiveDataBusThirdActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_data_bus);
-        LiveDataBus.get().with("text",String.class).observe(this, new Observer<String>() {
+        LiveDataBus1.get().with("text",String.class).observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 ToastUtils.showShort(s);
             }
         });
+
     }
     public void sendMessage(View view) {
-        LiveDataBus.get().with("text").setValue("我是第二个");
+        LiveDataBus1.get().with("text").setValue("我是第二个");
     }
 
     public void Jump(View view) {
