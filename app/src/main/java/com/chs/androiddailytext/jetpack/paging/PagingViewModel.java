@@ -45,7 +45,7 @@ public class PagingViewModel extends ViewModel {
         @NonNull
         @Override
         public DataSource create() {
-            if (mDataSource == null) {
+            if (mDataSource == null || mDataSource.isInvalid()) {
                 mDataSource = new ArticleDataSource();
             }
             return mDataSource;

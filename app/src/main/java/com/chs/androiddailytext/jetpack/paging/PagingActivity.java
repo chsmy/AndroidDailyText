@@ -67,6 +67,6 @@ public class PagingActivity extends AppCompatActivity implements OnLoadMoreListe
     }
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+        viewModel.getDataSource().invalidate();
     }
 }
