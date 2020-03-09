@@ -1,17 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+apply from:"config.gradle"
 buildscript {
-    ext.kotlin_version = '1.3.21'
+    ext.kotlin_version = '1.3.61'
 
     repositories {
-//        google()
-//        jcenter()
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.6.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.2.1"
         // NOTE: Do not place your application dependencies here; they belong
@@ -21,11 +19,9 @@ buildscript {
 
 allprojects {
     repositories {
-//        google()
-//        jcenter()
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        google()
+        jcenter()
         maven { url 'https://jitpack.io' }
         maven { url 'https://kotlin.bintray.com/kotlinx/' }
     }

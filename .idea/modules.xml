@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidDailyText.iml" filepath="$PROJECT_DIR$/AndroidDailyText.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidDailyText.iml" filepath="$PROJECT_DIR$/AndroidDailyText.iml" group="AndroidDailyText" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="AndroidDailyText/app" />
+      <module fileurl="file://$PROJECT_DIR$/app_test/app_test.iml" filepath="$PROJECT_DIR$/app_test/app_test.iml" group="AndroidDailyText/app_test" />
+      <module fileurl="file://$PROJECT_DIR$/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/lib_common/lib_common.iml" group="AndroidDailyText/lib_common" />
     </modules>
   </component>
 </project>
