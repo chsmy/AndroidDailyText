@@ -72,4 +72,12 @@
         android:textAllCaps="false"
         android:text="WebView"
         />
+    <Button
+        android:id="@+id/btn_go_to_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:text="单元测试"
+        />
 </LinearLayout>

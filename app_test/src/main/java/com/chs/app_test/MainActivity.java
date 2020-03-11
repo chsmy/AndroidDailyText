@@ -10,15 +10,11 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.chs.app_test.databinding.ActivityMainBinding;
 
@@ -29,56 +25,35 @@ public class MainActivity extends AppCompatActivity {
     private String phoneNum;
     private ImageView mImageView;
     private ActivityMainBinding mBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
-        mImageView =  findViewById(R.id.iv_take_photo);
-        mBinding.btnClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBinding.tvText.setText("Hello Espresso!");
+        mImageView = findViewById(R.id.iv_take_photo);
+        mBinding.btnClick.setOnClickListener(v -> mBinding.tvText.setText("Hello Espresso!"));
+        mBinding.btnToRecyclerview.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RecyclerViewActivity.class)));
+        mBinding.btnToContacts.setOnClickListener(v -> startActivityForResult(new Intent(getApplicationContext(), ContactsActivity.class), REQUEST_CODE_PICK));
+        mBinding.btnCall.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(phoneNum)) {
+                callPhone();
+            } else {
+                Toast.makeText(getApplicationContext(), "先获取号码", Toast.LENGTH_SHORT).show();
             }
         });
-        mBinding.btnToRecyclerview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), RecyclerViewActivity.class));
-            }
-        });
-        mBinding.btnToContacts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent(getApplicationContext(), ContactsActivity.class), REQUEST_CODE_PICK);
-            }
-        });
-        mBinding.btnCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!TextUtils.isEmpty(phoneNum)){
-                    callPhone();
-                }else {
-                    Toast.makeText(getApplicationContext(),"先获取号码",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        mBinding.btnTakePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 takePhoto();
-            }
-        });
-        mBinding.btnGoToWeb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 goToWebView();
-            }
-        });
+        mBinding.btnTakePhoto.setOnClickListener(v -> takePhoto());
+        mBinding.btnGoToWeb.setOnClickListener(v -> goToWebView());
+        mBinding.btnGoToUnit.setOnClickListener(v->goToUnit());
+    }
+
+    private void goToUnit() {
+        Intent intent = new Intent(this, UnitTestActivity.class);
+        startActivity(intent);
     }
 
     private void goToWebView() {
-        Intent intent = new Intent(this,WebViewActivity.class);
+        Intent intent = new Intent(this, WebViewActivity.class);
 //        intent.putExtra(WebViewActivity.KEY_URL_TO_LOAD,"https://www.wanandroid.com/");
         startActivity(intent);
     }
@@ -95,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         intentToCall.setData(Uri.parse("tel:" + phoneNum));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             startActivity(intentToCall);
-        }else {
-            Toast.makeText(getApplicationContext(),"没有打电话的权限，请去设置中打开",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "没有打电话的权限，请去设置中打开", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -104,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_PICK&&resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE_PICK && resultCode == RESULT_OK) {
             phoneNum = data.getExtras().getString(ContactsActivity.KEY_PHONE_NUMBER);
         }
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
