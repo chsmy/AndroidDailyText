@@ -11,4 +11,16 @@ public class Utils {
         return a + b;
     }
 
+    public Integer toNumber(String num){
+        if(num == null || num.isEmpty()){
+             return null;
+        }
+        Integer integer;
+        try {
+            integer = Integer.parseInt(num.trim());
+        }catch (Exception e){
+            integer = null;
+        }
+        return integer;
+    }
 }

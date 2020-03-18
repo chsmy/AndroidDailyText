@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
  * des：
  */
 @RunWith(MockitoJUnitRunner.class)
-public class UnitTestActivityTest {
+public class MockitoTest {
 
     @Before
     public void setUp() throws Exception {

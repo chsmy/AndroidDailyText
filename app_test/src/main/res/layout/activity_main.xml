@@ -80,4 +80,8 @@
         android:textAllCaps="false"
         android:text="单元测试"
         />
+    <ImageView
+        android:id="@+id/iv_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -30,4 +31,23 @@ public class ExampleUnitTest {
         assertTrue(list.size()>0);
     }
 
+    @Test
+    public void testToNumber_NotNullOrEmpty(){
+        Utils utils = new Utils();
+       assertNull(utils.toNumber(null));
+       assertNull(utils.toNumber(""));
+    }
+    @Test
+    public void testToNumber_hasSpace(){
+        Utils utils = new Utils();
+        assertEquals(new Integer("123"),utils.toNumber("123"));
+        assertEquals(new Integer("123"),utils.toNumber("123 "));
+        assertEquals(new Integer("123"),utils.toNumber(" 123 "));
+    }
+    @Test
+    public void testToNumber_hasMiddleSpace(){
+        Utils utils = new Utils();
+        assertNull(utils.toNumber("12 3"));
+        assertNull(utils.toNumber("12a3"));
+    }
 }
