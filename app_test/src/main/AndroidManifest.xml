@@ -23,6 +23,10 @@
         <activity android:name=".WebViewActivity" />
         <activity android:name=".ContactsActivity" />
         <activity android:name=".RecyclerViewActivity" />
+
+        <uses-library android:name="android.test.runner"
+            android:required="false" />
+
     </application>
 
 </manifest>

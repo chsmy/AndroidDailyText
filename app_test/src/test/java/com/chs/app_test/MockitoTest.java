@@ -1,21 +1,15 @@
 package com.chs.app_test;
 
-import android.content.Context;
-import android.text.TextUtils;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
-import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
