@@ -22,14 +22,6 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class MockitoTest {
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
     //结果验证，测试某些结果是否正确
     @Test
     public void testMockitoResult() {
@@ -68,7 +60,7 @@ public class MockitoTest {
 
     @Mock
     List<Integer> mList;
-
+    @Test
     public void testAnnotationMock(){
         mList.add(0);
         verify(mList).add(0);

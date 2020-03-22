@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -46,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         mBinding.btnTakePhoto.setOnClickListener(v -> takePhoto());
         mBinding.btnGoToWeb.setOnClickListener(v -> goToWebView());
         mBinding.btnGoToUnit.setOnClickListener(v->goToUnit());
+        mBinding.btnShowToast.setOnClickListener(v->showToast());
+    }
+
+    private void showToast() {
+       Toast.makeText(this,"测试Toast",Toast.LENGTH_SHORT).show();
     }
 
     private void goToUnit() {

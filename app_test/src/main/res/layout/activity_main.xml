@@ -80,8 +80,13 @@
         android:textAllCaps="false"
         android:text="单元测试"
         />
-    <ImageView
-        android:id="@+id/iv_loading"
+    <Button
+        android:id="@+id/btn_show_toast"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:text="showToast"
+        />
+
 </LinearLayout>
