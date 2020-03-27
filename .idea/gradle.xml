@@ -12,8 +12,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/app_jetpack" />
             <option value="$PROJECT_DIR$/app_test" />
             <option value="$PROJECT_DIR$/lib_common" />
+            <option value="$PROJECT_DIR$/lib_navannotation" />
+            <option value="$PROJECT_DIR$/lib_navcompiler" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
