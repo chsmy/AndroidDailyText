@@ -53,7 +53,7 @@ public class AppConfig {
             is = assets.open(fileName);
             br = new BufferedReader(new InputStreamReader(is));
             String line = null;
-            if ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 builder.append(line);
             }
         } catch (IOException e) {

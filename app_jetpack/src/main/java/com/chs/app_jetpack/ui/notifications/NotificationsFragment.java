@@ -13,7 +13,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.chs.app_jetpack.R;
+import com.chs.lib_navannotation.FragmentDestination;
 
+@FragmentDestination(pageUrl = "main/tabs/my")
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;

@@ -76,7 +76,7 @@ public class NavProcessor extends AbstractProcessor {
                 messager.printMessage(Diagnostic.Kind.NOTE,"resourcePath:"+resourcePath);
 
                 String appPath = resourcePath.substring(0,resourcePath.indexOf("build"));
-                String assetPath = appPath + "src/main/asset";
+                String assetPath = appPath + "src/main/assets";
 
                 File assetDir = new File(assetPath);
                 if(!assetDir.exists()){
@@ -128,7 +128,7 @@ public class NavProcessor extends AbstractProcessor {
             boolean needLogin = false;
             boolean asStarter = false;
             boolean isFragment = true;
-            messager.printMessage(Diagnostic.Kind.ERROR,"className:"+className);
+//            messager.printMessage(Diagnostic.Kind.NOTE,"className:"+className);
             Annotation annotation = element.getAnnotation(desAnnotationClazz);
             //根据不同的注解获取注解的参数
             if(annotation instanceof FragmentDestination){

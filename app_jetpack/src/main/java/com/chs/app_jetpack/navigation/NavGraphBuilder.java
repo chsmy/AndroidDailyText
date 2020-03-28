@@ -1,7 +1,9 @@
 package com.chs.app_jetpack.navigation;
 
 import android.content.ComponentName;
+import android.content.Context;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.ActivityNavigator;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
@@ -21,9 +23,14 @@ import java.util.Map;
  */
 public class NavGraphBuilder {
 
-    public static void build(NavController controller){
+    public static void build(NavController controller, FragmentActivity activity,int containerId){
         NavigatorProvider navigatorProvider = controller.getNavigatorProvider();
-        FragmentNavigator fragmentNavigator = navigatorProvider.getNavigator(FragmentNavigator.class);
+
+//        FragmentNavigator fragmentNavigator = navigatorProvider.getNavigator(FragmentNavigator.class);
+        FixFragmentNavigator fixFragmentNavigator = new FixFragmentNavigator(activity,
+                activity.getSupportFragmentManager(),containerId);
+        navigatorProvider.addNavigator(fixFragmentNavigator);
+
         ActivityNavigator activityNavigator = navigatorProvider.getNavigator(ActivityNavigator.class);
         HashMap<String, Destination> destinationMap = AppConfig.getDestinationMap();
 
@@ -34,7 +41,7 @@ public class NavGraphBuilder {
             Destination node = desEntry.getValue();
             if(node.isFragment){
                 //创建目标
-                FragmentNavigator.Destination destination = fragmentNavigator.createDestination();
+                FragmentNavigator.Destination destination = fixFragmentNavigator.createDestination();
                 destination.setId(node.id);
                 destination.setClassName(node.className);
                 destination.addDeepLink(node.pageUrl);

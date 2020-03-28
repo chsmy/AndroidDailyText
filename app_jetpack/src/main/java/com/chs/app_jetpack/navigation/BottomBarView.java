@@ -12,6 +12,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.chs.app_jetpack.R;
@@ -28,11 +29,12 @@ import java.util.List;
  * date：2020/3/27
  * des： 底部导航view
  */
-public class BottomBarView extends BottomNavigationView {
+public class BottomBarView extends BottomNavigationView implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private static int[] sIcons = new int[]{R.drawable.icon_tab_home
-    ,R.drawable.icon_tab_apply,R.drawable.icon_tab_find,R.drawable.icon_tab_mine};
-
+    ,R.drawable.icon_tab_apply,R.drawable.icon_tab_mine};
+    private NavController mNavController;
+//R.drawable.icon_tab_find,
     public BottomBarView(@NonNull Context context) {
         this(context,null);
     }
@@ -44,6 +46,7 @@ public class BottomBarView extends BottomNavigationView {
     @SuppressLint("RestrictedApi")
     public BottomBarView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setOnNavigationItemSelectedListener(this);
         BottomBar bottomBar = AppConfig.getsBottomBar();
 
         int[][] states = new int[2][];
@@ -54,7 +57,7 @@ public class BottomBarView extends BottomNavigationView {
         setItemTextColor(colorStateList);
         setItemIconTintList(colorStateList);
         //设置文本和图标都一直显示
-        setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_SELECTED);
+        setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
 
         List<BottomBar.Tabs> tabs = bottomBar.tabs;
         //循环添加item
@@ -114,5 +117,17 @@ public class BottomBarView extends BottomNavigationView {
             return destination.id;
         }
         return -1;
+    }
+
+    public void setNavController(NavController navController) {
+        mNavController = navController;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(mNavController!=null){
+            mNavController.navigate(item.getItemId());
+        }
+        return true;
     }
 }
