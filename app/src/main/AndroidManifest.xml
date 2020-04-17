@@ -85,6 +85,7 @@
             <nav-graph android:value="@navigation/nav_graph"/>
         </activity>
         <activity android:name=".jetpack.botton_navigation.BottomNavActivity" />
+        <activity android:name=".jetpack.EmptyActivity" />
 
         <meta-data
             android:name="TINKER_ID"
