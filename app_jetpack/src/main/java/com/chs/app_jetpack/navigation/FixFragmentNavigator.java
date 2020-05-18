@@ -17,14 +17,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavDestination;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigator;
-import androidx.navigation.NavigatorProvider;
 import androidx.navigation.fragment.FragmentNavigator;
 
-import com.chs.app_jetpack.R;
 
 import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**

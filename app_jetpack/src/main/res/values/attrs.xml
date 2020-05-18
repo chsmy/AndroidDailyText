@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RecordView">
+        <attr name="bg_color" format="color" />
+        <attr name="stroke_color" format="color"/>
+        <attr name="stroke_width" format="dimension"/>
+        <attr name="radius" format="dimension"/>
+        <attr name="duration" format="integer"/>
+    </declare-styleable>
+
+</resources>
