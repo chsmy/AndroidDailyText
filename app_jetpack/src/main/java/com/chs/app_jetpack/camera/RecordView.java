@@ -10,9 +10,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,7 +56,7 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RecordView);
         mBgColor = typedArray.getColor(R.styleable.RecordView_bg_color, Color.WHITE);
-        mBgColor = typedArray.getColor(R.styleable.RecordView_stroke_color, Color.RED);
+        mStrokeColor = typedArray.getColor(R.styleable.RecordView_stroke_color, Color.RED);
         mStrokeWidth = typedArray.getDimensionPixelOffset(R.styleable.RecordView_stroke_width, SizeUtils.dp2px(5));
         mDuration = typedArray.getInteger(R.styleable.RecordView_duration, 10);
         mRadius = typedArray.getDimensionPixelOffset(R.styleable.RecordView_radius, SizeUtils.dp2px(40));
@@ -69,8 +71,6 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
         mProgressPaint.setColor(mStrokeColor);
         mProgressPaint.setStrokeWidth(mStrokeWidth);
 
-        mArcRectF = new RectF(mStrokeWidth / 2f, mStrokeWidth / 2f,
-                mWidth - mStrokeWidth / 2f, mHeight - mStrokeWidth / 2f);
         setEvent();
     }
 
@@ -81,7 +81,7 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
                 super.handleMessage(msg);
                 mProgressValue++;
                 postInvalidate();
-                if (mProgressValue <= mDuration) {
+                if (mProgressValue < mDuration*10) {
                     sendEmptyMessageDelayed(0, PROGRESS_INTERVAL);
                 } else {
                     finishRecord();
@@ -97,7 +97,8 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
                     handler.sendEmptyMessage(0);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     long duration = System.currentTimeMillis() - mStartRecordTime;
-                    if(duration/1000>mDuration){
+                    //是否大于系统设定的最小长按时间
+                    if(duration > ViewConfiguration.getLongPressTimeout()){
                         finishRecord();
                     }
                     handler.removeCallbacksAndMessages(null);
@@ -124,6 +125,8 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth = w;
         mHeight = w;
+        mArcRectF = new RectF(mStrokeWidth / 2f, mStrokeWidth / 2f,
+                mWidth - mStrokeWidth / 2f, mHeight - mStrokeWidth / 2f);
     }
 
     @Override
@@ -133,8 +136,9 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
         canvas.drawCircle(mWidth / 2f, mHeight / 2f, mRadius, mBgPaint);
 
         if (isRecording) {
-            float sweepAngle = 360f * mProgressValue / mDuration;
-            canvas.drawArc(mArcRectF, -90, sweepAngle, false, mProgressPaint);
+            float sweepAngle = 360f * mProgressValue / (mDuration*10);
+            Log.i("sweepAngle",sweepAngle+"");
+            canvas.drawArc(mArcRectF, 90, sweepAngle, false, mProgressPaint);
         }
 
     }
