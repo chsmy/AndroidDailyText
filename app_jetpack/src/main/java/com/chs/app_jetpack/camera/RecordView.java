@@ -44,6 +44,10 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
     private OnRecordListener mOnRecordListener;
     private long mStartRecordTime;
 
+    public void setOnRecordListener(OnRecordListener onRecordListener) {
+        mOnRecordListener = onRecordListener;
+    }
+
     public RecordView(Context context) {
         this(context, null);
     }
@@ -138,7 +142,7 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
         if (isRecording) {
             float sweepAngle = 360f * mProgressValue / (mDuration*10);
             Log.i("sweepAngle",sweepAngle+"");
-            canvas.drawArc(mArcRectF, 90, sweepAngle, false, mProgressPaint);
+            canvas.drawArc(mArcRectF, -90, sweepAngle, false, mProgressPaint);
         }
 
     }
@@ -146,7 +150,7 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
     @Override
     public boolean onLongClick(View v) {
         if(mOnRecordListener!=null){
-            mOnRecordListener.onLongClick();
+            mOnRecordListener.onRecordVideo();
         }
         return true;
     }
@@ -154,14 +158,14 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
     @Override
     public void onClick(View v) {
         if(mOnRecordListener!=null){
-            mOnRecordListener.onClick();
+            mOnRecordListener.onTackPicture();
         }
     }
 
     public interface OnRecordListener {
-        void onClick();
+        void onTackPicture();
 
-        void onLongClick();
+        void onRecordVideo();
 
         void onFinish();
     }
