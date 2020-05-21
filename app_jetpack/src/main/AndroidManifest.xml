@@ -3,7 +3,9 @@
     package="com.chs.app_jetpack">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +17,6 @@
 <!--            android:name=".BottomMainActivity"-->
 <!--            android:label="@string/title_activity_bottom_main"></activity>-->
         <activity android:name=".BottomMainActivity"
-            android:theme="@style/FullScreen"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.camera.CameraActivity"
+            android:theme="@style/FullScreen"/>
     </application>
 
 </manifest>
