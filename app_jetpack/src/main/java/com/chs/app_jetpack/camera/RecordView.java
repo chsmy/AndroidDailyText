@@ -96,7 +96,6 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    isRecording = true;
                     mStartRecordTime = System.currentTimeMillis();
                     handler.sendEmptyMessage(0);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
@@ -149,6 +148,7 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
 
     @Override
     public boolean onLongClick(View v) {
+        isRecording = true;
         if(mOnRecordListener!=null){
             mOnRecordListener.onRecordVideo();
         }

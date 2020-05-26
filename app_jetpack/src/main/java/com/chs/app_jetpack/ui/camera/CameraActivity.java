@@ -1,14 +1,25 @@
 package com.chs.app_jetpack.ui.camera;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.Size;
+import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,8 +31,10 @@ import androidx.camera.core.Camera;
 import androidx.camera.core.CameraInfoUnavailableException;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
 import androidx.camera.core.VideoCapture;
+import androidx.camera.core.impl.VideoCaptureConfig;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
@@ -33,8 +46,11 @@ import com.chs.app_jetpack.ui.home.HomeFragment;
 import com.chs.app_jetpack.ui.home.HomeViewModel;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * author：chs
@@ -44,28 +60,17 @@ import java.util.concurrent.ExecutionException;
 public class CameraActivity extends AppCompatActivity {
     private static final String[] PERMISSIONS = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO};
     private static final int  PERMISSIONS_REQUEST_CODE = 10;
-    private ArrayList<String> deniedPermission = new ArrayList<>();
-    public static boolean hsaPermission(Context context){
-        for (String permission : PERMISSIONS) {
-            boolean res = ContextCompat.checkSelfPermission(context,permission) == PackageManager.PERMISSION_DENIED;
-            if(res){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static void start(Activity activity){
-        Intent intent = new Intent(activity,CameraActivity .class);
-        activity.startActivity(intent);
-    }
-
     private static final double RATIO_4_3_VALUE = 4.0 / 3.0;
     private static final double  RATIO_16_9_VALUE = 16.0 / 9.0;
+    private ArrayList<String> deniedPermission = new ArrayList<>();
+    private String TAG = this.getClass().getSimpleName();
+    private String outputFilePath;
     private PreviewView mPreviewView;
     private RecordView mRecordView;
+    private ImageButton mBtnCameraSwitch;
     private Preview mPreview;
     private Camera mCamera;
+    private ExecutorService mExecutorService;
     /**
      * 照相
      */
@@ -82,10 +87,30 @@ public class CameraActivity extends AppCompatActivity {
      * 摄像头朝向 默认向后
      */
     private int mLensFacing = CameraSelector.LENS_FACING_BACK;
+    /**
+     * 是否是照相
+     */
+    private boolean takingPicture;
+
+    public static boolean hsaPermission(Context context){
+        for (String permission : PERMISSIONS) {
+            boolean res = ContextCompat.checkSelfPermission(context,permission) == PackageManager.PERMISSION_DENIED;
+            if(res){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void start(Activity activity){
+        Intent intent = new Intent(activity,CameraActivity .class);
+        activity.startActivity(intent);
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        mExecutorService = Executors.newSingleThreadExecutor();
         if(!hsaPermission(this)){
             ActivityCompat.requestPermissions(this,PERMISSIONS,PERMISSIONS_REQUEST_CODE);
         }else {
@@ -93,24 +118,94 @@ public class CameraActivity extends AppCompatActivity {
         }
         mPreviewView = findViewById(R.id.view_finder);
         mRecordView = findViewById(R.id.record_view);
+        mBtnCameraSwitch = findViewById(R.id.camera_switch_button);
         updateCameraUi();
+        setRecordListener();
+        mBtnCameraSwitch.setOnClickListener(v -> {
+            if (CameraSelector.LENS_FACING_FRONT == mLensFacing){
+                mLensFacing = CameraSelector.LENS_FACING_BACK;
+            }else {
+                mLensFacing = CameraSelector.LENS_FACING_FRONT;
+            }
+            bindCameraUseCases();
+        });
+    }
+
+    private void setRecordListener() {
         mRecordView.setOnRecordListener(new RecordView.OnRecordListener() {
             @Override
             public void onTackPicture() {
                 //拍照
+                takingPicture = true;
+                //创建图片保存的文件地址
+                File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath(),
+                        System.currentTimeMillis() + ".jpeg");
+                ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
+                mImageCapture.takePicture(outputFileOptions,mExecutorService , new ImageCapture.OnImageSavedCallback() {
+                    @Override
+                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                        Uri savedUri = outputFileResults.getSavedUri();
+                        if(savedUri == null){
+                            savedUri = Uri.fromFile(file);
+                        }
+                        outputFilePath = file.getAbsolutePath();
+                        onFileSaved(savedUri);
+                    }
 
+                    @Override
+                    public void onError(@NonNull ImageCaptureException exception) {
+                        Log.e(TAG, "Photo capture failed: "+exception.getMessage(), exception);
+                    }
+                });
             }
 
+            @SuppressLint("RestrictedApi")
             @Override
             public void onRecordVideo() {
                 //视频
+                takingPicture = false;
+                //创建图片保存的文件地址
+                File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath(),
+                        System.currentTimeMillis() + ".mp4");
+                mVideoCapture.startRecording(file, Executors.newSingleThreadExecutor(), new VideoCapture.OnVideoSavedCallback() {
+                    @Override
+                    public void onVideoSaved(@NonNull File file) {
+                        outputFilePath = file.getAbsolutePath();
+                        onFileSaved(Uri.fromFile(file));
+                    }
+
+                    @Override
+                    public void onError(int videoCaptureError, @NonNull String message, @Nullable Throwable cause) {
+                        Log.i(TAG,message);
+                    }
+                });
             }
 
+            @SuppressLint("RestrictedApi")
             @Override
             public void onFinish() {
                 //录制完成
+                mVideoCapture.stopRecording();
             }
         });
+    }
+
+    private void onFileSaved(Uri savedUri) {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            sendBroadcast(new Intent(android.hardware.Camera.ACTION_NEW_PICTURE, savedUri));
+        }
+        String mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap
+                .getFileExtensionFromUrl(savedUri.getPath()));
+        MediaScannerConnection.scanFile(getApplicationContext(),
+                new String[]{new File(savedUri.getPath()).getAbsolutePath()},
+                new String[]{mimeTypeFromExtension}, new MediaScannerConnection.OnScanCompletedListener() {
+                    @Override
+                    public void onScanCompleted(String path, Uri uri) {
+                        Log.d(TAG, "Image capture scanned into media store: $uri"+uri);
+                    }
+                });
+        PreviewActivity.start(this, outputFilePath, !takingPicture);
     }
 
     @Override
@@ -168,44 +263,9 @@ public class CameraActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"无可用的设备cameraId!,请检查设备的相机是否被占用",Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    //获取屏幕的分辨率
-                    DisplayMetrics displayMetrics = new DisplayMetrics();
-                    mPreviewView.getDisplay().getRealMetrics(displayMetrics);
-                    //获取宽高比
-                    int screenAspectRatio = aspectRatio(displayMetrics.widthPixels, displayMetrics.heightPixels);
+                    // 构建并绑定照相机用例
+                    bindCameraUseCases();
 
-                    int rotation = mPreviewView.getDisplay().getRotation();
-
-                    if(mCameraProvider == null){
-                        Toast.makeText(getApplicationContext(),"相机初始化失败",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(mLensFacing).build();
-
-                    mPreview = new Preview.Builder()
-                            //设置宽高比
-                            .setTargetAspectRatio(screenAspectRatio)
-                            //设置当前旋转
-                            .setTargetRotation(rotation)
-                            .build();
-                    mImageCapture = new ImageCapture.Builder()
-                            //优化捕获速度，可能降低图片质量
-                            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-                            //设置宽高比
-                            .setTargetAspectRatio(screenAspectRatio)
-                            //设置当前旋转
-                            .setTargetRotation(rotation)
-                            .build();
-
-                    //重新绑定之前必须先取消绑定
-                    mCameraProvider.unbindAll();
-
-                    mCamera = mCameraProvider.bindToLifecycle(CameraActivity.this,
-                            cameraSelector,mPreview,mImageCapture);
-                    if(mCamera!=null){
-                        mPreview.setSurfaceProvider(mPreviewView.createSurfaceProvider(mCamera.getCameraInfo()));
-                    }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -213,6 +273,56 @@ public class CameraActivity extends AppCompatActivity {
                 }
             }
         }, ContextCompat.getMainExecutor(this));
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void bindCameraUseCases() {
+        //获取屏幕的分辨率
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        mPreviewView.getDisplay().getRealMetrics(displayMetrics);
+        //获取宽高比
+        int screenAspectRatio = aspectRatio(displayMetrics.widthPixels, displayMetrics.heightPixels);
+
+        int rotation = mPreviewView.getDisplay().getRotation();
+
+        if(mCameraProvider == null){
+            Toast.makeText(getApplicationContext(),"相机初始化失败",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(mLensFacing).build();
+
+        mPreview = new Preview.Builder()
+                //设置宽高比
+                .setTargetAspectRatio(screenAspectRatio)
+                //设置当前旋转
+                .setTargetRotation(rotation)
+                .build();
+        mImageCapture = new ImageCapture.Builder()
+                //优化捕获速度，可能降低图片质量
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                //设置宽高比
+                .setTargetAspectRatio(screenAspectRatio)
+                //设置当前旋转
+                .setTargetRotation(rotation)
+                .build();
+        mVideoCapture = new VideoCaptureConfig.Builder()
+                //设置当前旋转
+                .setTargetRotation(rotation)
+                //分辨率
+                .setTargetResolution(new Size(displayMetrics.widthPixels,displayMetrics.heightPixels))
+                //视频帧率
+                .setVideoFrameRate(25)
+                //bit率
+                .setBitRate(3 * 1024 * 1024)
+                .build();
+
+        //重新绑定之前必须先取消绑定
+        mCameraProvider.unbindAll();
+
+        mCamera = mCameraProvider.bindToLifecycle(CameraActivity.this,
+                cameraSelector,mPreview,mImageCapture,mVideoCapture);
+        mPreview.setSurfaceProvider(mPreviewView.createSurfaceProvider(mCamera.getCameraInfo()));
     }
 
     private int aspectRatio(int widthPixels, int heightPixels) {
@@ -224,12 +334,13 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private int getLensFacing() {
-        if(hasBackCamera()){
-            return CameraSelector.LENS_FACING_BACK;
-        }
         if(hasFrontCamera()){
             return CameraSelector.LENS_FACING_FRONT;
         }
+        if(hasBackCamera()){
+            return CameraSelector.LENS_FACING_BACK;
+        }
+
         return -1;
     }
 
@@ -262,4 +373,10 @@ public class CameraActivity extends AppCompatActivity {
         return false;
     }
 
+    @Override
+    protected void onDestroy() {
+        mCameraProvider.unbindAll();
+        mExecutorService.shutdown();
+        super.onDestroy();
+    }
 }

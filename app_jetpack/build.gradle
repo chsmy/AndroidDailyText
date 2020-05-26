@@ -43,13 +43,18 @@ dependencies {
 
     // CameraX core library using the camera2 implementation
     def camerax_version = "1.0.0-alpha10"
-    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:1.0.0-beta03"
     // If you want to use the CameraX View class
     implementation "androidx.camera:camera-view:1.0.0-alpha10"
     // If you want to use the CameraX Extensions library
     implementation "androidx.camera:camera-extensions:1.0.0-alpha10"
     // If you want to use the CameraX Lifecycle library
-    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    implementation "androidx.camera:camera-lifecycle:1.0.0-beta03"
 
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    //图片加载
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'jp.wasabeef:glide-transformations:4.0.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }
