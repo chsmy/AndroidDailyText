@@ -16,7 +16,6 @@ import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
-import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageButton;
@@ -42,8 +41,6 @@ import androidx.core.content.ContextCompat;
 
 import com.chs.app_jetpack.R;
 import com.chs.app_jetpack.camera.RecordView;
-import com.chs.app_jetpack.ui.home.HomeFragment;
-import com.chs.app_jetpack.ui.home.HomeViewModel;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
@@ -62,6 +59,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final int  PERMISSIONS_REQUEST_CODE = 10;
     private static final double RATIO_4_3_VALUE = 4.0 / 3.0;
     private static final double  RATIO_16_9_VALUE = 16.0 / 9.0;
+    private Size resolution = new Size(1080,1920);
     private ArrayList<String> deniedPermission = new ArrayList<>();
     private String TAG = this.getClass().getSimpleName();
     private String outputFilePath;
@@ -69,7 +67,6 @@ public class CameraActivity extends AppCompatActivity {
     private RecordView mRecordView;
     private ImageButton mBtnCameraSwitch;
     private Preview mPreview;
-    private Camera mCamera;
     private ExecutorService mExecutorService;
     /**
      * 照相
@@ -79,6 +76,7 @@ public class CameraActivity extends AppCompatActivity {
      * 录制视频
      */
     private VideoCapture mVideoCapture;
+    private Camera mCamera;
     /**
      * 可以将一个camera跟任意的LifecycleOwner绑定的一个单例类
      */
@@ -119,6 +117,7 @@ public class CameraActivity extends AppCompatActivity {
         mPreviewView = findViewById(R.id.view_finder);
         mRecordView = findViewById(R.id.record_view);
         mBtnCameraSwitch = findViewById(R.id.camera_switch_button);
+
         updateCameraUi();
         setRecordListener();
         mBtnCameraSwitch.setOnClickListener(v -> {
@@ -250,6 +249,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void setUpCamera() {
+        //Future表示一个异步的任务，ListenableFuture可以监听这个任务，当任务完成的时候执行回调
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture =
                 ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(new Runnable() {
@@ -290,6 +290,8 @@ public class CameraActivity extends AppCompatActivity {
             return;
         }
 
+        ProcessCameraProvider cameraProvider = mCameraProvider;
+
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(mLensFacing).build();
 
         mPreview = new Preview.Builder()
@@ -303,30 +305,30 @@ public class CameraActivity extends AppCompatActivity {
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                 //设置宽高比
                 .setTargetAspectRatio(screenAspectRatio)
-                //设置当前旋转
+                //设置初始的旋转角度
                 .setTargetRotation(rotation)
                 .build();
         mVideoCapture = new VideoCaptureConfig.Builder()
                 //设置当前旋转
                 .setTargetRotation(rotation)
                 //分辨率
-                .setTargetResolution(new Size(displayMetrics.widthPixels,displayMetrics.heightPixels))
-                //视频帧率
+                .setTargetResolution(resolution)
+                //视频帧率  越高视频体积越大
                 .setVideoFrameRate(25)
-                //bit率
+                //bit率  越大视频体积越大
                 .setBitRate(3 * 1024 * 1024)
                 .build();
 
         //重新绑定之前必须先取消绑定
-        mCameraProvider.unbindAll();
+        cameraProvider.unbindAll();
 
-        mCamera = mCameraProvider.bindToLifecycle(CameraActivity.this,
+        mCamera = cameraProvider.bindToLifecycle(CameraActivity.this,
                 cameraSelector,mPreview,mImageCapture,mVideoCapture);
         mPreview.setSurfaceProvider(mPreviewView.createSurfaceProvider(mCamera.getCameraInfo()));
     }
 
     private int aspectRatio(int widthPixels, int heightPixels) {
-        Double previewRatio = Double.valueOf(Math.max(widthPixels,heightPixels) / Math.min(widthPixels,heightPixels));
+        double previewRatio = (double) Math.max(widthPixels, heightPixels) / (double) Math.min(widthPixels, heightPixels);
         if (Math.abs(previewRatio - RATIO_4_3_VALUE) <= Math.abs(previewRatio - RATIO_16_9_VALUE)) {
             return AspectRatio.RATIO_4_3;
         }
@@ -334,13 +336,12 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private int getLensFacing() {
-        if(hasFrontCamera()){
-            return CameraSelector.LENS_FACING_FRONT;
-        }
         if(hasBackCamera()){
             return CameraSelector.LENS_FACING_BACK;
         }
-
+        if(hasFrontCamera()){
+            return CameraSelector.LENS_FACING_FRONT;
+        }
         return -1;
     }
 
