@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.service.autofill.LuhnChecksumValidator;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
@@ -29,12 +30,19 @@ import androidx.camera.core.AspectRatio;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraInfoUnavailableException;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.core.VideoCapture;
+import androidx.camera.core.impl.CaptureConfig;
 import androidx.camera.core.impl.VideoCaptureConfig;
+import androidx.camera.extensions.AutoImageCaptureExtender;
+import androidx.camera.extensions.BeautyImageCaptureExtender;
+import androidx.camera.extensions.BokehImageCaptureExtender;
 import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.CameraView;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -76,6 +84,7 @@ public class CameraActivity extends AppCompatActivity {
      * 录制视频
      */
     private VideoCapture mVideoCapture;
+    private ImageAnalysis mImageAnalysis;
     private Camera mCamera;
     /**
      * 可以将一个camera跟任意的LifecycleOwner绑定的一个单例类
@@ -163,7 +172,7 @@ public class CameraActivity extends AppCompatActivity {
             public void onRecordVideo() {
                 //视频
                 takingPicture = false;
-                //创建图片保存的文件地址
+                //创建视频保存的文件地址
                 File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath(),
                         System.currentTimeMillis() + ".mp4");
                 mVideoCapture.startRecording(file, Executors.newSingleThreadExecutor(), new VideoCapture.OnVideoSavedCallback() {
@@ -190,7 +199,6 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void onFileSaved(Uri savedUri) {
-
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             sendBroadcast(new Intent(android.hardware.Camera.ACTION_NEW_PICTURE, savedUri));
         }
@@ -300,7 +308,12 @@ public class CameraActivity extends AppCompatActivity {
                 //设置当前旋转
                 .setTargetRotation(rotation)
                 .build();
-        mImageCapture = new ImageCapture.Builder()
+        ImageCapture.Builder builder = new ImageCapture.Builder();
+        AutoImageCaptureExtender bokehImageCapture = AutoImageCaptureExtender.create(builder);
+        if (bokehImageCapture.isExtensionAvailable(cameraSelector)) {
+            bokehImageCapture.enableExtension(cameraSelector);
+        }
+        mImageCapture = builder
                 //优化捕获速度，可能降低图片质量
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                 //设置宽高比
@@ -318,12 +331,23 @@ public class CameraActivity extends AppCompatActivity {
                 //bit率  越大视频体积越大
                 .setBitRate(3 * 1024 * 1024)
                 .build();
+        mImageAnalysis = new ImageAnalysis.Builder()
+                .setTargetAspectRatio(screenAspectRatio)
+                .setTargetRotation(rotation)
+                .build();
+        mImageAnalysis.setAnalyzer(mExecutorService, new ImageAnalysis.Analyzer() {
+            @Override
+            public void analyze(@NonNull ImageProxy image) {
+
+            }
+        });
+
 
         //重新绑定之前必须先取消绑定
         cameraProvider.unbindAll();
 
         mCamera = cameraProvider.bindToLifecycle(CameraActivity.this,
-                cameraSelector,mPreview,mImageCapture,mVideoCapture);
+                cameraSelector,mPreview,mImageCapture,mVideoCapture,mImageAnalysis);
         mPreview.setSurfaceProvider(mPreviewView.createSurfaceProvider(mCamera.getCameraInfo()));
     }
 
@@ -376,7 +400,6 @@ public class CameraActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        mCameraProvider.unbindAll();
         mExecutorService.shutdown();
         super.onDestroy();
     }

@@ -139,6 +139,7 @@ public class RecordView extends View implements View.OnLongClickListener, View.O
         canvas.drawCircle(mWidth / 2f, mHeight / 2f, mRadius, mBgPaint);
 
         if (isRecording) {
+            canvas.drawCircle(mWidth / 2f, mHeight / 2f, mRadius/10f*11, mBgPaint);
             float sweepAngle = 360f * mProgressValue / (mDuration*10);
             Log.i("sweepAngle",sweepAngle+"");
             canvas.drawArc(mArcRectF, -90, sweepAngle, false, mProgressPaint);

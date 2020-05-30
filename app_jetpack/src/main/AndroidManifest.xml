@@ -30,6 +30,7 @@
         <activity android:name=".ui.camera.PreviewActivity"
             android:theme="@style/FullScreen"
             />
+        <activity android:name=".ui.camera.CameraViewActivity" />
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.chs.app_jetpack.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.chs.app_jetpack.R;
 import com.chs.app_jetpack.ui.camera.CameraActivity;
+import com.chs.app_jetpack.ui.camera.CameraViewActivity;
 import com.chs.lib_navannotation.FragmentDestination;
 
 @FragmentDestination(pageUrl = "main/tabs/home",asStarter = true)
@@ -36,6 +38,10 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_take).setOnClickListener(v -> {
             CameraActivity.start(requireActivity());
+        });
+        view.findViewById(R.id.btn_camera_view).setOnClickListener(v ->{
+            Intent intent = new Intent(requireContext(), CameraViewActivity.class);
+            startActivity(intent);
         });
     }
 
