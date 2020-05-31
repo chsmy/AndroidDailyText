@@ -39,8 +39,15 @@ import androidx.camera.core.VideoCapture;
 import androidx.camera.core.impl.CaptureConfig;
 import androidx.camera.core.impl.VideoCaptureConfig;
 import androidx.camera.extensions.AutoImageCaptureExtender;
+import androidx.camera.extensions.AutoPreviewExtender;
 import androidx.camera.extensions.BeautyImageCaptureExtender;
+import androidx.camera.extensions.BeautyPreviewExtender;
 import androidx.camera.extensions.BokehImageCaptureExtender;
+import androidx.camera.extensions.BokehPreviewExtender;
+import androidx.camera.extensions.HdrImageCaptureExtender;
+import androidx.camera.extensions.HdrPreviewExtender;
+import androidx.camera.extensions.NightImageCaptureExtender;
+import androidx.camera.extensions.NightPreviewExtender;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.CameraView;
 import androidx.camera.view.PreviewView;
@@ -302,17 +309,21 @@ public class CameraActivity extends AppCompatActivity {
 
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(mLensFacing).build();
 
-        mPreview = new Preview.Builder()
+        Preview.Builder pBuilder = new Preview.Builder();
+
+        setPreviewExtender(pBuilder,cameraSelector);
+
+        mPreview = pBuilder
                 //设置宽高比
                 .setTargetAspectRatio(screenAspectRatio)
-                //设置当前旋转
+                //设置当前屏幕的旋转
                 .setTargetRotation(rotation)
                 .build();
+
         ImageCapture.Builder builder = new ImageCapture.Builder();
-        AutoImageCaptureExtender bokehImageCapture = AutoImageCaptureExtender.create(builder);
-        if (bokehImageCapture.isExtensionAvailable(cameraSelector)) {
-            bokehImageCapture.enableExtension(cameraSelector);
-        }
+
+        setImageCaptureExtender(builder,cameraSelector);
+
         mImageCapture = builder
                 //优化捕获速度，可能降低图片质量
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
@@ -324,8 +335,10 @@ public class CameraActivity extends AppCompatActivity {
         mVideoCapture = new VideoCaptureConfig.Builder()
                 //设置当前旋转
                 .setTargetRotation(rotation)
-                //分辨率
-                .setTargetResolution(resolution)
+                //设置宽高比
+                .setTargetAspectRatio(screenAspectRatio)
+//                分辨率
+//                .setTargetResolution(resolution)
                 //视频帧率  越高视频体积越大
                 .setVideoFrameRate(25)
                 //bit率  越大视频体积越大
@@ -347,8 +360,64 @@ public class CameraActivity extends AppCompatActivity {
         cameraProvider.unbindAll();
 
         mCamera = cameraProvider.bindToLifecycle(CameraActivity.this,
-                cameraSelector,mPreview,mImageCapture,mVideoCapture,mImageAnalysis);
+                cameraSelector,mPreview,mImageCapture,mVideoCapture);
         mPreview.setSurfaceProvider(mPreviewView.createSurfaceProvider(mCamera.getCameraInfo()));
+    }
+
+    /**
+     * 给预览设置外部扩展
+     * @param builder
+     * @param cameraSelector
+     */
+    private void setPreviewExtender(Preview.Builder builder, CameraSelector cameraSelector) {
+        AutoPreviewExtender extender = AutoPreviewExtender.create(builder);
+        if(extender.isExtensionAvailable(cameraSelector)){
+            extender.enableExtension(cameraSelector);
+        }
+        BokehPreviewExtender bokehPreviewExtender = BokehPreviewExtender.create(builder);
+        if(bokehPreviewExtender.isExtensionAvailable(cameraSelector)){
+            bokehPreviewExtender.enableExtension(cameraSelector);
+        }
+        HdrPreviewExtender hdrPreviewExtender = HdrPreviewExtender.create(builder);
+        if(hdrPreviewExtender.isExtensionAvailable(cameraSelector)){
+            hdrPreviewExtender.enableExtension(cameraSelector);
+        }
+        BeautyPreviewExtender beautyPreviewExtender = BeautyPreviewExtender.create(builder);
+        if(beautyPreviewExtender.isExtensionAvailable(cameraSelector)){
+            beautyPreviewExtender.enableExtension(cameraSelector);
+        }
+        NightPreviewExtender nightPreviewExtender = NightPreviewExtender.create(builder);
+        if(nightPreviewExtender.isExtensionAvailable(cameraSelector)){
+            nightPreviewExtender.enableExtension(cameraSelector);
+        }
+    }
+
+    /**
+     * 给拍照设置外部预览
+     * @param builder
+     * @param cameraSelector
+     */
+    private void setImageCaptureExtender(ImageCapture.Builder builder, CameraSelector cameraSelector) {
+        AutoImageCaptureExtender autoImageCaptureExtender = AutoImageCaptureExtender.create(builder);
+        if (autoImageCaptureExtender.isExtensionAvailable(cameraSelector)) {
+            autoImageCaptureExtender.enableExtension(cameraSelector);
+        }
+        BokehImageCaptureExtender bokehImageCaptureExtender = BokehImageCaptureExtender.create(builder);
+        if(bokehImageCaptureExtender.isExtensionAvailable(cameraSelector)){
+            bokehImageCaptureExtender.enableExtension(cameraSelector);
+        }
+        HdrImageCaptureExtender hdrImageCaptureExtender = HdrImageCaptureExtender.create(builder);
+        if(hdrImageCaptureExtender.isExtensionAvailable(cameraSelector)){
+            hdrImageCaptureExtender.enableExtension(cameraSelector);
+        }
+        BeautyImageCaptureExtender beautyImageCaptureExtender = BeautyImageCaptureExtender.create(builder);
+        if(beautyImageCaptureExtender.isExtensionAvailable(cameraSelector)){
+            beautyImageCaptureExtender.enableExtension(cameraSelector);
+        }
+        NightImageCaptureExtender nightImageCaptureExtender = NightImageCaptureExtender.create(builder);
+        if(nightImageCaptureExtender.isExtensionAvailable(cameraSelector)){
+            nightImageCaptureExtender.enableExtension(cameraSelector);
+        }
     }
 
     private int aspectRatio(int widthPixels, int heightPixels) {
