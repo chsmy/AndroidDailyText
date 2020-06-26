@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+   <Button
+       android:id="@+id/btn_take"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="200dp"
+       android:text="去拍照"
+       />
+   <Button
+       android:id="@+id/btn_camera_view"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="300dp"
+       android:text="CameraView"
+       android:textAllCaps="false"
+       />
+   <Button
+       android:id="@+id/btn_paging"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="400dp"
+       android:text="Paging"
+       android:textAllCaps="false"
+       />
+
+</RelativeLayout>

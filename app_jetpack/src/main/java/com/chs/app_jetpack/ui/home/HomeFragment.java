@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.chs.app_jetpack.R;
+import com.chs.app_jetpack.paging.PagingActivity;
 import com.chs.app_jetpack.ui.camera.CameraActivity;
 import com.chs.app_jetpack.ui.camera.CameraViewActivity;
 import com.chs.lib_navannotation.FragmentDestination;
@@ -41,6 +42,10 @@ public class HomeFragment extends Fragment {
         });
         view.findViewById(R.id.btn_camera_view).setOnClickListener(v ->{
             Intent intent = new Intent(requireContext(), CameraViewActivity.class);
+            startActivity(intent);
+        });
+        view.findViewById(R.id.btn_paging).setOnClickListener(v ->{
+            Intent intent = new Intent(requireContext(), PagingActivity.class);
             startActivity(intent);
         });
     }

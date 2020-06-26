@@ -6,7 +6,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.camera" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,22 +16,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--        <activity-->
-<!--            android:name=".BottomMainActivity"-->
-<!--            android:label="@string/title_activity_bottom_main"></activity>-->
-        <activity android:name=".BottomMainActivity"
-            >
+        <activity android:name=".paging.PagingActivity"></activity>
+        <!-- <activity -->
+        <!-- android:name=".BottomMainActivity" -->
+        <!-- android:label="@string/title_activity_bottom_main"></activity> -->
+        <activity android:name=".BottomMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.camera.CameraActivity"
-            android:theme="@style/FullScreen"/>
-        <activity android:name=".ui.camera.PreviewActivity"
-            android:theme="@style/FullScreen"
-            />
+        <activity
+            android:name=".ui.camera.CameraActivity"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name=".ui.camera.PreviewActivity"
+            android:theme="@style/FullScreen" />
         <activity android:name=".ui.camera.CameraViewActivity" />
     </application>
 

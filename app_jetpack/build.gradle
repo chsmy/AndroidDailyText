@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -13,7 +14,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -39,6 +43,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.2.1'
     implementation 'androidx.navigation:navigation-ui:2.2.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     annotationProcessor project(path: ':lib_navcompiler')
 
     // CameraX core library using the camera2 implementation
@@ -52,6 +57,10 @@ dependencies {
 
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
+
+    def paging_version = "3.0.0-alpha02"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
     //图片加载
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
