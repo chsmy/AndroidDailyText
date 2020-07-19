@@ -42,5 +42,17 @@ class NotificationsFragment : Fragment() {
         motion7.setOnClickListener {
             MotionLayoutActivity.start(requireContext(),R.layout.activity_motion_layout6)
         }
+        motion8.setOnClickListener {
+            MotionLayoutActivity.start(requireContext(),R.layout.activity_motion_layout7)
+        }
+        motion9.setOnClickListener {
+            MotionLayoutActivity.start(requireContext(),R.layout.activity_motion_layout8)
+        }
+        motion10.setOnClickListener {
+            MotionLayoutActivity.start(requireContext(),R.layout.activity_motion_layout9)
+        }
+        motion11.setOnClickListener {
+            MotionLayoutActivity.start(requireContext(),R.layout.activity_motion_layout10)
+        }
     }
 }

@@ -59,6 +59,30 @@
             android:layout_height="wrap_content"
             android:text="motion7"
             android:textAllCaps="false" />
+        <Button
+            android:id="@+id/motion8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="motion8"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/motion9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="motion9"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/motion10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="motion10"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/motion11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="motion11"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </ScrollView>
