@@ -45,6 +45,7 @@ public class CameraViewActivity extends AppCompatActivity {
      * 是否是照相
      */
     private boolean takingPicture;
+    private int mLensFacing = CameraSelector.LENS_FACING_BACK;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,13 +62,12 @@ public class CameraViewActivity extends AppCompatActivity {
         takePictureAndVideo();
 
         mBtnCameraSwitch.setOnClickListener(v -> {
-            Integer cameraLensFacing = mCameraView.getCameraLensFacing();
-            if(cameraLensFacing == CameraSelector.LENS_FACING_FRONT){
-                cameraLensFacing = CameraSelector.LENS_FACING_BACK;
+            if(mLensFacing == CameraSelector.LENS_FACING_FRONT){
+                mLensFacing = CameraSelector.LENS_FACING_BACK;
             }else {
-                cameraLensFacing = CameraSelector.LENS_FACING_FRONT;
+                mLensFacing = CameraSelector.LENS_FACING_FRONT;
             }
-            mCameraView.setCameraLensFacing(cameraLensFacing);
+            mCameraView.setCameraLensFacing(mLensFacing);
         });
     }
 
@@ -99,7 +99,13 @@ public class CameraViewActivity extends AppCompatActivity {
         File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath(),
                 System.currentTimeMillis() + ".jpeg");
         mCameraView.setCaptureMode(CameraView.CaptureMode.IMAGE);
-        mCameraView.takePicture(file, mExecutorService, new ImageCapture.OnImageSavedCallback() {
+        ImageCapture.Metadata metadata = new ImageCapture.Metadata();
+        metadata.setReversedHorizontal(mLensFacing == CameraSelector.LENS_FACING_FRONT);
+        ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture
+                .OutputFileOptions.Builder(file)
+                .setMetadata(metadata)
+                .build();
+        mCameraView.takePicture(outputFileOptions, mExecutorService, new ImageCapture.OnImageSavedCallback() {
             @Override
             public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                 Uri savedUri = outputFileResults.getSavedUri();

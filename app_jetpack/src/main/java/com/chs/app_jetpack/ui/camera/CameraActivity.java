@@ -155,7 +155,13 @@ public class CameraActivity extends AppCompatActivity {
                 //创建图片保存的文件地址
                 File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath(),
                         System.currentTimeMillis() + ".jpeg");
-                ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
+                ImageCapture.Metadata metadata = new ImageCapture.Metadata();
+                metadata.setReversedHorizontal(mLensFacing == CameraSelector.LENS_FACING_FRONT);
+
+                ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture
+                        .OutputFileOptions.Builder(file)
+                        .setMetadata(metadata)
+                        .build();
                 mImageCapture.takePicture(outputFileOptions,mExecutorService , new ImageCapture.OnImageSavedCallback() {
                     @Override
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
@@ -182,6 +188,7 @@ public class CameraActivity extends AppCompatActivity {
                 //创建视频保存的文件地址
                 File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath(),
                         System.currentTimeMillis() + ".mp4");
+                VideoCapture.Metadata metadata = new VideoCapture.Metadata();
                 mVideoCapture.startRecording(file, Executors.newSingleThreadExecutor(), new VideoCapture.OnVideoSavedCallback() {
                     @Override
                     public void onVideoSaved(@NonNull File file) {
@@ -361,7 +368,7 @@ public class CameraActivity extends AppCompatActivity {
 
         mCamera = cameraProvider.bindToLifecycle(CameraActivity.this,
                 cameraSelector,mPreview,mImageCapture,mVideoCapture);
-        mPreview.setSurfaceProvider(mPreviewView.createSurfaceProvider(mCamera.getCameraInfo()));
+        mPreview.setSurfaceProvider(mPreviewView.createSurfaceProvider());
     }
 
     /**

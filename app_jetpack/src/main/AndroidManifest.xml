@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -16,8 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".paging.PagingActivity"></activity>
-        <!-- <activity -->
+        <activity android:name=".ui.motionlayout.MotionLayoutActivity" />
+        <activity android:name=".paging.PagingActivity" /> <!-- <activity -->
         <!-- android:name=".BottomMainActivity" -->
         <!-- android:label="@string/title_activity_bottom_main"></activity> -->
         <activity android:name=".BottomMainActivity">
