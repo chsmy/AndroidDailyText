@@ -17,6 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
+        app:round="10dp"
         tools:layout_editor_absoluteY="303dp" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

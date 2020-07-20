@@ -35,6 +35,7 @@
             android:name=".ui.camera.PreviewActivity"
             android:theme="@style/FullScreen" />
         <activity android:name=".ui.camera.CameraViewActivity" />
+        <activity android:name="com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerActivity" />
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.chs.app_jetpack.R
 import com.chs.app_jetpack.ui.motionlayout.MotionLayoutActivity
 import com.chs.lib_navannotation.FragmentDestination
+import com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerActivity
 import kotlinx.android.synthetic.main.fragment_notifications.*
 
 @FragmentDestination(pageUrl = "main/tabs/my")
@@ -53,6 +54,9 @@ class NotificationsFragment : Fragment() {
         }
         motion11.setOnClickListener {
             MotionLayoutActivity.start(requireContext(),R.layout.activity_motion_layout10)
+        }
+        motion12.setOnClickListener {
+            ViewPagerActivity.start(requireContext())
         }
     }
 }
