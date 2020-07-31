@@ -45,16 +45,16 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    annotationProcessor project(path: ':lib_navcompiler')
+    kapt project(path: ':lib_navcompiler')
 
     // CameraX core library using the camera2 implementation
-    implementation "androidx.camera:camera-camera2:1.0.0-beta06"
+    implementation "androidx.camera:camera-camera2:1.0.0-beta07"
     // If you want to use the CameraX View class
-    implementation "androidx.camera:camera-view:1.0.0-alpha13"
+    implementation "androidx.camera:camera-view:1.0.0-alpha14"
     // If you want to use the CameraX Extensions library
-    implementation "androidx.camera:camera-extensions:1.0.0-alpha13"
+    implementation "androidx.camera:camera-extensions:1.0.0-alpha14"
     // If you want to use the CameraX Lifecycle library
-    implementation "androidx.camera:camera-lifecycle:1.0.0-beta06"
+    implementation "androidx.camera:camera-lifecycle:1.0.0-beta07"
 
     //
     implementation "androidx.exifinterface:exifinterface:1.2.0"

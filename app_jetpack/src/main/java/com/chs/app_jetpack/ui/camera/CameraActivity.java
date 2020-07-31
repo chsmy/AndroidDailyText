@@ -3,7 +3,6 @@ package com.chs.app_jetpack.ui.camera;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.service.autofill.LuhnChecksumValidator;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
@@ -36,8 +34,6 @@ import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.core.VideoCapture;
-import androidx.camera.core.impl.CaptureConfig;
-import androidx.camera.core.impl.VideoCaptureConfig;
 import androidx.camera.extensions.AutoImageCaptureExtender;
 import androidx.camera.extensions.AutoPreviewExtender;
 import androidx.camera.extensions.BeautyImageCaptureExtender;
@@ -49,7 +45,6 @@ import androidx.camera.extensions.HdrPreviewExtender;
 import androidx.camera.extensions.NightImageCaptureExtender;
 import androidx.camera.extensions.NightPreviewExtender;
 import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.CameraView;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -339,7 +334,7 @@ public class CameraActivity extends AppCompatActivity {
                 //设置初始的旋转角度
                 .setTargetRotation(rotation)
                 .build();
-        mVideoCapture = new VideoCaptureConfig.Builder()
+        mVideoCapture = new VideoCapture.Builder()
                 //设置当前旋转
                 .setTargetRotation(rotation)
                 //设置宽高比
