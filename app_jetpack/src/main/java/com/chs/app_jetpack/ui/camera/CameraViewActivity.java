@@ -1,13 +1,14 @@
 package com.chs.app_jetpack.ui.camera;
 
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.View;
+import android.view.TextureView;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageButton;
 
@@ -17,10 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
-import androidx.camera.core.ImageProxy;
 import androidx.camera.core.VideoCapture;
 import androidx.camera.view.CameraView;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.chs.app_jetpack.R;
 import com.chs.app_jetpack.camera.RecordView;
 
@@ -141,6 +142,24 @@ public class CameraViewActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * 预览自拍视频时 旋转TextureView 解决左右镜像的问题
+     *
+     * @param textureView
+     */
+    private void transformsTextureView(TextureView textureView) {
+        Matrix matrix = new Matrix();
+        int screenHeight = ScreenUtils.getScreenHeight();
+        int screenWidth = ScreenUtils.getScreenWidth();
+        if (mLensFacing == CameraSelector.LENS_FACING_FRONT) {
+            matrix.postScale(-1, 1, 1f * screenWidth / 2, 1f * screenHeight / 2);
+        } else {
+            matrix.postScale(1, 1, 1f * screenWidth / 2, 1f * screenHeight / 2);
+        }
+        textureView.setTransform(matrix);
+    }
+
 
     private void onFileSaved(Uri savedUri) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
