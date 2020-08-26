@@ -1,0 +1,11 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<!--该布局是从exoplayer中复制过来，删除一些用不到的布局-->
+    <com.google.android.exoplayer2.ui.AspectRatioFrameLayout android:id="@id/exo_content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <!-- Video surface will be inserted as the first child of the content frame. -->
+    </com.google.android.exoplayer2.ui.AspectRatioFrameLayout>
+
+</merge>

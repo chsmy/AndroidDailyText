@@ -1,5 +1,6 @@
 package com.chs.app_video
 
+import android.app.Application
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,16 +18,22 @@ class MainActivity : AppCompatActivity() {
 
     private val exoPlayer by lazy { SimpleExoPlayer.Builder(this).build() }
 
+    companion object{
+        private val app: Application = AppUtil.getApp()
+        //创建视频缓存
+        val cache = SimpleCache(app.cacheDir, LeastRecentlyUsedCacheEvictor(1024 * 1024 * 200),ExoDatabaseProvider(app))
+        //将cache和cache工厂关联，用来对cache进行读写
+        val cacheDataSinkFactory = CacheDataSinkFactory(cache, Long.MAX_VALUE)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         player_view.player = exoPlayer
+        control_view.player = exoPlayer
         val dataSourceFactory = DefaultHttpDataSourceFactory(Util.getUserAgent(this,packageName))
-        //创建视频缓存
-        val cache = SimpleCache(cacheDir, LeastRecentlyUsedCacheEvictor(1024 * 1024 * 200),ExoDatabaseProvider(this))
-        //将cache和cache工厂关联，用来对cache进行读写
-        val cacheDataSinkFactory = CacheDataSinkFactory(cache, Long.MAX_VALUE)
+
         //创建一个可以边播放 边缓存到本地的工厂
         val cacheDataSourceFactory = CacheDataSourceFactory(cache,dataSourceFactory,FileDataSource.Factory(),
          cacheDataSinkFactory, CacheDataSource.FLAG_BLOCK_ON_CACHE,null)
