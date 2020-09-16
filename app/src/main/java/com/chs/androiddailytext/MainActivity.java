@@ -3,6 +3,7 @@ package com.chs.androiddailytext;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +40,7 @@ import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
 import com.chs.androiddailytext.slideview.SlideActivity;
 import com.chs.androiddailytext.tabscroll.TabRecyclerActivity;
 import com.chs.androiddailytext.tabscroll.TabStickyActivity;
+import com.chs.androiddailytext.widget.selecttext.SelectTextActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +49,7 @@ import login.LoginActivity;
 import login.RegisterActivity;
 
 public class MainActivity extends BaseActivity {
-    List<String> datas = new ArrayList<>();
+    List<MainInfo> datas = new ArrayList<>();
     RecyclerView recyclerView;
     BaseQuickAdapter adapter;
     @Override
@@ -59,10 +61,10 @@ public class MainActivity extends BaseActivity {
     public void initView() {
         recyclerView = findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        adapter = new BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_main,datas) {
+        adapter = new BaseQuickAdapter<MainInfo, BaseViewHolder>(R.layout.item_main,datas) {
             @Override
-            protected void convert(BaseViewHolder helper, String item) {
-                helper.setText(R.id.tv_name,item);
+            protected void convert(BaseViewHolder helper, MainInfo item) {
+                helper.setText(R.id.tv_name,item.name);
             }
         };
         recyclerView.setAdapter(adapter);
@@ -70,157 +72,68 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (position){
-                    case 0:
-                        startActivity(PermissionActivity.class);
-                        break;
-                    case 1:
-                        startActivity(ViewActivity.class);
-                        break;
-                    case 2:
-                        startActivity(AnimatorActivity.class);
-                        break;
-                    case 3:
-                        startActivity(PullRefreshActivity.class);
-                        break;
-                    case 4:
-                        startActivity(ChartActivity.class);
-                        break;
-                    case 5:
-                        startActivity(StrategyActivity.class);
-                        break;
-                    case 6:
-                        startActivity(ChangeSkinActivity.class);
-                        break;
-                    case 7:
-                        startActivity(OkhttpTextActivity.class);
-                        break;
-                    case 8:
-                        startActivity(RetrofitTextActivity.class);
-                        break;
-                    case 9:
-                        startActivity(GlideActivity.class);
-                        break;
-                    case 10:
-                        startActivity(WorkLoadStatisticActivity.class);
-                        break;
-                    case 11:
-                        startActivity(BarChartActivity.class);
-                        break;
-                    case 12:
-                        startActivity(DaggerActivity.class);
-                        break;
-                    case 13:
-                        startActivity(ListActivity.class);
-                        break;
-                    case 14:
-                        startActivity(PicCanvasActivity.class);
-                        break;
-                    case 15:
-                        startActivity(PopActivity.class);
-                        break;
-                    case 16:
-                        startActivity(LoginActivity.class);
-                        break;
-                    case 17:
-                        startActivity(RegisterActivity.class);
-                        break;
-                    case 18:
-                        startActivity(NeteaseActivity.class);
-                        break;
-                    case 19:
-                        startActivity(LiveDataFirstActivity.class);
-                        break;
-                    case 20:
-                        startActivity(AnimActivity.class);
-                        break;
-                    case 21:
-                        startActivity(RecyclerActivity.class);
-                        break;
-                    case 22:
-                        startActivity(SlideActivity.class);
-                        break;
-                    case 23:
-                        startActivity(BigViewActivity.class);
-                        break;
-                    case 24:
-                        startActivity(PercentActivity.class);
-                        break;
-                    case 25:
-                        startActivity(TabRecyclerActivity.class);
-                        break;
-                    case 26:
-                        startActivity(TabStickyActivity.class);
-                        break;
-                    case 27:
-                        startActivity(CoordinatorlayoutActivity.class);
-                        break;
-                    case 28:
-                        startActivity(CoroutinesActivity.class);
-                        break;
-                    case 29:
-                        Bundle bundle = new Bundle();
-                        bundle.putString("userName","大海");
-                        PendingIntent pendingIntent = new NavDeepLinkBuilder(MainActivity.this)
-                                .setGraph(R.navigation.nav_graph)
-                                .setDestination(R.id.thirdFragment)
-                                .setArguments(bundle)
-                                .createPendingIntent();
-                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
-                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                            notificationManager.createNotificationChannel(new NotificationChannel(
-                                    "deepLink","deepLinkName", NotificationManager.IMPORTANCE_HIGH
-                            ));
-                        }
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "deepLink")
-                                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                                .setContentTitle("测试deepLink")
-                                .setContentText("哈哈哈")
-                                .setContentIntent(pendingIntent)
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-                        notificationManager.notify(10,builder.build());
-                        break;
-                    default:
+        adapter.setOnItemClickListener((adapter, view, position) -> {
+            MainInfo mainInfo = datas.get(position);
+            if(mainInfo.toWhere!=null){
+                startActivity(new Intent(getApplicationContext(),mainInfo.toWhere));
+            }else {
+                Bundle bundle = new Bundle();
+                bundle.putString("userName","大海");
+                PendingIntent pendingIntent = new NavDeepLinkBuilder(MainActivity.this)
+                        .setGraph(R.navigation.nav_graph)
+                        .setDestination(R.id.thirdFragment)
+                        .setArguments(bundle)
+                        .createPendingIntent();
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    notificationManager.createNotificationChannel(new NotificationChannel(
+                            "deepLink","deepLinkName", NotificationManager.IMPORTANCE_HIGH
+                    ));
                 }
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "deepLink")
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setContentTitle("测试deepLink")
+                        .setContentText("哈哈哈")
+                        .setContentIntent(pendingIntent)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                notificationManager.notify(10,builder.build());
             }
         });
     }
     @Override
     public void initData() {
-        datas.add("权限");
-        datas.add("View");
-        datas.add("动画");
-        datas.add("刷新");
-        datas.add("图表");
-        datas.add("策略模式");
-        datas.add("换肤");
-        datas.add("okhttp");
-        datas.add("retrofit");
-        datas.add("glide");
-        datas.add("统计");
-        datas.add("柱状图");
-        datas.add("Dagger");
-        datas.add("treelist");
-        datas.add("PicCanvas");
-        datas.add("toPop");
-        datas.add("登录");
-        datas.add("注册");
-        datas.add("Netease");
-        datas.add("Jetpack");
-        datas.add("手写动画");
-        datas.add("手写recycleview");
-        datas.add("Slide");
-        datas.add("BigView");
-        datas.add("percent");
-        datas.add("tabRecycler");
-        datas.add("tabSticky");
-        datas.add("Coordinator");
-        datas.add("协程");
-        datas.add("deepLink");
+        datas.add(new MainInfo("权限",PermissionActivity.class));
+        datas.add(new MainInfo("View",ViewActivity.class));
+        datas.add(new MainInfo("动画",AnimatorActivity.class));
+        datas.add(new MainInfo("刷新",PullRefreshActivity.class));
+        datas.add(new MainInfo("图表",ChartActivity.class));
+        datas.add(new MainInfo("策略模式",StrategyActivity.class));
+        datas.add(new MainInfo("换肤",ChangeSkinActivity.class));
+        datas.add(new MainInfo("okhttp",OkhttpTextActivity.class));
+        datas.add(new MainInfo("retrofit",RetrofitTextActivity.class));
+        datas.add(new MainInfo("glide",GlideActivity.class));
+        datas.add(new MainInfo("统计",WorkLoadStatisticActivity.class));
+        datas.add(new MainInfo("柱状图",BarChartActivity.class));
+        datas.add(new MainInfo("Dagger",DaggerActivity.class));
+        datas.add(new MainInfo("treelist",ListActivity.class));
+        datas.add(new MainInfo("PicCanvas",PicCanvasActivity.class));
+        datas.add(new MainInfo("toPop",PopActivity.class));
+        datas.add(new MainInfo("登录",LoginActivity.class));
+        datas.add(new MainInfo("注册",RegisterActivity.class));
+        datas.add(new MainInfo("Netease",NeteaseActivity.class));
+        datas.add(new MainInfo("Jetpack",LiveDataFirstActivity.class));
+        datas.add(new MainInfo("手写动画",AnimActivity.class));
+        datas.add(new MainInfo("手写recycleview",RecyclerActivity.class));
+        datas.add(new MainInfo("Slide",SlideActivity.class));
+        datas.add(new MainInfo("BigView",BigViewActivity.class));
+        datas.add(new MainInfo("percent",PercentActivity.class));
+        datas.add(new MainInfo("tabRecycler",TabRecyclerActivity.class));
+        datas.add(new MainInfo("tabSticky",TabStickyActivity.class));
+        datas.add(new MainInfo("Coordinator",CoordinatorlayoutActivity.class));
+        datas.add(new MainInfo("协程",CoroutinesActivity.class));
+        datas.add(new MainInfo("deepLink",null));
+        datas.add(new MainInfo("selectText",SelectTextActivity.class));
     }
 
 }

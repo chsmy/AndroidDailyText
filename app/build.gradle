@@ -40,6 +40,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     implementation 'com.lzy.net:okgo:3.0.4'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 

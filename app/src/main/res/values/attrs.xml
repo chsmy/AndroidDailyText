@@ -38,7 +38,7 @@
         <!--圆弧进度条颜色-->
         <attr name="circleProgressColor" format="reference" />
         <!--圆弧宽度-->
-        <attr name="circleRadius" format="integer" />
+        <attr name="circleRadiusWidth" format="integer" />
         <!--渐变开始颜色-->
         <attr name="circleStartColor" format="reference" />
         <!--渐变结束颜色-->

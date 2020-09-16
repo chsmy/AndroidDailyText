@@ -44,7 +44,7 @@ public class CirclePercentView extends View {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CirclePercentView);
         mBgColor = typedArray.getColor(R.styleable.CirclePercentView_circleBgColor, ContextCompat.getColor(context,R.color.gray));
         mProgressColor = typedArray.getColor(R.styleable.CirclePercentView_circleProgressColor, ContextCompat.getColor(context,R.color.blue));
-        mRadius = typedArray.getInt(R.styleable.CirclePercentView_circleRadius, WIDTH_RADIUS_RATIO);
+        mRadius = typedArray.getInt(R.styleable.CirclePercentView_circleRadiusWidth, WIDTH_RADIUS_RATIO);
         isGradient = typedArray.getBoolean(R.styleable.CirclePercentView_circleIsGradient, false);
         mStartColor = typedArray.getColor(R.styleable.CirclePercentView_circleStartColor, ContextCompat.getColor(context,R.color.blue));
         mEndColor = typedArray.getColor(R.styleable.CirclePercentView_circleEndColor, ContextCompat.getColor(context,R.color.green));
