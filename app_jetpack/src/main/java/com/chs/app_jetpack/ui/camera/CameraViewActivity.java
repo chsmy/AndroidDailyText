@@ -1,6 +1,8 @@
 package com.chs.app_jetpack.ui.camera;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Matrix;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -20,6 +22,7 @@ import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.VideoCapture;
 import androidx.camera.view.CameraView;
+import androidx.core.app.ActivityCompat;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.chs.app_jetpack.R;
@@ -56,6 +59,16 @@ public class CameraViewActivity extends AppCompatActivity {
         mRecordView = findViewById(R.id.record_view);
         mBtnCameraSwitch = findViewById(R.id.camera_switch_button);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mCameraView.bindToLifecycle(this);
 
         mExecutorService = Executors.newSingleThreadExecutor();
@@ -129,9 +142,11 @@ public class CameraViewActivity extends AppCompatActivity {
         File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath(),
                 System.currentTimeMillis() + ".mp4");
         mCameraView.setCaptureMode(CameraView.CaptureMode.VIDEO);
+        VideoCapture.Metadata metadata = new VideoCapture.Metadata();
+
         mCameraView.startRecording(file, mExecutorService, new VideoCapture.OnVideoSavedCallback() {
             @Override
-            public void onVideoSaved(@NonNull File file) {
+            public void onVideoSaved(@NonNull VideoCapture.OutputFileResults outputFileResults) {
                 outputFilePath = file.getAbsolutePath();
                 onFileSaved(Uri.fromFile(file));
             }

@@ -29,6 +29,7 @@ import com.chs.androiddailytext.kotlin.CoroutinesActivity;
 import com.chs.androiddailytext.list.ListActivity;
 import com.chs.androiddailytext.myanimator.AnimActivity;
 import com.chs.androiddailytext.netease.NeteaseActivity;
+import com.chs.androiddailytext.nomal.NightActivity;
 import com.chs.androiddailytext.pattern.strategy.StrategyActivity;
 import com.chs.androiddailytext.permission.PermissionActivity;
 import com.chs.androiddailytext.piccanvas.BigViewActivity;
@@ -134,6 +135,7 @@ public class MainActivity extends BaseActivity {
         datas.add(new MainInfo("协程",CoroutinesActivity.class));
         datas.add(new MainInfo("deepLink",null));
         datas.add(new MainInfo("selectText",SelectTextActivity.class));
+        datas.add(new MainInfo("夜间模式", NightActivity.class));
     }
 
 }
