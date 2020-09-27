@@ -44,7 +44,6 @@ public class StringManager {
 
     }
 
-
     public void setOnWordClickListener(OnWordClickListener onWordClickListener) {
         this.onWordClickListener = onWordClickListener;
     }
