@@ -25,7 +25,6 @@ public class FiveActivity extends AppCompatActivity implements ViewPager.OnPageC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_five);
-        getSupportActionBar().hide();
         mSlidingTabLayout =  findViewById(R.id.slidingTabLayout);
         viewpager =  findViewById(R.id.viewpager);
 

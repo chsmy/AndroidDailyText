@@ -29,7 +29,6 @@ public class SecondActivity extends AppCompatActivity implements ViewPager.OnPag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        getSupportActionBar().hide();
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.slidingTabLayout);
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         initFragment();

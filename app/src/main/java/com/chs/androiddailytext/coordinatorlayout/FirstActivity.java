@@ -27,7 +27,6 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         initData();
-        getSupportActionBar().hide();
         recycleview = (RecyclerView) findViewById(R.id.recycleview);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("CoordinatorLayout");

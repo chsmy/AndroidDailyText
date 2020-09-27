@@ -31,7 +31,6 @@ public class FourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_four);
         initData();
-        getSupportActionBar().hide();
         recycleview = (RecyclerView) findViewById(R.id.recycleview);
         appbarlayout = (AppBarLayout) findViewById(R.id.appbarlayout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);

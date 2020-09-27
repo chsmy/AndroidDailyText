@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.UnderlineSpan;
 import android.util.SparseBooleanArray;
 
 import com.chs.androiddailytext.R;
@@ -27,7 +26,6 @@ public class StringManager {
      * 需要填空的位置
      */
     public static List<String> blank = new ArrayList<>();
-    private List<CustomUnderlineSpan> spans = new ArrayList<>();
     /**
      * 填充过的位置
      */
@@ -37,44 +35,25 @@ public class StringManager {
      */
     private SparseBooleanArray hasFilled = new SparseBooleanArray();
 
+    /**
+     * 需要划线的地方
+     */
+    public static List<String> needLines = new ArrayList<>();
+
     public StringManager() {
-        blank.add("10");
-        blank.add("15");
-        blank.add("20");
-        blank.add("25");
-        blank.add("30");
-        blank.add("35");
-        blank.add("40");
-        blank.add("45");
-        blank.add("50");
-        blank.add("55");
+
     }
+
 
     public void setOnWordClickListener(OnWordClickListener onWordClickListener) {
         this.onWordClickListener = onWordClickListener;
     }
 
     public SpannableString getResult(String text){
-        SpannableString spannableString = new SpannableString(text);
-        if(wordInfos.isEmpty()){
-            wordInfos = getWordInfo(text);
-        }
-        //给每个单词设置点击事件
-        for (int i = 0; i < wordInfos.size(); i++) {
-            final WordInfo info = wordInfos.get(i);
-            final int finalI = i;
-            spannableString.setSpan(new WordClickableSpan(finalI,onWordClickListener,wordInfos),
-                    info.getStart(),info.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            if(blank.contains(String.valueOf(i))){
-                CustomUnderlineSpan customUnderlineSpan = new CustomUnderlineSpan();
-                spans.add(customUnderlineSpan);
-                spannableString.setSpan(customUnderlineSpan,info.getStart(), info.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
-        return spannableString;
+        return getResult(text,null,null,-1);
     }
 
-    public SpannableString getClickResult(String text, WordInfo wordInfo, Context context, int position){
+    public SpannableString getResult(String text, WordInfo wordInfo, Context context, int position){
         SpannableString spannableString = new SpannableString(text);
         if(wordInfos.isEmpty()){
             wordInfos = getWordInfo(text);
@@ -84,19 +63,31 @@ public class StringManager {
             final int finalI = i;
             spannableString.setSpan(new WordClickableSpan(finalI,onWordClickListener,wordInfos),
                     info.getStart(),info.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            //填空横线
             if(blank.contains(String.valueOf(i))){
                 CustomUnderlineSpan customUnderlineSpan = new CustomUnderlineSpan();
-                spans.add(customUnderlineSpan);
                 spannableString.setSpan(customUnderlineSpan,info.getStart(), info.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
+            //已经填过的
             if(hasRemoved.contains(i)){
-                spannableString.setSpan(new UnderlineSpan(),info.getStart(), info.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new CustomUnderlineSpan(R.color.black,R.color.black,
+                                3f,true)
+                        ,info.getStart(), info.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            //需要绘制下划线的
+            if(needLines.contains(String.valueOf(i))){
+                float lineHeight = i%2==0?5f:9f;
+                CustomUnderlineSpan customUnderlineSpan = new CustomUnderlineSpan(R.color.colorAccent,R.color.black
+                        ,lineHeight,true);
+                spannableString.setSpan(customUnderlineSpan,info.getStart(), info.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
         if(!hasRemoved.contains(position)||(hasRemoved.contains(position)&&hasFilled.get(position))){
-            spannableString.setSpan(new BackgroundImageSpan(R.drawable.text_underline_bg,
-                            context.getResources().getDrawable(R.drawable.text_underline_bg)),
-                    wordInfo.getStart(),wordInfo.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if(wordInfo!=null){
+                spannableString.setSpan(new BackgroundImageSpan(R.drawable.text_underline_bg,
+                                context.getResources().getDrawable(R.drawable.text_underline_bg)),
+                        wordInfo.getStart(),wordInfo.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
         hasFilled.put(position,true);
         return spannableString;
@@ -115,7 +106,7 @@ public class StringManager {
         for (int i = 0; i < words.size(); i++) {
             String word = words.get(i);
             // 获取开始位置
-            int start = text.toString().indexOf(word, startIndex);
+            int start = text.indexOf(word, startIndex);
             int end = start + word.length();
             startIndex = end;
             WordInfo wordInfo = new WordInfo();
@@ -132,8 +123,8 @@ public class StringManager {
      * @return
      */
     private List<String> splitWord(String text) {
-        if (TextUtils.isEmpty(text.toString())) {
-            return new ArrayList<String>();
+        if (TextUtils.isEmpty(text)) {
+            return new ArrayList<>();
         }
         List<String> results = new ArrayList<>();
         Pattern pattern = Pattern.compile("[a-zA-Z-’]+");

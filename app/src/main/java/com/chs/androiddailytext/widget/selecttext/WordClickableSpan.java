@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author: chs
  * @date: Create in 2020/9/14
- * @description
+ * @description 点击span
  */
 public class WordClickableSpan extends ClickableSpan {
 
