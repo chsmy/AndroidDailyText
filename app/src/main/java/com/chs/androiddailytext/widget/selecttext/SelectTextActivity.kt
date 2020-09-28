@@ -1,8 +1,10 @@
 package com.chs.androiddailytext.widget.selecttext
 
+import android.os.Build
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -31,6 +33,9 @@ class SelectTextActivity : AppCompatActivity() {
         btn_j.setOnClickListener {
             StringManager.hasRemoved.clear()
             setJStyle(text)
+        }
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            textView.customSelectionActionModeCallback = MyActionMode()
         }
     }
 

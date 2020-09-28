@@ -67,6 +67,9 @@ dependencies {
 
     implementation project(path: ':lib_common')
 
+    implementation 'me.weishu:free_reflection:3.0.1'
+
+
 }
 repositories {
     mavenCentral()
