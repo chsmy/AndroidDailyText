@@ -11,10 +11,12 @@ public class BackgroundImageSpan extends ReplacementSpan {
     private static final String TAG = "BackgroundImageSpan";
     private Drawable mDrawable;
     private int mWidth = -1;
+    private WordBoundaryListener mListener;
 
 
-    public BackgroundImageSpan(int id, Drawable drawable) {
+    public BackgroundImageSpan(Drawable drawable,WordBoundaryListener listener) {
         mDrawable = drawable;
+        mListener = listener;
     }
 
 
@@ -41,6 +43,10 @@ public class BackgroundImageSpan extends ReplacementSpan {
         // draw text
         // the paint is already updated
         canvas.drawText(text, start, end, x, y, paint);
+        if(mListener!=null){
+            Log.i("event",top+">>>>>>>======");
+            mListener.boundary(top,bottom);
+        }
     }
 
     public int getSize(Paint paint, CharSequence text, int start, int end,

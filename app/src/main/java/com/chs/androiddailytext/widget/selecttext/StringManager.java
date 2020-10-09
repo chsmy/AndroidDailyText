@@ -49,10 +49,10 @@ public class StringManager {
     }
 
     public SpannableString getResult(String text){
-        return getResult(text,null,null,-1);
+        return getResult(text,null,null,-1,null);
     }
 
-    public SpannableString getResult(String text, WordInfo wordInfo, Context context, int position){
+    public SpannableString getResult(String text, WordInfo wordInfo, Context context, int position,WordBoundaryListener listener){
         SpannableString spannableString = new SpannableString(text);
         if(wordInfos.isEmpty()){
             wordInfos = getWordInfo(text);
@@ -83,8 +83,8 @@ public class StringManager {
         }
         if(!hasRemoved.contains(position)||(hasRemoved.contains(position)&&hasFilled.get(position))){
             if(wordInfo!=null){
-                spannableString.setSpan(new BackgroundImageSpan(R.drawable.text_underline_bg,
-                                context.getResources().getDrawable(R.drawable.text_underline_bg)),
+                spannableString.setSpan(new BackgroundImageSpan(
+                                context.getResources().getDrawable(R.drawable.text_underline_bg),listener),
                         wordInfo.getStart(),wordInfo.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
