@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidDailyText.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidDailyText.iml" group="AndroidDailyText" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidDailyText-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidDailyText-app.iml" group="AndroidDailyText/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app_jetpack/AndroidDailyText-app_jetpack.iml" filepath="$PROJECT_DIR$/.idea/modules/app_jetpack/AndroidDailyText-app_jetpack.iml" group="AndroidDailyText/app_jetpack" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app_test/AndroidDailyText-app_test.iml" filepath="$PROJECT_DIR$/.idea/modules/app_test/AndroidDailyText-app_test.iml" group="AndroidDailyText/app_test" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app_video/AndroidDailyText-app_video.iml" filepath="$PROJECT_DIR$/.idea/modules/app_video/AndroidDailyText-app_video.iml" group="AndroidDailyText/app_video" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_common/AndroidDailyText-lib_common.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_common/AndroidDailyText-lib_common.iml" group="AndroidDailyText/lib_common" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_navannotation/AndroidDailyText-lib_navannotation.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_navannotation/AndroidDailyText-lib_navannotation.iml" group="AndroidDailyText/lib_navannotation" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_navcompiler/AndroidDailyText-lib_navcompiler.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_navcompiler/AndroidDailyText-lib_navcompiler.iml" group="AndroidDailyText/lib_navcompiler" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidproject-AndroidDailyText.iml" filepath="$PROJECT_DIR$/.idea/modules/androidproject-AndroidDailyText.iml" group="AndroidDailyText" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="AndroidDailyText/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app_jetpack/app_jetpack.iml" filepath="$PROJECT_DIR$/.idea/modules/app_jetpack/app_jetpack.iml" group="AndroidDailyText/app_jetpack" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app_test/app_test.iml" filepath="$PROJECT_DIR$/.idea/modules/app_test/app_test.iml" group="AndroidDailyText/app_test" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app_video/app_video.iml" filepath="$PROJECT_DIR$/.idea/modules/app_video/app_video.iml" group="AndroidDailyText/app_video" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_common/lib_common.iml" group="AndroidDailyText/lib_common" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_navannotation/lib_navannotation.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_navannotation/lib_navannotation.iml" group="AndroidDailyText/lib_navannotation" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_navcompiler/lib_navcompiler.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_navcompiler/lib_navcompiler.iml" group="AndroidDailyText/lib_navcompiler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidDailyText.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidDailyText.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app_jetpack/AndroidDailyText.app_jetpack.iml" filepath="$PROJECT_DIR$/.idea/modules/app_jetpack/AndroidDailyText.app_jetpack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app_test/AndroidDailyText.app_test.iml" filepath="$PROJECT_DIR$/.idea/modules/app_test/AndroidDailyText.app_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app_video/AndroidDailyText.app_video.iml" filepath="$PROJECT_DIR$/.idea/modules/app_video/AndroidDailyText.app_video.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_common/AndroidDailyText.lib_common.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_common/AndroidDailyText.lib_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_navannotation/AndroidDailyText.lib_navannotation.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_navannotation/AndroidDailyText.lib_navannotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_navcompiler/AndroidDailyText.lib_navcompiler.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_navcompiler/AndroidDailyText.lib_navcompiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidproject.AndroidDailyText.iml" filepath="$PROJECT_DIR$/.idea/modules/androidproject.AndroidDailyText.iml" />
     </modules>
   </component>
 </project>

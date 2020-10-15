@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.SurfaceHolder
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.MediaItem
@@ -17,10 +18,11 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSink
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import kotlinx.android.synthetic.main.activity_main.*
+import tv.danmaku.ijk.media.player.IjkMediaPlayer
 import java.io.IOException
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SurfaceHolder.Callback {
 
     private val exoPlayer by lazy { SimpleExoPlayer.Builder(this).build() }
 
@@ -136,10 +138,41 @@ class MainActivity : AppCompatActivity() {
 //        exoPlayer.setShuffleOrder(object :ShuffleOrder{
 //
 //        })
+
+        useIjkplayer(url)
+
+        play.setOnClickListener {
+            mediaPlayer.start()
+        }
+        pause.setOnClickListener {
+            mediaPlayer.pause()
+        }
+    }
+
+    private val mediaPlayer:IjkMediaPlayer by lazy { IjkMediaPlayer() }
+
+    private fun useIjkplayer(url:String) {
+        surface_view.holder.addCallback(this)
+        mediaPlayer.dataSource = url
+        mediaPlayer.prepareAsync()
+        mediaPlayer.start()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         exoPlayer.release()
+        mediaPlayer.release()
+    }
+
+    override fun surfaceCreated(holder: SurfaceHolder) {
+        mediaPlayer.setDisplay(holder)
+    }
+
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+
+    }
+
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
+
     }
 }
