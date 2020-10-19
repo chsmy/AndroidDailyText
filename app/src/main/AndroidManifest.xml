@@ -87,9 +87,12 @@ package="com.chs.androiddailytext">
     <activity android:name=".jetpack.EmptyActivity" />
     <activity android:name="com.chs.androiddailytext.widget.selecttext.SelectTextActivity"></activity>
     <activity android:name="com.chs.androiddailytext.nomal.NightActivity"></activity>
+    <activity android:name="com.chs.androiddailytext.changeSkin.ThemeSkinActivity"></activity>
+
     <meta-data
         android:name="TINKER_ID"
         android:value="1.0" />
 </application>
 
 </manifest>
+

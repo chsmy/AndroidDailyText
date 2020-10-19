@@ -187,9 +187,11 @@ public class CameraActivity extends AppCompatActivity {
                 File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath(),
                         System.currentTimeMillis() + ".mp4");
                 VideoCapture.Metadata metadata = new VideoCapture.Metadata();
-                mVideoCapture.startRecording(file, Executors.newSingleThreadExecutor(), new VideoCapture.OnVideoSavedCallback() {
+                VideoCapture.OutputFileOptions outputFileOptions = new VideoCapture.OutputFileOptions.Builder(file).build();
+                mVideoCapture.startRecording(outputFileOptions, Executors.newSingleThreadExecutor(), new VideoCapture.OnVideoSavedCallback() {
+
                     @Override
-                    public void onVideoSaved(@NonNull File file) {
+                    public void onVideoSaved(@NonNull VideoCapture.OutputFileResults outputFileResults) {
                         outputFilePath = file.getAbsolutePath();
                         onFileSaved(Uri.fromFile(file));
                     }
@@ -366,7 +368,7 @@ public class CameraActivity extends AppCompatActivity {
 
         mCamera = cameraProvider.bindToLifecycle(CameraActivity.this,
                 cameraSelector,mPreview,mImageCapture,mVideoCapture);
-        mPreview.setSurfaceProvider(mPreviewView.createSurfaceProvider());
+        mPreview.setSurfaceProvider(mPreviewView.getSurfaceProvider());
     }
 
     /**

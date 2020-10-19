@@ -51,4 +51,18 @@
         <item name="android:background">@drawable/selector_button</item>
         <item name="android:foreground">@null</item>
     </style>
+
+
+    <style name="LightStyle">
+        <item name="text_title_color">@color/black</item>
+        <item name="text_des_color">@color/gray</item>
+        <item name="icon_xxx">@mipmap/gua</item>
+        <item name="bg_xxx">@color/white</item>
+    </style>
+    <style name="BlackStyle">
+        <item name="text_title_color">@color/colorPrimaryDark</item>
+        <item name="text_des_color">@color/colorPrimary</item>
+        <item name="icon_xxx">@mipmap/shader</item>
+        <item name="bg_xxx">@color/gray</item>
+    </style>
 </resources>

@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chs.androiddailytext.base.BaseActivity;
 import com.chs.androiddailytext.changeSkin.ChangeSkinActivity;
+import com.chs.androiddailytext.changeSkin.ThemeSkinActivity;
 import com.chs.androiddailytext.chart.BarChartActivity;
 import com.chs.androiddailytext.chart.PercentActivity;
 import com.chs.androiddailytext.coordinatorlayout.CoordinatorlayoutActivity;
@@ -110,7 +111,7 @@ public class MainActivity extends BaseActivity {
         datas.add(new MainInfo("刷新",PullRefreshActivity.class));
         datas.add(new MainInfo("图表",ChartActivity.class));
         datas.add(new MainInfo("策略模式",StrategyActivity.class));
-        datas.add(new MainInfo("换肤",ChangeSkinActivity.class));
+        datas.add(new MainInfo("插件换肤",ChangeSkinActivity.class));
         datas.add(new MainInfo("okhttp",OkhttpTextActivity.class));
         datas.add(new MainInfo("retrofit",RetrofitTextActivity.class));
         datas.add(new MainInfo("glide",GlideActivity.class));
@@ -136,6 +137,7 @@ public class MainActivity extends BaseActivity {
         datas.add(new MainInfo("deepLink",null));
         datas.add(new MainInfo("selectText",SelectTextActivity.class));
         datas.add(new MainInfo("夜间模式", NightActivity.class));
+        datas.add(new MainInfo("Theme换肤", ThemeSkinActivity.class));
     }
 
 }

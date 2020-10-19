@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="text_title_color" format="reference|color"/>
+    <attr name="text_des_color" format="reference|color"/>
+    <attr name="icon_xxx" format="reference"/>
+    <attr name="bg_xxx" format="reference|color"/>
+
     <declare-styleable name="SlideDetailsLayout">
         <!-- float value for indicate the moment of switch panel-->
         <attr name="percent" format="float"/>

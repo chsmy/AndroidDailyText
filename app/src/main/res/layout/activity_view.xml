@@ -24,12 +24,14 @@
         android:layout_height="wrap_content"
         android:max="300"
         />
+
     <com.chs.androiddailytext.widget.PlaceStatisticView
-        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="10dp" />
+
     <com.chs.androiddailytext.widget.RulerView
         android:layout_width="match_parent"
         android:layout_height="80dp"

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="?attr/bg_xxx"
+    tools:context=".changeSkin.ThemeSkinActivity">
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="?attr/text_title_color"
+      android:layout_marginTop="@dimen/dp20"
+      android:text="我是标题"
+      />
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="?attr/text_des_color"
+      android:layout_marginTop="@dimen/dp20"
+      android:text="我是内容"
+      />
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/dp20"
+      android:src="?attr/icon_xxx"
+      />
+<com.chs.androiddailytext.changeSkin.TestView
+    android:layout_width="@dimen/dp100"
+    android:layout_height="@dimen/dp100"/>
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/dp_40"
+      android:text="切换"
+      android:onClick="changeSkin"
+      />
+  </LinearLayout>
