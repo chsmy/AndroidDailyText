@@ -10,6 +10,7 @@ import androidx.appcompat.app.SkinAppCompatDelegateImpl;
 import android.view.View;
 
 
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chs.androiddailytext.R;
 import com.facebook.stetho.common.LogUtil;
@@ -19,6 +20,10 @@ import skin.support.SkinCompatManager;
 public class ChangeSkinActivity extends AppCompatActivity {
 
     private boolean isChange;
+
+    public static final String STYLE_TYPE = "style_type";
+    public static final String STYLE_LIGHT = "style_light";
+    public static final String STYLE_NIGHT = "style_night";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class ChangeSkinActivity extends AppCompatActivity {
 
     private void changeSkin(boolean isOpen){
         if(isOpen){
+            SPUtils.getInstance().put(STYLE_TYPE,STYLE_NIGHT);
             ToastUtils.showShort("App换肤");
             //加载新皮肤
             SkinCompatManager.getInstance().loadSkin("night", new SkinCompatManager.SkinLoaderListener() {
@@ -58,6 +64,7 @@ public class ChangeSkinActivity extends AppCompatActivity {
                 }
             }, SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);//后缀加载
         }else{
+            SPUtils.getInstance().put(STYLE_TYPE,STYLE_LIGHT);
             ToastUtils.showShort("App皮肤还原");
             // 恢复应用默认皮肤
             SkinCompatManager.getInstance().restoreDefaultTheme();

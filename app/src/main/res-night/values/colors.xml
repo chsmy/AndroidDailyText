@@ -2,5 +2,5 @@
 <resources>
 
     <color name="skin_bg_night">#5AAACC</color>
-
+    <color name="colorAccent_night">#00E099</color>
 </resources>

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.chs.androiddailytext.changeSkin.ChangeSkinActivity"
     android:background="@color/skin_bg"
+    android:orientation="vertical"
     >
    <Button
        android:id="@+id/btn"
@@ -20,4 +21,8 @@
        android:layout_height="wrap_content"
        android:src="@mipmap/gua"
        />
+   <com.chs.androiddailytext.changeSkin.TestView1
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/dp300"
+       android:layout_marginTop="@dimen/dp20"/>
 </LinearLayout>

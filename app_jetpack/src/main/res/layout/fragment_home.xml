@@ -29,5 +29,12 @@
        android:text="Paging"
        android:textAllCaps="false"
        />
-
+   <Button
+       android:id="@+id/btn_hilt"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="500dp"
+       android:text="Hilt"
+       android:textAllCaps="false"
+       />
 </RelativeLayout>
