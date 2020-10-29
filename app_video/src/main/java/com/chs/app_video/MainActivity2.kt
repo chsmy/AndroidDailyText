@@ -2,28 +2,21 @@ package com.chs.app_video
 
 import android.app.Application
 import android.net.Uri
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.SurfaceHolder
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.exoplayer2.ExoPlaybackException
+import android.os.Bundle
+import android.view.SurfaceHolder
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.database.ExoDatabaseProvider
-import com.google.android.exoplayer2.upstream.HttpDataSource.HttpDataSourceException
-import com.google.android.exoplayer2.upstream.HttpDataSource.InvalidResponseCodeException
-import com.google.android.exoplayer2.upstream.cache.CacheDataSink
+import com.google.android.exoplayer2.offline.DownloadRequest
+import com.google.android.exoplayer2.offline.DownloadService
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import kotlinx.android.synthetic.main.activity_main.*
 import tv.danmaku.ijk.media.player.IjkMediaPlayer
-import java.io.IOException
 
-
-class MainActivity : AppCompatActivity(), SurfaceHolder.Callback {
+class MainActivity2 : AppCompatActivity() , SurfaceHolder.Callback{
 
     private val exoPlayer by lazy { SimpleExoPlayer.Builder(this).build() }
 
@@ -141,7 +134,7 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback {
 //
 //        })
 
-        useIjkplayer(url)
+//        useIjkplayer(url)
 
         play.setOnClickListener {
             mediaPlayer.start()
@@ -149,14 +142,18 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback {
         pause.setOnClickListener {
             mediaPlayer.pause()
         }
+        downloadVideo(url);
     }
 
     private fun downloadVideo(url: String) {
+        val uri = Uri.parse(url)
+        val downloadRequest = DownloadRequest.Builder(url,uri).build()
+        DownloadService.sendAddDownload(applicationContext,MediaDownloadService::class.java
+        ,downloadRequest,false)
 
-        val downloadService = MediaDownloadService()
     }
 
-    private val mediaPlayer:IjkMediaPlayer by lazy { IjkMediaPlayer() }
+    private val mediaPlayer: IjkMediaPlayer by lazy { IjkMediaPlayer() }
 
     private fun useIjkplayer(url:String) {
         surface_view.holder.addCallback(this)
@@ -182,4 +179,5 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback {
     override fun surfaceDestroyed(holder: SurfaceHolder) {
 
     }
+
 }
