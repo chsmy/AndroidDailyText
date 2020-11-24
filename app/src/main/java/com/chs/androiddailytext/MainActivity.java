@@ -40,6 +40,7 @@ import com.chs.androiddailytext.recyclerview.RecyclerActivity;
 import com.chs.androiddailytext.retorfit.OkhttpTextActivity;
 import com.chs.androiddailytext.retorfit.RetrofitTextActivity;
 import com.chs.androiddailytext.slideview.SlideActivity;
+import com.chs.androiddailytext.table.TableActivity;
 import com.chs.androiddailytext.tabscroll.TabRecyclerActivity;
 import com.chs.androiddailytext.tabscroll.TabStickyActivity;
 import com.chs.androiddailytext.widget.selecttext.SelectTextActivity;
@@ -138,6 +139,7 @@ public class MainActivity extends BaseActivity {
         datas.add(new MainInfo("selectText",SelectTextActivity.class));
         datas.add(new MainInfo("夜间模式", NightActivity.class));
         datas.add(new MainInfo("Theme换肤", ThemeSkinActivity.class));
+        datas.add(new MainInfo("表格", TableActivity.class));
     }
 
 }

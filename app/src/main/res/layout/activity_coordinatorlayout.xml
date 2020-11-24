@@ -47,4 +47,12 @@
         android:onClick="five"
         android:layout_marginTop="10dp"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="six"
+        android:textAllCaps="false"
+        android:onClick="six"
+        android:layout_marginTop="10dp"
+        />
 </LinearLayout>

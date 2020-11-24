@@ -88,6 +88,8 @@ package="com.chs.androiddailytext">
     <activity android:name="com.chs.androiddailytext.widget.selecttext.SelectTextActivity"></activity>
     <activity android:name="com.chs.androiddailytext.nomal.NightActivity"></activity>
     <activity android:name="com.chs.androiddailytext.changeSkin.ThemeSkinActivity"></activity>
+    <activity android:name="com.chs.androiddailytext.table.TableActivity"></activity>
+    <activity android:name=".coordinatorlayout.SixActivity" />
 
     <meta-data
         android:name="TINKER_ID"
@@ -95,4 +97,3 @@ package="com.chs.androiddailytext">
 </application>
 
 </manifest>
-
