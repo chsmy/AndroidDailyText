@@ -3,6 +3,7 @@ package com.chs.androiddailytext.coordinatorlayout;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class SixActivity extends AppCompatActivity {
     private List<String> mList = new ArrayList<>();
     private BaseRecycleAdapter mAdapter;
     private CoordinatorLayout container;
+    private RelativeLayout relat;
     private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class SixActivity extends AppCompatActivity {
         recycleview = findViewById(R.id.recycleview);
         toolbar =  findViewById(R.id.toolbar);
         container =  findViewById(R.id.container);
+        relat =  findViewById(R.id.relat);
         LinearLayoutManager layoutManager =  new LinearLayoutManager(this);
         recycleview.setLayoutManager(layoutManager);
         mAdapter = new BaseRecycleAdapter<String>(this,R.layout.item,mList,recycleview) {
@@ -51,7 +54,7 @@ public class SixActivity extends AppCompatActivity {
             }
         };
         recycleview.setAdapter(mAdapter);
-        recycleview.setBackground(DrawableUtil.getDrawableTop(this,R.color.white,15));
+        relat.setBackground(DrawableUtil.getDrawableTop(this,R.color.white,15));
         Palette.from(BitmapFactory.decodeResource(getResources(),R.mipmap.background))
                 .generate(palette -> {
                     if(palette!=null){
