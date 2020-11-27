@@ -140,6 +140,7 @@ public class MainActivity extends BaseActivity {
         datas.add(new MainInfo("夜间模式", NightActivity.class));
         datas.add(new MainInfo("Theme换肤", ThemeSkinActivity.class));
         datas.add(new MainInfo("表格", TableActivity.class));
+        datas.add(new MainInfo("H5ToApp", H5ToAppActivity.class));
     }
 
 }

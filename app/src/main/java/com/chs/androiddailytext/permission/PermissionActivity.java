@@ -107,4 +107,9 @@ public class PermissionActivity extends AppCompatActivity {
                     }
                 }).create().show();
     }
+
+    public void jump(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("ylyk://selfcheck?type=1&id=10"));
+        startActivity(intent);
+    }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Bugly9.0适配-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">android.bugly.qq.com</domain>
+    </domain-config>
+    <!--解决9.0无法访问的问题-->
+<!--    <base-config cleartextTrafficPermitted="true" />-->
+<!--    todo  上线前关闭抓包-->
+    <base-config cleartextTrafficPermitted="true" >
+        <trust-anchors>
+            <certificates
+                overridePins="true"
+                src="system" />
+            <certificates
+                overridePins="true"
+                src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
