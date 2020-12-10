@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.paging.pagingwithnetwork.reddit.ui.PostsLoadStateAdapter
 import com.chs.app_jetpack.R
+import com.chs.app_jetpack.databinding.ActivityPagingBinding
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
@@ -20,14 +21,14 @@ class PagingActivity : AppCompatActivity() {
 
     private val adapter: ArticleAdapter by lazy { ArticleAdapter() }
 
+    private lateinit var binding: ActivityPagingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_paging)
-
-        val refreshView:SmartRefreshLayout = findViewById(R.id.refreshView)
-        val recyclerView :RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter.withLoadStateFooter(PostsLoadStateAdapter(adapter))
+        binding = ActivityPagingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(PostsLoadStateAdapter(adapter))
 
         viewModel.getArticleData().observe(this, Observer {
             lifecycleScope.launchWhenCreated {
@@ -37,12 +38,12 @@ class PagingActivity : AppCompatActivity() {
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
             adapter.loadStateFlow.collectLatest {
-                if(it.refresh !is LoadState.Loading){
-                    refreshView.finishRefresh()
+                if (it.refresh !is LoadState.Loading) {
+                    binding.refreshView.finishRefresh()
                 }
             }
         }
-        refreshView.setOnRefreshListener {
+        binding.refreshView.setOnRefreshListener {
             adapter.refresh()
         }
     }
