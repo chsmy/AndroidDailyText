@@ -8,6 +8,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
+import android.os.CountDownTimer
+import android.os.Handler
+import android.util.Log
 import android.webkit.DownloadListener
 import androidx.core.app.NotificationCompat
 import com.blankj.utilcode.util.LogUtils
@@ -22,10 +25,7 @@ import com.google.android.exoplayer2.scheduler.Scheduler
 import com.google.android.exoplayer2.upstream.DataSink
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
-import com.google.android.exoplayer2.upstream.cache.CacheDataSink
-import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory
-import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor
-import com.google.android.exoplayer2.upstream.cache.SimpleCache
+import com.google.android.exoplayer2.upstream.cache.*
 import com.google.android.exoplayer2.upstream.crypto.AesCipherDataSink
 import com.google.android.exoplayer2.upstream.crypto.AesCipherDataSource
 
@@ -37,26 +37,49 @@ import com.google.android.exoplayer2.upstream.crypto.AesCipherDataSource
 class MediaDownloadService() :
         DownloadService(1){
 
+    var mDownloadManager: DownloadManager? = null;
+
     override fun getDownloadManager(): DownloadManager {
         val provider = ExoDatabaseProvider(Utils.getApp())
         val downloadCache = SimpleCache(getDir("ylyk_down", MODE_PRIVATE), NoOpCacheEvictor(), provider)
         val dataSourceFactory = DefaultHttpDataSourceFactory()
-        val readFactory = DataSource.Factory { AesCipherDataSource("cf#yu*dfcf#yu*df".toByteArray(), dataSourceFactory.createDataSource()) }
+//        val readFactory = DataSource.Factory { AesCipherDataSource("cf#yu*dfcf#yu*df".toByteArray(), dataSourceFactory.createDataSource()) }
 
         val writeFactory = DataSink.Factory { AesCipherDataSink("cf#yu*dfcf#yu*df".toByteArray(), CacheDataSink(downloadCache, 512 * 1024 * 1024), ByteArray(1024 * 1024)) }
-        val cacheFactory = CacheDataSourceFactory(downloadCache, dataSourceFactory,readFactory,writeFactory,0,null)
+        val cacheFactory = CacheDataSource.Factory()
+                .setCache(downloadCache)
+                .setCacheWriteDataSinkFactory(writeFactory)
+                .setCacheReadDataSourceFactory(dataSourceFactory)
+//        val cacheFactory = CacheDataSourceFactory(downloadCache, dataSourceFactory, readFactory, writeFactory, 0, null)
         val downloadManager = DownloadManager(Utils.getApp(), provider, downloadCache, cacheFactory, ThreadUtils.getIoPool())
         downloadManager.maxParallelDownloads = 3
         downloadManager.addListener(object : DownloadListener, DownloadManager.Listener {
             override fun onDownloadStart(url: String?, userAgent: String?, contentDisposition: String?, mimetype: String?, contentLength: Long) {
-                LogUtils.i("开始下载》。。。。。。")
+                LogUtils.i("startdowload>>>>。。。。。。")
             }
 
             override fun onDownloadChanged(downloadManager: DownloadManager, download: Download, finalException: Exception?) {
                 super.onDownloadChanged(downloadManager, download, finalException)
+                Log.i("progress",download.percentDownloaded.toString())
+                mDownloadManager = downloadManager
             }
         })
+
         return downloadManager
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        val mTimer: CountDownTimer = object : CountDownTimer(63000, 100) {
+            override fun onTick(millisUntilFinished: Long) {
+                val currentDownloads = mDownloadManager?.currentDownloads
+                if(currentDownloads!=null&&currentDownloads.size >0){
+                    Log.i("progress>>",currentDownloads[0].percentDownloaded.toString())
+                }
+            }
+            override fun onFinish() {}
+        }
+        mTimer.start()
     }
 
     override fun getScheduler(): Scheduler? {
@@ -68,7 +91,6 @@ class MediaDownloadService() :
         val pi = PendingIntent.getActivity(Utils.getApp(), 0, intent, 0)
         return getNotification()
     }
-
 
     fun getNotification():Notification{
         val CHANNEL_ONE_ID = "CHANNEL_ONE_ID"

@@ -55,94 +55,14 @@ class MainActivity2 : AppCompatActivity() , SurfaceHolder.Callback{
         exoPlayer.prepare()
         exoPlayer.play()
 
-//
-//        exoPlayer.addListener(object : Player.EventListener {
-//            override fun onPlaybackStateChanged(state: Int) {
-//                super.onPlaybackStateChanged(state)
-//            }
-//
-//            override fun onPlayWhenReadyChanged(playWhenReady: Boolean, reason: Int) {
-//                super.onPlayWhenReadyChanged(playWhenReady, reason)
-//            }
-//
-//            override fun onIsPlayingChanged(isPlaying: Boolean) {
-//                super.onIsPlayingChanged(isPlaying)
-//            }
-//
-//            override fun onPlayerError(error: ExoPlaybackException) {
-//                super.onPlayerError(error)
-//                if (error.type == ExoPlaybackException.TYPE_SOURCE) {
-//                    val cause: IOException = error.sourceException
-//                    if (cause is HttpDataSourceException) {
-//                        // 发生HTTP错误。
-//                        val httpError = cause
-//                        // 发生错误的请求。
-//                        val requestDataSpec = httpError.dataSpec
-//                        // 通过casting和by可以发现更多关于错误的信息
-//                        // 查询原因
-//                        if (httpError is InvalidResponseCodeException) {
-//                            // 强转到InvalidResponseCodeException并检索响应代码， 消息和标题。
-//                        } else {
-//                            //尝试调用httperloader . getcause()来检索底层原因， 尽管注意它可能是空的。
-//                        }
-//                    }
-//                }
-//            }
-//
-//            override fun onPositionDiscontinuity(reason: Int) {
-//                super.onPositionDiscontinuity(reason)
-//            }
-//
-//            override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
-//                super.onMediaItemTransition(mediaItem, reason)
-//            }
-//        })
-//        exoPlayer
-//                .createMessage { messageType: Int, payload: Any? ->
-//                    //在特定位置进行特定的操作
-//                }
-//                .setHandler(Handler(Looper.getMainLooper()))
-//                .setPosition( /* windowIndex= */0,  /* positionMs= */120000)
-//                .setPayload("")
-//                .setDeleteAfterDelivery(false)
-//                .send()
-//        exoPlayer.addAnalyticsListener( EventLogger(trackSelector))
-
-
-//        // 在位置1处添加一个新的播放资源
-//        exoPlayer.addMediaItem(/* index= */ 1, MediaItem.fromUri(url))
-//        // 把位置3处的资源移动到位置0处
-//        exoPlayer.moveMediaItem(/* currentIndex= */ 2, /* newIndex= */ 0)
-//        // 移除第一个资源
-//        exoPlayer.removeMediaItem(/* index= */ 0)
-//
-//        // Replaces the playlist with a new one.
-//        val newItems: List<MediaItem> = listOf(
-//                MediaItem.fromUri(url),
-//                MediaItem.fromUri(url2))
-//        exoPlayer.setMediaItems(newItems,  /* resetPosition= */true)
-//        // 移除所有的列表
-//        exoPlayer.clearMediaItems()
-//
-//        val itemCount = exoPlayer.mediaItemCount
-//        val mediaItemAt = exoPlayer.getMediaItemAt(1)
-//        val currentMediaItem = exoPlayer.currentMediaItem
-
-//        val mediaItem: MediaItem = MediaItem.Builder().setUri(url).setMediaId(mediaId).build()
-//        val mediaItem: MediaItem = MediaItem.Builder().setUri(url).setTag(metadata).build()
-//        exoPlayer.setShuffleOrder(object :ShuffleOrder{
-//
-//        })
-
-//        useIjkplayer(url)
-
         play.setOnClickListener {
             mediaPlayer.start()
         }
         pause.setOnClickListener {
             mediaPlayer.pause()
         }
-        downloadVideo(url);
+        val urla = "https://mv-cdn1.ylyk.com/Fs3MOFiBwuF1XUZxRsP4yAbii9B9";
+        downloadVideo(urla);
     }
 
     private fun downloadVideo(url: String) {
@@ -150,7 +70,6 @@ class MainActivity2 : AppCompatActivity() , SurfaceHolder.Callback{
         val downloadRequest = DownloadRequest.Builder(url,uri).build()
         DownloadService.sendAddDownload(applicationContext,MediaDownloadService::class.java
         ,downloadRequest,false)
-
     }
 
     private val mediaPlayer: IjkMediaPlayer by lazy { IjkMediaPlayer() }
